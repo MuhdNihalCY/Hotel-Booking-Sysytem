@@ -1,0 +1,105 @@
+<section>
+    <div class="parent">
+        <div class="container">
+            <div class="child">
+                <div class="heading">
+                    <h3>My Bookings</h3>
+                </div>
+
+                <div class="eachRow">
+                    {{#each bookingDetails}}
+                    <div class="card mb-3" style="max-width: 100%;">
+                        <div class="row no-gutters">
+                            <div class="imageSec col-md-4">
+                                <img src="/room-images/632ac6170cd5f2d92b87f45a1.jpg" class="card-img" alt="...">
+                            </div>
+
+                            
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{roomName}}</h3>
+                                    <div class="checkINOUT">
+                                        <div class="Checkin">
+                                            <h5>Check In</h5>
+                                            <h5>{{checkin}}</h5>
+                                        </div>
+                                        <div class="Checkout">
+                                            <h5>Check Out</h5>
+                                            <h5>{{checkout}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="checkINOUT">
+                                        <h5 class="Bookingstatus">No:of Rooms</h5>
+                                        <h5 class="Bookingstatus">{{roomCount}}</h5>
+                                    </div>
+                                    <div class="checkINOUT">
+                                        <h5 class="Bookingstatus">Booking Status:</h5>
+                                        <h5 class="Bookingstatus">{{Confirm}}</h5>
+                                    </div>
+                                    <div class="cancel">
+                                        <a href="/cancelBooking/{{_id}}" class="cancelBTN btn btn-primary">Request Cancel Booking</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .parent {}
+
+    .child {}
+
+    .heading {
+        margin: 3rem auto;
+        text-align: center;
+    }
+
+    .heading h3 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 600;
+        font-size: 30px;
+    }
+
+    .eachRow {
+
+        width: 100%;
+        margin: 5rem 0;
+    }
+    .card {
+        border: 3px  gray solid;
+        border-radius: 1.5rem;
+    }
+    .imageSec {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+    .card-img {
+        margin: 3rem 0rem;
+        width: 90%;
+        border-radius: 1.5rem;
+    }
+
+    .checkINOUT {
+        display: flex;
+        padding: .5rem 0rem;
+    }
+
+    .Checkin,
+    .Checkout {
+        margin: 0 1rem;
+    }
+    .Bookingstatus {
+        margin-left: 1rem;
+    }
+    .cancel {
+        text-align: center;
+    }
+</style>

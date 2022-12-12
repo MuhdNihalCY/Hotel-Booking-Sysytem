@@ -1,0 +1,104 @@
+<section>
+    <div class="parentDiv col-sm-8">
+        <div class="innerDiv col-xs-12 col-sm-12 col-md-6">
+            <img class="LoginImg" src="/images/add-user.png" alt="">
+            <form action="/signup"  method="post" enctype="multipart/form-data"><br>
+                {{#if errorMsg}}
+                <p class="status">{{errorMsg}}</p>
+                {{/if}}
+                <input type="text" name="name" placeholder="User Name" required><br>
+                <input type="email" name="email" placeholder="Email" required><br>
+                <input type="number" name="number" placeholder="Mobile Number" required><br>
+                <input type="password" id="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br>
+                <button type="submit"  class="btn btn-primary">Sign Up</button>
+                <hr class="hr">
+                <a href="/OTPlogin">Login With OTP</a>
+                <div class="singupSec">
+                    <p>Already have an account? <a href="/login">LOGIN</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+   
+</script>
+
+<style>
+    section {
+        background-color: rgb(241, 240, 240);
+        height: 900px;
+        padding-bottom: 8rem;
+        padding-top: 2rem;
+    }
+
+    .parentDiv {
+        height: 500px;
+        margin: 0 auto;
+        margin-top: 80px;
+
+    }
+
+    .innerDiv {
+        margin: 0 auto;
+        height: 650px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        padding-top: 2rem;
+        border: 1px solid #BFBFBF;
+        border-radius: 2rem;
+        box-shadow: 10px 10px 5px #b4b4b478;
+
+    }
+
+    .LoginImg {
+        height: 7rem;
+    }
+
+    input[type=email],
+    input[type=password],
+    input[type=number],
+    input[type=text] {
+        margin: 1rem 0;
+        padding: .5rem 1rem;
+        border-radius: 1rem;
+        border-color: rgb(144, 143, 142);
+    }
+
+    .btn {
+        width: 100px;
+        border-radius: 1rem;
+    }
+
+    .hr {
+        background-color: gray;
+        height: 1px;
+        width: 75%;
+    }
+
+    .innerDiv a {
+        color: gray;
+        font-family: sans-serif;
+    }
+
+    .singupSec {
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    .singupSec p {
+        font-size: 12px;
+        color: gray;
+    }
+
+    .singupSec p a {
+        color: gray;
+        text-decoration: underline;
+    }
+
+    .status {
+        color: red;
+    }
+</style>

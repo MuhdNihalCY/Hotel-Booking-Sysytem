@@ -1,0 +1,195 @@
+<section>
+    <div class="headerDiv">
+        <h2>Our Rooms</h2>
+        <div class="set">
+            <h5>home</h5> <h3>></h3> <h5>rooms</h5>
+        </div>
+    </div>
+    <div class="roomsArea">
+        {{#if rooms}}
+        {{#each rooms}}
+        <div class="room">
+            <div class="row">
+                <div class="secImg col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="/room-images/{{img1}}.jpg" alt="First slide">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ContentSec col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <h2 class="nameOfRoom">{{name}}</h2>
+                    <div class="Realprice">
+                        <h6>₹</h6>
+                        <h1 class="offerPrice">{{OfferPrice}}</h1>
+                        <h5 class="perday"><b>/</b>day</h5>
+                    </div>
+                    <div class="TypeSuit">
+                        <h6>Type </h6>
+                        <h6 class="typeOfroom">{{TyprOfRoom}}</h6>
+                    </div>
+                    <div class="services">
+                        <h6>Services</h6>
+                        <div class="typeOfservices">
+                            {{#if Wifi}}
+                            <span class="icon material-symbols-outlined">wifi</span>
+                            {{/if}}
+                            {{#if FoodService}}
+                            <span class="icon material-symbols-outlined">restaurant_menu</span>
+                            {{/if}}
+                            {{#if Pool}}
+                            <span class="icon material-symbols-outlined">pool</span>
+                            {{/if}}
+                            {{#if AC}}
+                            <span class="icon material-symbols-outlined">ac_unit</span>
+                            {{/if}}
+                            {{#if TV}}
+                            <span class="material-symbols-outlined">live_tv</span>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="places">
+                        <h6>Place</h6>
+                        <h6 class="place">{{Place}}</h6>
+                    </div>
+                    <div class="viewMore">
+                        <a href="/viewRoomDetails/{{_id}}">View Details</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{else}}
+        <div class="noRoom">
+            <h3>No Rooms Available</h3>
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+<style>
+    .headerDiv {
+        height: 20rem;
+        background-image:
+            linear-gradient(to left, rgba(0, 0, 0, 0.52), rgba(10, 10, 10, 0.83)),
+            url(images/bkg2.jpg);
+        backdrop-filter: blur(80);
+        background-repeat: no-repeat;
+        background-size: cover;
+        text-align: center;
+        padding: 8rem;
+    }
+
+    .headerDiv h2 {
+        color: white;
+        font-weight: 700;
+        font-size: 34px;
+    }
+
+    .headerDiv h5 {
+        display: inline-flex;
+        color: gray;
+    }
+    .set {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+    .set h5 {
+        margin-top: 4px;
+    }
+    .set h3 {
+        margin: 0 .5rem;
+        color: gray;
+    }
+
+    .roomsArea {}
+
+    .room {
+        border: solid 3px rgb(236, 234, 234);
+        padding: 2rem;
+        margin: 1rem;
+    }
+
+    .secImg {}
+
+    .ContentSec {
+        padding: 3rem;
+    }
+
+    .nameOfRoom {
+        font-weight: 700;
+    }
+
+    .Realprice {
+        display: flex;
+        margin-left: 1rem;
+        margin-top: 2rem;
+    }
+
+    .offerPrice {
+        color: rgb(243, 61, 61);
+        font-weight: 600;
+    }
+
+    .perday {
+        margin-top: 20px;
+        font-weight: 600;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .Realprice h4 {
+        margin-right: 1rem;
+    }
+
+    .Realprice h6 {
+        font-weight: 500;
+    }
+
+    .TypeSuit,
+    .services,
+    .places {
+        display: flex;
+        margin-top: 2rem;
+        margin-left: 1rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: rgb(47, 47, 47);
+    }
+
+    .typeOfroom {
+        margin-left: 4rem;
+    }
+
+    .typeOfservices {
+        margin-left: 3rem;
+    }
+
+    .icon {
+        margin-right: 1rem;
+    }
+
+    .place {
+        margin-left: 4rem;
+    }
+
+    .viewMore {
+        margin-top: 1rem;
+        margin-left: 1rem;
+    }
+
+    .viewMore a {
+        color: black;
+        font-size: 24px;
+        text-decoration: none;
+        border-bottom: 3px solid orange;
+    }
+
+    .noRoom {
+        height: 80vh;
+        padding-top: 10rem;
+        text-align: center;
+    }
+</style>

@@ -1,0 +1,129 @@
+<div class="formArea  ">
+    <center>
+        Bookings
+    </center>
+    <div class="parent">
+        <div class="viewBookings col-xs-10 col-sm-10 col-md-9">
+            <div class="row">
+                <div class="RoomImageDiv col-xs-10 col-md-3">
+                    <img class="roomImg" src="/room-images/632ac6170cd5f2d92b87f45a2.jpg" alt="roomImg">
+                </div>
+                <div class="roomDetails">
+                    <div class="roomName">
+                        <h3>Tower Hall</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="viewBookings col-xs-10 col-sm-10 col-md-9">
+            <div class="row">
+                <div class="RoomImageDiv">
+                    <img class="roomImg" src="/room-images/632ac6170cd5f2d92b87f45a2.jpg" alt="roomImg">
+                </div>
+            </div>
+        </div>
+        <div class="viewBookings col-xs-10 col-sm-10 col-md-9">
+            <div class="row">
+                <div class="RoomImageDiv">
+                    <img class="roomImg" src="/room-images/632ac6170cd5f2d92b87f45a2.jpg" alt="roomImg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{!-- View Bookings of hotel rooms in table --}}
+    {{!-- <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>sl.No</th>
+                    <th>Hotel</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>hdf</td>
+                    <td>fdgdfg</td>
+                    <td>dfgfd</td>
+                    <td><img src="/room-images/632ac6170cd5f2d92b87f45a1.jpg" alt=""></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>hdf</td>
+                    <td>fdgdfg</td>
+                    <td>dfgfd</td>
+                    <td>dfgdfgdfgd</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>hdf</td>
+                    <td>fdgdfg</td>
+                    <td>dfgfd</td>
+                    <td>dfgdfgdfgd</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>hdf</td>
+                    <td>fdgdfg</td>
+                    <td>dfgfd</td>
+                    <td>dfgdfgdfgd</td>
+                </tr>
+            </tbody>
+        </table>
+    </div> --}}
+</div>
+
+<style>
+    .formArea {
+        height: 100vh;
+        float: left;
+        width: 100%;
+        padding-left: 221px;
+        background-color: rgb(233, 248, 248);
+    }
+    center {
+        margin: 0;
+        padding: 1rem;
+    }
+
+    .parent {
+        display: grid;
+        background-color: red;
+        width: 100%;
+    }
+    .viewBookings {
+        background-color: orange;
+        margin: auto;
+    }
+    .row {
+        width: 100%;
+    }
+    .roomImg {
+        width: 150px;
+    }
+
+    /*
+    {{!-- View Bookings of hotel rooms in table --}}
+    td, th {
+        text-align: center;
+    }
+    td > img {
+        width: 100px;
+    }*/
+
+    @media screen and (max-width:1105px) {
+        .formArea {
+            float: none;
+            width: 100%;
+            padding-left: 0;
+        }
+        .parent {
+            margin-top: 3rem;
+        }
+    }
+</style>

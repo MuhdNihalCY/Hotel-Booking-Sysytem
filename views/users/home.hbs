@@ -1,0 +1,584 @@
+<section class="section">
+    <div class="parent">
+        <div class="container">
+            <div class="topSection col-xs-12">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="/images/bkg1a.jpg" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="/images/bkg2.jpg" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="/images/bkg3.jpg" alt="Third slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="/images/bk4.jpg" alt="Third slide">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="part2">
+                <div class="row">
+                    <div class="text-center col-md-12">
+                        <div class="yelloWelcome">WELCOME</div>
+                        <div class="subWelcome">Experience the greatest for your holidays</div>
+                    </div>
+
+                    <div class="col-md-4 col-md-pull-7 mt-5 pt-5">
+                        <div class="booking-form">
+                            <form action="/checkAvailability" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <span class="form-label">Your Destination</span>
+                                    {{!-- <input class="form-control" type="text"
+                                        placeholder="Enter a destination or hotel name"> --}}
+                                    <select class="inputForm form-control" name="destination" required>
+                                        <option value="" selected="true" disabled="disabled">Select Destination</option>
+
+                                        {{#each locations}}
+                                        <option value="{{Place}}">{{Place}}</option>
+                                        {{/each}}
+
+
+                                    </select>
+                                    <span class="select-arrow"></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Check In</span>
+                                            <input name="checkin" min="{{formatedToday}}" id="Checkin" value=""
+                                                onchange="DateChange()" class="form-control" type="date" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Check out</span>
+                                            <input name="checkout" min="{{formatedTomorow}}" id="checkout"
+                                                class="form-control" type="date" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Rooms</span>
+                                            <select name="rooms" class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                            <span class="select-arrow"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Guests</span>
+                                            <select name="guests" class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                            <span class="select-arrow"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-btn">
+                                    <button class="submit-btn">Check availability</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="nextToForm col-md-7">
+                        <h3>Explore The Most Beautiful In The Hotel</h3>
+                        <h5>INTRODUCING</h5>
+                        <h4>MMT Luxe Selections</h4>
+                        <h6>Escape to the eoitome of luxury, packed with signature amenities and services.</h6>
+                        <a href="" class="btn FindSelection">Find Suit</a>
+                        <div class="specialisationDiv">
+                            <h5>OUR SPECIALIZATION</h5>
+                            <div class=" text-center col-xs-12 iconsDIV">
+                                <div class="row">
+                                    <div class="Icons">
+                                        <img class="imageIcons" src="/images/wifi.png" /><br>
+                                        <h5>Free Wifi</h5>
+                                    </div>
+                                    <div class="Icons">
+                                        <img class="imageIcons" src="/images/swim.png" /><br>
+                                        <h5>Premium Pool</h5>
+                                    </div>
+                                    <div class="Icons">
+                                        <img class="imageIcons" src="/images/hot-cup.png" /><br>
+                                        <h5>Coffee Maker</h5>
+                                    </div>
+                                    <div class="Icons">
+                                        <img class="imageIcons" src="/images/ac.png" /><br>
+                                        <h5>AC</h5>
+                                    </div>
+                                    <div class="Icons">
+                                        <img class="imageIcons" src="/images/tv.png" /><br>
+                                        <h5>4K TV</h5>
+                                    </div>
+                                    <div class="Icons">
+                                        <img class="imageIcons" src="/images/restaurant.png" /><br>
+                                        <h5>Restaurant</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- image scroll horizontal --}}
+            {{#if bookingDetails}}
+            <div class="wrapedOnHorizontalScroll">
+                <h4 class="RecentlyViewed">Recently Viewed</h4>
+                <div class="imageScrollWrapper container">
+                    {{#each bookingDetails}}
+                    <div class="ScrollImgDiv">
+                        <a href="/viewClickedRoomDetails/{{_id}}">
+                            <img class="ScrollImageInDiv" src="/room-images/{{roomImg}}.jpg" alt="">
+                            <div class="ScrollHotel ml-2">{{roomName}} <br> {{destination}}</div>
+                        </a>
+                    </div>
+                    {{/each}}
+
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</section>
+
+<style>
+    .part2 {
+        margin: 0px 50px;
+        padding-top: 3rem;
+    }
+
+    .yelloWelcome {
+        color: orange;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 300;
+    }
+
+    .subWelcome {
+        color: black;
+        font-family: sans-serif;
+        font-weight: 900;
+        font-size: 30px;
+    }
+
+    .formArea {
+
+        background: rgb(255, 255, 255);
+    }
+
+    .formArea2 {
+        margin: 5rem 0rem;
+        padding: 0rem 3rem;
+        background: rgb(255, 255, 255);
+        align-items: center;
+        text-align: center;
+    }
+
+    .formArea2 label {
+        color: rgb(5, 5, 5);
+        font-weight: 700;
+    }
+
+    .formArea2 h4 {
+        color: rgb(5, 5, 5);
+        font-weight: 700;
+    }
+
+    .inputForm {
+        background: rgb(242, 241, 241);
+    }
+
+    select,
+    input[type=date] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #1e62d8;
+    }
+
+    ::-webkit-inner-spin-button {
+        display: none;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        background-color: white
+    }
+
+    input[type=date] {
+        font-size: 25px;
+    }
+
+    ::-webkit-datetime-edit-text {
+        color: #555555
+    }
+
+    ::-webkit-datetime-edit-month-field {
+        color: #555555
+    }
+
+    ::-webkit-datetime-edit-day-field {
+        color: #555555;
+    }
+
+    ::-webkit-datetime-edit-year-field {
+        color: #555555;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        background-image: url(http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Calendar-icon.png); 
+        background-position: center;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+        color: rgba(204, 204, 204, 0);
+    }
+
+
+    select option {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .dateCheck {
+        margin-left: 1rem;
+    }
+
+    .nextToForm {
+        padding: 2rem;
+        margin-top: 4rem;
+        text-align: center;
+    }
+
+    .nextToForm h3 {
+        font-size: 40px;
+        font-weight: 900;
+        margin-bottom: 3rem;
+
+    }
+
+    .nextToForm h5 {
+        font-weight: 700;
+        color: rgb(119, 121, 122);
+    }
+
+    .nextToForm h4 {
+        color: rgb(245, 183, 12);
+        font-weight: 800;
+    }
+
+    .nextToForm h6 {
+        color: rgb(154, 151, 151);
+    }
+
+    .FindSelection {
+        background: rgb(233, 210, 3);
+        color: white;
+    }
+
+    .specialisationDiv {
+        margin-top: 3rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .imageIcons {
+        height: 50px;
+        margin-bottom: 1rem;
+    }
+
+
+    .iconsDIV {
+        justify-content: center;
+    }
+
+    .Icons {
+        width: 4.5rem;
+        margin: 2rem;
+        height: 6rem;
+        text-align: center;
+    }
+
+    .row {
+        justify-content: center;
+    }
+
+
+
+
+
+    @media screen and (min-width:500px) {
+
+        select,
+        input[type=date],
+        select option {
+            width: 45%;
+        }
+    }
+
+
+
+
+    /* template for hotel room form */
+    #booking {
+        font-family: 'Montserrat', sans-serif;
+        background-image: url('../img/background.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    #booking::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        background: rgba(47, 103, 177, 0.6);
+    }
+
+    .booking-form {
+        background-color: #fff;
+        padding: 50px 20px;
+        -webkit-box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+    }
+
+    .booking-form .form-group {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .booking-form .form-control {
+        width: 100%;
+        background-color: #ebecee;
+        border-radius: 4px;
+        border: none;
+        height: 40px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        color: #3e485c;
+        font-size: 14px;
+    }
+
+    .booking-form .form-control::-webkit-input-placeholder {
+        color: rgba(62, 72, 92, 0.3);
+    }
+
+    .booking-form .form-control:-ms-input-placeholder {
+        color: rgba(62, 72, 92, 0.3);
+    }
+
+    .booking-form .form-control::placeholder {
+        color: rgba(62, 72, 92, 0.3);
+    }
+
+    .booking-form input[type="date"].form-control:invalid {
+        color: rgba(62, 72, 92, 0.3);
+    }
+
+    .booking-form select.form-control {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .booking-form select.form-control+.select-arrow {
+        position: absolute;
+        right: 0px;
+        bottom: 4px;
+        width: 32px;
+        line-height: 32px;
+        height: 32px;
+        text-align: center;
+        pointer-events: none;
+        color: rgba(62, 72, 92, 0.3);
+        font-size: 14px;
+    }
+
+    .booking-form select.form-control+.select-arrow:after {
+        content: '\279C';
+        display: block;
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+
+    .booking-form .form-label {
+        display: inline-block;
+        color: #3e485c;
+        font-weight: 700;
+        margin-bottom: 6px;
+        margin-left: 7px;
+    }
+
+    .booking-form .submit-btn {
+        display: inline-block;
+        color: #fff;
+        background-color: #1e62d8;
+        font-weight: 700;
+        padding: 14px 30px;
+        border-radius: 4px;
+        border: none;
+        -webkit-transition: 0.2s all;
+        transition: 0.2s all;
+    }
+
+    .booking-form .submit-btn:hover,
+    .booking-form .submit-btn:focus {
+        opacity: 0.9;
+    }
+
+    .booking-cta {
+        margin-top: 80px;
+        margin-bottom: 30px;
+    }
+
+    .booking-cta h1 {
+        font-size: 52px;
+        text-transform: uppercase;
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .booking-cta p {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* image horizontal scroll  */
+
+    .wrapedOnHorizontalScroll {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-right: 5rem;
+        padding-left: 4rem;
+    }
+
+    .imageScrollWrapper {
+        display: flex;
+        flex-wrap: no-wrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin: 20px;
+        height: 240px;
+    }
+
+    /* img {
+        flex: 0 0 auto;
+        width: auto;
+        height: 100px;
+        max-width: 100%;
+        margin-right: 10px;
+    }*/
+    .ScrollImgDiv {
+        flex: 0 0 auto;
+        width: auto;
+        height: 200px;
+        max-width: 100%;
+        margin-right: 10px;
+        border-radius: 10px;
+    }
+
+    .ScrollImgDiv a {
+        text-decoration: none;
+    }
+
+    .ScrollImageInDiv {
+        width: auto;
+        height: 150px;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .ScrollImgDiv p {
+        font-size: 20px;
+        text-decoration: none;
+        color: #5b5b5b;
+    }
+
+    .ScrollHotel {
+        font-size: 20px;
+        text-decoration: none;
+        color: #5b5b5b;
+    }
+
+    /*  .ScrollImage {
+        flex: 0 0 auto;
+        width: auto;
+        height: 170px;
+        max-width: 100%;
+        margin-right: 10px;
+        border-radius: 10px;
+    }*/
+
+    ::-webkit-scrollbar {
+        width: 20px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(233, 233, 233);
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #86c3f9;
+    }
+</style>
+
+
+<script>
+
+    function DateChange() {
+        var checkin = document.getElementById("Checkin").value
+        //console.log(checkin)
+        var date = new Date(checkin);
+        date.setDate(date.getDate() + 1);
+
+        const yyyy = date.getFullYear();
+        let mm = date.getMonth() + 1; // Months start at 0!
+        let dd = date.getDate();
+        if (dd < 10) {
+            dd = "0" + dd
+        }
+
+        const formatedTomorow = yyyy + '-' + mm + '-' + dd;
+
+
+
+        document.getElementById("checkout").value = formatedTomorow;
+        //alert(formatedTomorow)
+        //console.log(formatedTomorow)
+    }
+
+
+</script>

@@ -1,0 +1,284 @@
+<nav class="nav">
+    <div class="nav_links">
+        <div class="navClose">
+            <span class="material-symbols-outlined ">
+                close
+            </span>
+        </div>
+        <a href="/vendor" class="nav__link ">
+            <span class="material-symbols-outlined">home_app_logo</span>
+            Home
+        </a>
+        <a href="/vendor/addroom">
+            <span class="material-symbols-outlined">
+                add_circle
+            </span>Add Room
+        </a>
+        <a href="/vendor/viewrooms">
+            <span class="material-symbols-outlined">
+                widgets
+            </span>View Rooms
+        </a>
+        <a href="/vendor/viewbookings">
+            <span class="material-symbols-outlined">
+                book_online
+            </span>Booking
+        </a>
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{#if user}}
+                {{user.name}}
+                {{/if}}
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="nav__overlay"></div>
+</nav>
+<section class="section col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="sideSection  ">
+        <div class="sideSecLinks">
+            <a href="/vendor">
+                <span class="material-symbols-outlined">
+                    home_app_logo
+                </span>Home
+            </a>
+            <a href="/vendor/addroom">
+                <span class="material-symbols-outlined">
+                    add_circle
+                </span>Add Room
+            </a>
+            <a href="/vendor/viewrooms">
+                <span class="material-symbols-outlined">
+                    widgets
+                </span>View Rooms
+            </a>
+            <a href="/vendor/viewbookings">
+                <span class="material-symbols-outlined">
+                    book_online
+                </span>Booking
+            </a>
+            <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{#if user}}
+                {{user.name}}
+                {{/if}}
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="/vendor/logout">Logout</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div id="btnNav" class="menuBar">
+        <span class="menuIcon material-symbols-outlined">menu</span>
+    </div>
+    
+</section>
+
+<style>
+    .section {
+        padding: 0;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .sideSecLinks {
+        margin-top: 3rem;
+    }
+
+    .sideSecLinks a {
+        display: flex;
+        margin-top: 1rem;
+        font-size: 20px;
+        color: #b6b6b6;
+        margin-left: 1rem;
+        margin-right: 1.5rem;
+        border-radius: 25px;
+        padding: .5rem;
+    }
+
+    .sideSecLinks span {
+        margin-top: 5px;
+        margin-right: .5rem;
+    }
+
+    .sideSecLinks a:hover {
+        transition: all 0.2s;
+        text-decoration: none;
+        background: rgb(75, 75, 75) !important;
+    }
+
+
+    .sideSection {
+        position: fixed;
+        height: 100%;
+        background: #393838;
+        float: left;
+        width: 220px;
+    }
+
+    .menuBar {
+        height: 10vh;
+        float: left;
+
+    }
+
+    .menuBar span {
+        font-size: 50px;
+        padding: 1rem 1rem;
+    }
+
+    .formArea {
+        height: 100vh;
+        float: left;
+        width: 100%;
+        padding-left: 230px;
+    }
+
+    @media screen and (max-width:1105px) {
+        .sideSection {
+            display: none;
+        }
+
+        .formArea {
+            float: none;
+            width: 100%;
+            padding-left: 0;
+        }
+    }
+
+    @media screen and (min-width:1105px) {
+        .menuBar {
+            display: none;
+        }
+    }
+
+    .nav_links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        height: 100vh;
+        width: 200px;
+        background: #393838;
+        transform: translateX(-250px);
+        transition: all 0.5s;
+        padding-left: 1rem;
+        display: block;
+    }
+
+    .nav--open .nav_links {
+        transform: translateX(0);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+    }
+
+    .navClose {
+        padding: 0rem 0;
+        color: #595757;
+    }
+
+    .navClose span {
+        font-size: 70px;
+        font-weight: 500;
+    }
+
+    .navClose:hover {
+        color: #918d8d;
+    }
+
+
+
+
+    .nav_links a {
+        text-decoration: none;
+        color: #bfbebe;
+        display: block;
+        margin: .5rem;
+        margin-right: 1rem;
+        padding: .5rem;
+        border-radius: 25px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .nav_links span {
+        margin-right: .5rem;
+        margin-top: 5px;
+    }
+
+    .nav_links a:hover {
+        background: #272727;
+    }
+
+    .nav_link:hover {
+        text-decoration: none;
+        background: #363636;
+        color: #efeeee;
+    }
+
+    .nav_link--active:hover {
+        color: #037d65;
+        background: #d1d0d0;
+    }
+
+    .nav__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(2px);
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .nav--open .nav__overlay {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .dropdown-menu {
+        background-color: #2c2b2b;
+        border: none;
+        border-radius: 30px;
+        padding-left: 1.7rem;
+        margin-top: .5rem;
+        padding-right: 2.5rem;
+        width: 7rem !important;
+        text-align: center;
+    }
+    .dropdown-item:hover {
+        color: whitesmoke;
+    }
+    .dropdown a {
+        overflow:hidden; 
+        white-space:nowrap; 
+        text-overflow: ellipsis;
+    }
+</style>
+
+<script>
+    window.addEventListener("load", () => {
+        document.body.classList.remove("preload")
+    })
+    document.addEventListener("DOMContentLoaded", () => {
+        const nav = document.querySelector(".nav");
+        document.querySelector("#btnNav").addEventListener("click", () => {
+            nav.classList.add("nav--open")
+        })
+        document.querySelector(".navClose").addEventListener("click", () => {
+            nav.classList.remove("nav--open")
+        })
+    })
+</script>

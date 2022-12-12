@@ -1,0 +1,74 @@
+<section>
+    <div class="TableDiv  ">
+        <div class="table">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Offer Price</th>
+                        <th scope="col">Room Count</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Place</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Verification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each rooms}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td>{{contact}}</td>
+                        <td>{{OfferPrice}}</td>
+                        <td>{{roomCount}}</td>
+                        <td>{{State}}</td>
+                        <td>{{Place}}</td>
+                        <td><img class="tableImg" src="/room-images/{{img1}}.jpg" alt=""></td>
+                        <td>
+                            {{#if VerificationStatus}}
+                            Approved
+                            {{else}}
+                            Under Varification
+                            {{/if}}
+
+
+                            {{!-- {{#if (Verification "false")}}
+                            Under Varification
+                            {{else}}
+                            Approved
+                            {{/if}} --}}
+
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+<style>
+    .TableDiv {
+        min-height: 100vh;
+        float: left;
+        width: 100%;
+        padding-left: 230px;
+
+    }
+    .table {
+        margin: 1rem;
+        padding-right: 50px;
+        margin-top: 5rem;
+    }
+
+    @media screen and (max-width:1105px) {
+        .TableDiv {
+            float: none;
+            width: 100%;
+            padding-left: 0;
+        }
+    }
+    .tableImg {
+        height: 5rem;
+    }
+</style>

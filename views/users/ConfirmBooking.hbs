@@ -1,0 +1,170 @@
+<section class="section">
+    <div class="container">
+        <div class="topHeader">
+            <div class="row">
+                <div class="imageDiv col-xs-12 col-sm-7 col-md-7 col-lg-4 col-xl-4">
+                    <img class="image" src="/room-images/632ac6170cd5f2d92b87f45a1.jpg" alt="">
+                </div>
+                <div class="HotelDetails col-xs-12 col-sm-6 col-md-5 col-lg-5 col-xl-5">
+                    <h3>{{room.name}}</h3>
+                    <h5>{{room.Place}}</h5>
+                    <h5>{{room.State}} {{room.District}}</h5>
+                    <h5>Ph: {{room.contact}}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="OrderDetails col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="BookingHeadin">
+                <h3>Booking Details</h3>
+                <a href="/editBooking/{{bookingDetails._id}}" class="btn btn-primary">Edit</a>
+            </div>
+            <div class="BooingDetails">
+                <div class="ItemView">
+                    <h5>CheckIn:</h5>
+                    <h4>{{bookingDetails.checkin}}</h4>
+                </div>
+                <div class="ItemView">
+                    <h5>CheckOut:</h5>
+                    <h4>{{bookingDetails.checkout}}</h4>
+                </div>
+                <div class="ItemView">
+                    <h5>No:Of Rooms:</h5>
+                    <h4>{{bookingDetails.roomCount}}</h4>
+                </div>
+                <div class="ItemView">
+                    <h5>No:Of Guests:</h5>
+                    <h4>{{bookingDetails.guests}}</h4>
+                </div>
+            </div>
+            <hr class="horiLine">
+            <div class="Summery">
+                <h3>Summary</h3>
+                <h4>Deluxe Room </h4>
+                <h6>MAP Rate ({{bookingDetails.roomCount}} Room)</h6>
+                <div class="finalSummary">
+                    <div class="FinalSummaryItem">
+                        <h6>Room Price:</h6>
+                        <h6>₹{{room.OfferPrice}}</h6>
+                    </div>
+                    <div class="FinalSummaryItem">
+                        <h6>Room Count:</h6>
+                        <h6>{{bookingDetails.roomCount}}</h6>
+                    </div>
+                    <div class="FinalSummaryItem">
+                        <h6>Stay Day Count:</h6>
+                        <h6>{{bookingDetails.dayCount}}</h6>
+                    </div>
+                    <div class="FinalSummaryItem">
+                        <h6>Total:</h6>
+                        <h6>₹{{bookingDetails.TotalPrice}}</h6>
+                    </div>
+                </div>
+                <div class="Confirm">
+                    <a href="/confirmOrder/{{bookingDetails._id}}" class="btn btn-primary" >Confirm Booking</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .section {}
+
+    .topHeader {
+        margin-top: 2rem;
+        padding: 1rem 2rem;
+        width: 100%;
+        border: 2px solid rgb(182, 182, 182);
+    }
+
+    .row {
+        justify-content: center;
+    }
+
+    .imageDiv {
+        padding: 1rem;
+    }
+
+    .image {
+        height: 12rem;
+    }
+
+    .HotelDetails {
+        padding: 1rem;
+    }
+
+    .hotelDetails {
+
+        padding: 3rem;
+    }
+
+    .hotelDetails h3 {
+        margin: 1rem;
+    }
+
+    .hotelDetails h5 {
+        margin: 1rem;
+    }
+
+    .OrderDetails {
+        margin-top: 3rem;
+        border: 2px solid rgb(182, 182, 182);
+        padding: 2rem;
+        margin-bottom: 10rem;
+    }
+
+    .BookingHeadin {
+        display: flex;
+        margin-bottom: 1rem;
+    }
+
+    .BookingHeadin h3:first-child {
+        margin-right: auto;
+    }
+
+    .BookingHeadin a:last-child {
+        margin-left: auto;
+    }
+
+    .BooingDetails {
+        margin-bottom: 2rem;
+    }
+
+    .horiLine {
+        height: 1px;
+        background-color: rgb(199, 199, 199);
+    }
+
+    .ItemView {
+        display: flex;
+        margin: 1rem auto;
+    }
+
+    .ItemView h4 {
+        margin-left: 1rem;
+    }
+
+    .ItemView h5 {
+        margin-top: 3px;
+    }
+
+    .Summery {
+        margin-top: 2rem;
+    }
+    .finalSummary {
+        margin-top: 1rem;
+        width: 10rem;
+    }
+    .FinalSummaryItem {
+        display: flex;
+    }
+    .FinalSummaryItem h6:first-child {
+        margin-right: auto;
+    }
+    .FinalSummaryItem h6:last-child {
+       margin-left: auto;
+    }
+    .Confirm {
+        margin-top: 1rem;
+    }
+</style>

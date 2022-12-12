@@ -1,0 +1,165 @@
+<div class="">
+    <div class="formArea  ">
+        <div class="center">
+            <img class="addroomIcon" src="/images/addroom.png" alt="">
+            <div class="Form">
+                <form action="/vendor/addroom" method="post" enctype="multipart/form-data">
+                    <input type="email" name="email" value="{{user.email}}" hidden>
+                    <input type="text" name="name" id="name" placeholder="Name of Building" required>
+                    <input type="number" name="contact" id="contact" placeholder="Contact No" required><br>
+                    <input type="number" name="RealPrice" id="RealPrice" placeholder="Real Price" required><br>
+                    <input type="number" name="OfferPrice" id="OfferPrice" placeholder="Offer Price" required><br>
+                    <input type="number" name="roomCount" id="RoomCount" placeholder="No of Rooms" required><br>
+                    <select name="TyprOfRoom" id="TypeOfRoom" aria-placeholder="Type of Room" required>
+                        <option value="" disabled selected>Type of Room</option>
+                        <option value="Standard Room">Standard Room</option>
+                        <option value="Minimalist">Minimalist</option>
+                        <option value="Deluxe">Deluxe</option>
+                        <option value="Studio">Studio</option>
+                        <option value="Connecting">Connecting</option>
+                        <option value="Standard Suite">Standard Suite</option>
+                        <option value="Junior Suite">Junior Suite</option>
+                        <option value="Presidential Suite">Presidential Suite</option>
+                        <option value="Penthouse Suite">Penthouse Suite</option>
+                        <option value="Honeymoon Suite">Honeymoon Suite</option>
+                        <option value="Bridal Suite">Bridal Suite</option>
+                    </select><br><br>
+                    <div class="services">
+                        <div class="amenities">
+                            <label for="">Amenities</label><br>
+                            <input type="checkbox" name="Wifi" id="Wifi">Free Wifi <br>
+                            <input type="checkbox" name="ServiceTime" id="service">Service 24/7<br>
+                            <input type="checkbox" name="FoodService" id="service">Food Service<br>
+                            <input type="checkbox" name="Pool" id="Pool">Pool<br>
+                            <input type="checkbox" name="AC" id="AC"> AC <br>
+                            <input type="checkbox" name="TV" id="TV"> TV <br><br>
+                        </div>
+                    </div>
+                    <input type="text" name="State" placeholder="State" required><br>
+                    <input type="text" name="District" placeholder="District" required><br>
+                    <input type="text" name="Address" placeholder="Address" required><br>
+                    <input type="text" name="Place" placeholder="Place" required><br>
+                    <input type="number" name="ZipCode" placeholder="Zip Code" required><br><br>
+                    <label class="imgUploadlabel" for="">Upload Image Of the Room</label>
+                    <input type="file" name="img1" required>
+                    <input type="file" name="img2" required>
+                    <input type="file" name="img3" required>
+                    <div class="form-group">
+                        <textarea type="text" class="form-control item" placeholder="description" name="description"
+                            required id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <input type="text" name="Verification" value="false" hidden >
+                    <button class="btn btn-primary addroomBtn" type="submit">Add Room</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .formArea {
+        margin-bottom: 10rem;
+        height: 100%;
+        float: left;
+        width: 100%;
+        padding-left: 230px;
+    }
+
+    .center {
+        margin: auto;
+        text-align: center;
+        margin-top: 8rem;
+        display: block;
+    }
+
+    .Form {
+
+        margin: 2rem auto;
+        width: 300px;
+    }
+
+    .addroomIcon {
+        height: 8rem;
+    }
+
+    .services {}
+
+    .amenities {
+        padding-left: 4rem;
+        text-align: left;
+        font-size: 20px;
+    }
+
+    input[type=number] {
+        width: 20rem;
+        margin: 1rem 0;
+        border-radius: 15px;
+        padding: .5rem;
+        border-color: blueviolet;
+    }
+
+    select {
+        width: 20rem;
+        margin: 1rem 0;
+        border-radius: 15px;
+        padding: .5rem;
+        border-color: blueviolet;
+    }
+
+    .amenities label {
+        font-size: 20px;
+    }
+
+    input[type=checkbox] {
+        border-color: blueviolet;
+        margin-right: .5rem;
+        width: 15px;
+        height: 15px;
+        margin-top: 10px;
+    }
+
+    input[type=text] {
+        width: 20rem;
+        margin: 1rem 0;
+        border-radius: 15px;
+        padding: .5rem;
+        border-color: blueviolet;
+    }
+
+    input[type=file] {
+        width: 20rem;
+        margin: 1rem 0;
+        border-radius: 15px;
+        padding: .5rem;
+        border: 2px solid;
+        border-color: blueviolet;
+    }
+    textarea[type=text] {
+        width: 20rem;
+        margin: 1rem 0;
+        border-radius: 15px;
+        padding: .5rem;
+        border: 2px solid;
+        border-color: blueviolet;
+    }
+
+    .imgUploadlabel {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .addroomBtn {
+        margin: 3rem 0;
+    }
+
+
+
+
+    @media screen and (max-width:1105px) {
+        .formArea {
+            float: none;
+            width: 100%;
+            padding-left: 0;
+        }
+    }
+</style>

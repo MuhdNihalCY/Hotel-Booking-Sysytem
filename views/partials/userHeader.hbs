@@ -1,0 +1,285 @@
+<header class="header">
+    <div class="row">
+        <button class="header__button" id="btnNav" type="button">
+            <i class="material-icons">menu</i>
+        </button>
+        <div class="brand box">
+            <div class="brandImg">
+                <img class="brand_icon" src="/images/BrandIcon.png" alt="">
+            </div>
+            <div class="brandName">
+                <img class="BrandNameImg" src="/images/stayonn.png" alt="">
+            </div>
+        </div>
+        <div class="navEnd box">
+            <div class="NavAction col-sm-2 col-md-3 col-lg-4 col-xl-9">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    {{#if user}}
+                    <li><a href="/myBookings">Bookings</a></li>
+                    <li><a class="username" href="/Profile">{{user.name}}</a></li>
+                    {{else}}
+                    <li><a href="/login">Login</a></li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<nav class="nav">
+    <div class="nav__links">
+        <div class="navClose">
+            <span class="material-symbols-outlined ">
+                close
+            </span>
+        </div>
+
+        <a href="/" class="nav__link ">
+            <i class="material-symbols-outlined">home_app_logo</i>
+            Home
+        </a>
+        <a href="" class="nav__link">
+            <i class="material-icons">person</i>
+            {{#if user}}
+            {{user.name}}
+            {{else}}
+            Profile
+            {{/if}}
+        </a>
+        <a href="/myBookings" class="nav__link ">
+            <i class="material-icons ">source</i>
+            Booking
+        </a>
+        {{#if user}}
+        {{else}}
+        <a href="/login" class="nav__link">
+            <span class="material-symbols-rounded">
+                login
+            </span> Login
+        </a>
+        {{/if}}
+    </div>
+    <div class="nav__overlay"></div>
+</nav>
+
+<style>
+    .row {
+        display: flex;
+
+    }
+
+    .box:first-child {
+        margin-right: auto;
+    }
+
+    .box:last-child {
+        margin-left: auto;
+        margin-right: 2rem;
+    }
+
+    body {
+        --header-height: 70px;
+
+        margin: var(--header-height) 0 0 0;
+        font-family: sans-serif;
+    }
+
+    .preload {
+        transition: none !important;
+    }
+
+    .header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background: #292929;
+
+    }
+
+    .brand {
+        padding-left: 10%;
+    }
+
+    .brandImg {
+        float: left;
+    }
+
+    .BrandNameImg {
+        height: 30px;
+    }
+
+    .brand_icon {
+        margin-top: 10px;
+        height: 50px;
+    }
+
+    .brandName {
+        font-family: serif;
+        padding-left: 4rem;
+        padding-top: 1.4rem;
+        color: #ffffff;
+    }
+
+    .navEnd {
+        text-align: end;
+        align-items: flex-end;
+    }
+
+    .NavAction {
+        color: white;
+        display: none;
+    }
+
+    .NavAction ul {
+        margin-top: 1rem;
+        display: flex;
+        list-style: none;
+    }
+
+    .NavAction ul li {
+        padding: 8px 15px;
+        border-radius: 10px;
+        transition: 0.2s ease-in;
+    }
+
+    .NavAction ul li a {
+        text-decoration: none;
+        color: #ccc9c9;
+    }
+
+    .NavAction ul li a:hover {
+        color: #f0eded;
+    }
+
+    .header__button {
+        width: var(--header-height);
+        flex-shrink: 0;
+        background: none;
+        outline: none;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        margin-left: 5px;
+        margin-top: 1.2rem;
+        display: block;
+    }
+
+    .nav__links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        height: 100vh;
+        width: 200px;
+        background: #393838;
+        transform: translateX(-250px);
+        transition: transform 0.3s;
+        padding-top: 3rem;
+        padding-left: 1rem;
+    }
+
+    .nav--open .nav__links {
+        transform: translateX(0);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav__link {
+        display: flex;
+        align-items: center;
+        color: #ccc9c9;
+        font-weight: bold;
+        font-size: 14px;
+        text-decoration: none;
+        padding: 12px 15px;
+        background: transform 0.2s;
+    }
+
+    .navClose {
+        color: #595757;
+    }
+
+    .navClose:hover {
+        color: #918d8d;
+    }
+
+
+    .nav__link>i {
+        margin-right: 15px;
+    }
+
+    .nav__link>span {
+        margin-right: 15px;
+    }
+
+    .nav__link--active {
+        color: #009578;
+        background: #eeeeee;
+    }
+
+    .nav__link:hover {
+        text-decoration: none;
+        background: #363636;
+        color: #efeeee;
+    }
+
+    .nav__link--active:hover {
+        color: #037d65;
+        background: #d1d0d0;
+    }
+
+    .nav__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(2px);
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .nav--open .nav__overlay {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .username {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: red;
+    }
+
+    /* responsive side bar css  */
+    @media screen and (min-width:810px) {
+        .header__button {
+            display: none;
+        }
+
+        .NavAction {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    window.addEventListener("load", () => {
+        document.body.classList.remove("preload")
+    })
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const nav = document.querySelector(".nav");
+
+        document.querySelector("#btnNav").addEventListener("click", () => {
+            nav.classList.add("nav--open")
+        })
+        document.querySelector(".navClose").addEventListener("click", () => {
+            nav.classList.remove("nav--open")
+        })
+    })
+</script>

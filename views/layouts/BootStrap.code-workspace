@@ -1,0 +1,64 @@
+{
+	"folders": [
+		{
+			"path": "D:/CROSSROADS/WEB_DESIGNIING/BootStrap"
+		},
+		{
+			"path": "D:/CROSSROADS/WEB_DESIGNIING/Project"
+		},
+		{
+			"path": "D:/CROSSROADS/Templates/Mallry_interior"
+		},
+		{
+			"path": "D:/CROSSROADS/datewithgit-Sample"
+		},
+		{
+			"path": "D:/CROSSROADS/Mallry_interior"
+		},
+		{
+			"path": "D:/netbeans/NETBEANS NIHAL/servicecenter"
+		},
+		{
+			"path": "D:/CROSSROADS/NODEJS"
+		},
+		{
+			"path": "D:/CROSSROADS/BOOTSTRAP PROJECTS"
+		},
+		{
+			"path": "D:/CROSSROADS/project-Ecommerce/project1"
+		},
+		{
+			"path": "D:/CROSSROADS/react-Project/ReacTPro1"
+		},
+		{
+			"path": "D:/CROSSROADS/project-Ecommerce/pro2"
+		},
+		{
+			"path": "D:/CROSSROADS/project-Ecommerce/nodejs-ecommerce-api"
+		},
+		{
+			"path": "D:/CROSSROADS/project-Ecommerce/ForTesting"
+		},
+		{
+			"path": "D:/CROSSROADS/project-Ecommerce/SocialMedia"
+		},
+		{
+			"path": "D:/CROSSROADS/project-Ecommerce/nodeMailerTesting"
+		},
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../Itbookstore"
+		},
+		{
+			"path": "../../../bootstrap/bootstrap-5.0.2-examples"
+		},
+		{
+			"path": "../../../cooladmin"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "cooladmin"
+	}
+}

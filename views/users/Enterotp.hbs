@@ -1,0 +1,81 @@
+<section>
+    <div class="parentDiv col-sm-8">
+        <div class="innerDiv col-xs-12 col-sm-12 col-md-6">
+            <img class="LoginImg" src="/images/otp.png" alt="">
+            <h3>Account Recovery</h3>
+            
+            <form action="/verifyotp" method="post" enctype="multipart/form-data"><br>
+            <p>An OTP is sent to<br>{{email}}</p>
+            <p class="errMSG">{{state}}</p>
+                <input type="email" name="email" placeholder="Email" value="{{email}}" hidden><br>
+                <input type="number" name="otp" placeholder="Enter OTP" required><br>
+                <button type="submit" class="btn btn-primary">Verify</button>
+                <hr class="hr">
+                <a href="/OTPlogin">Login With OTP</a>
+                <div class="singupSec">
+                    <p>Need an account? <a href="/vendor/signup">SIGNUP</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<style>
+    section {
+        background-color: rgb(233, 233, 233);
+        height: fit-content;
+        padding-bottom: 8rem;
+        padding-top: 2rem;
+    }
+
+    .parentDiv {
+        height: 580px;
+        margin: 0 auto;
+        margin-top: 80px;
+
+    }
+
+    .innerDiv {
+        margin: 0 auto;
+        height: 580px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        padding-top: 2rem;
+        border: 1px solid #BFBFBF;
+        border-radius: 2rem;
+        box-shadow: 10px 10px 5px #aaaaaa;
+
+    }
+
+    .LoginImg {
+        height: 7rem;
+        margin-bottom: 2rem;
+    }
+
+    input[type=email],
+    input[type=number] {
+        margin-bottom:  1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        border-color: rgb(144, 143, 142);
+    }
+
+    .btn {
+        width: 100px;
+        border-radius: 1rem;
+    }
+
+    .hr {
+        background-color: gray;
+        height: 1px;
+        width: 75%;
+    }
+
+    .innerDiv a {
+        color: gray;
+        font-family: sans-serif;
+    }
+    .errMSG {
+        color: red;
+    }
+</style>
