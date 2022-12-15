@@ -160,9 +160,22 @@ module.exports = {
 
             })
             let ConfirmedBooking = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).findOne({ "_id": ObjectId(id) });
-            await db.get().collection(collection.USER_CONFIRMED_BOOKING).insertOne(ConfirmedBooking).then(() => {
-                resolve()
+            console.log(ConfirmedBooking);
+            let ifConfirmedBooking = await db.get().collection(collection.USER_CONFIRMED_BOOKING).findOne({ _id: ObjectId(id) }).then((bookingData)=>{
+                if (bookingData) {
+                    let result ={
+                        status : "Already confirmed, retry your hotel search if you would like to make another reservation."
+                    } 
+                    console.log("Already Booked")
+                    resolve(result)
+                } else {
+                     db.get().collection(collection.USER_CONFIRMED_BOOKING).insertOne(ConfirmedBooking).then(() => {
+                        let result = {}
+                        resolve(result)
+                    })
+                }
             })
+            
         })
     },
     getEditBookingDetails: (id) => {

@@ -2,7 +2,8 @@ var express = require('express');
 const { response } = require('../app');
 var router = express.Router();
 var userHelpers = require('../helpers/userHelpers')
-var mailer = require('../helpers/mailer')
+var mailer = require('../helpers/mailer');
+const e = require('express');
 
 // function for verify login
 const verifyLogin = (req, res, next) => {
@@ -287,8 +288,14 @@ router.get('/confirmOrder/:id', verifyLogin, (req, res) => {
   var user = req.session.user;
   let id = req.params.id;
   console.log(id)
-  userHelpers.ConfirmBookingDetails(id).then(() => {
-    res.render("users/bookingConfirmed", { user })
+  userHelpers.ConfirmBookingDetails(id).then((result) => {
+    console.log("Confirmation DOne")
+    if(result.status){
+      let results = result.status;
+      res.render("users/bookingConfirmed", { user,results })
+    }else{
+      res.render("users/bookingConfirmed", { user })
+    }
   })
 })
 router.get('/editBooking/:id', verifyLogin, (req, res) => {

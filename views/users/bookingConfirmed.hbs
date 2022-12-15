@@ -106,12 +106,19 @@
             box-shadow: inset 0px 0px 0px 30px #7ac142
         }
     }
+
+    .AlreadyDone {
+        margin: 3rem;
+
+    }
 </style>
 <section>
     <div class="card">
-        {{!-- <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
-            <i class="checkmark">✓</i>
-        </div> --}}
+        {{#if results}}
+        <div class="AlreadyDone">
+            <h3>{{results}}</h3>
+        </div>
+        {{else}}
         <div class="wrapper"> <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
                 <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
                 <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
@@ -119,6 +126,8 @@
         </div>
         <h1>Success</h1>
         <p>We received your Booking request;<br /> we'll be in touch shortly!</p>
+        {{/if}}
         <a href="/">Go to homePage</a>
+
     </div>
 </section>
