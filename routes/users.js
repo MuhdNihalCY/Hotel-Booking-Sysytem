@@ -56,14 +56,16 @@ router.get('/', function (req, res, next) {
 
     }
 
-    console.log(locations)
+    //console.log(locations)
+    
+    var noHeader = true;
 
     if (user) {
       userHelpers.getRoomClickedDetailsReverse(user.email).then((bookingDetails) => {
-        res.render('users/home', { user, formatedToday, formatedTomorow, bookingDetails, locations })
+        res.render('users/home1', { user, formatedToday, formatedTomorow, bookingDetails, locations,noHeader })
       })
     } else {
-      res.render('users/home', { formatedToday, formatedTomorow, locations })
+      res.render('users/home1', { formatedToday, formatedTomorow, locations,noHeader })
     }
   })
 
@@ -255,7 +257,7 @@ router.get('/bookNowClicked/:id/:clickedId', verifyLogin, (req, res) => {
   var user = req.session.user;
   let ClickedId = req.params.clickedId;
 
-  console.log(id, "+++++", ClickedId)
+  //console.log(id, "+++++", ClickedId)
   userHelpers.GetBookingRoom(id).then((response) => {
     let room = response
     userHelpers.getClickedSearchData(ClickedId).then((bookingDetails) => {

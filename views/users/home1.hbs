@@ -1,0 +1,351 @@
+<section>
+    <div class="topHero ">
+        <div class="container MainSec">
+            <div class="flex-container">
+                <div>
+                    <div class="menu"></div>
+                    <h1 class="Brand">STAYONN</h1>
+                </div>
+                <div class="NAVLINKSDIV">
+                    <ul class="nav-links">
+                        <li><a class="NavLinks" href="">home</a></li>
+                        <li><a class="NavLinks" href="">about</a></li>
+                        <li><a class="NavLinks" href="">bookings</a></li>
+                        <li><a class="NavLinks" href="">User</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="mainContent">
+            <div class="container">
+                <div class="mainBody">
+                    <img class="HeroIMG col-12 col-md-6 float-left" src="/images/homeUser/Removal-921.png" alt="">
+                    <div class="HeroTitle col-12 col-md-6">
+                        <p class="Welcome">Welcome</p>
+                        <p class="subWelcomeTitle">Experience the greatest for your holidays</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="SearchRec">
+                <form action="/checkAvailability" class="SearchForm" method="post" enctype="multipart/form-data">
+                    <div class="location">
+                        <img src="/images/homeUser/location.png" alt="">
+                        <select class=" inputForm form-control InputLocation" placeholder="Location" name="destination"
+                            required>
+                            <option value="" selected="true" disabled="disabled">Select Location</option>
+                            {{#each locations}}
+                            <option value="{{Place}}">{{Place}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="date">
+                        <div class="checkin">
+                            <p class="checkinLabel">CheckIn</p>
+                            <input type="date" name="checkin" min="{{formatedToday}}" id="Checkin"
+                                value="{{formatedToday}}" class="form-control" required>
+                        </div>
+                        <div class="checkout">
+                            <p class="checkoutLabel">CheckIn</p>
+                            <input type="date" name="checkin" min="{{formatedToday}}" id="Checkin"
+                                value="{{formatedToday}}" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="roomsFor">
+                        <div class="dropdown">
+                            <input type="button" class="dropbtn btn" value="Rooms for">
+                            <div class="dropdown-content">
+                                <div class="RoomCount">
+                                    <label class="LabelRoomCount" for="">Room Count</label>
+                                    <input class="InputRoomCount" type="number" min="1" value="1" name="RoomCount">
+                                </div>
+                                <div class="GuestCount">
+                                    <label class="LabelGuestCount" for="">Guest Count</label>
+                                    <input class="InputGuestCount" type="number" min="1" value="1" name="RoomCount">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Search">
+                        <img class="SearchIcon" src="/images/homeUser/SearchIcon.svg" alt="">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .topHero {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        /*background: url(/images/homeUser/Rectangle1.png);*/
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        /*backdrop-filter: blur(410px);*/
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .Brand {
+        position: absolute;
+
+
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: 1000;
+        font-size: 45px;
+        line-height: 56px;
+        */
+        /* identical to box height */
+
+
+        /* Rich Black */
+
+        color: #000807;
+        cursor: pointer;
+    }
+
+    .MainSec {
+        /*background-color: red;*/
+    }
+
+    .flex-container {
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        /*background-color: yellow;*/
+        height: 5rem;
+    }
+
+    .nav-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style-type: none;
+    }
+
+    .nav-links li {
+        padding: .5rem;
+    }
+
+    .NavLinks {
+        color: black;
+    }
+
+    .NavLinks:hover {
+        text-decoration: none;
+        color: red;
+    }
+
+    .mainContent {
+        background-image: linear-gradient(white, rgba(117, 203, 227, 100%));
+    }
+
+    .container1 {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .mainBody {
+        display: flex;
+        overflow: auto;
+        flex-direction: row;
+    }
+
+
+
+    .HeroIMG {
+        height: auto;
+        width: auto;
+    }
+
+    .HeroTitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .Welcome {
+        font-size: 30px;
+    }
+
+    .subWelcomeTitle {
+        font-size: 25px;
+        font-weight: 800;
+    }
+
+    .SearchRec {
+        position: relative;
+        height: 5rem;
+        margin-top: -2rem;
+        z-index: 21;
+        background: #ffffff;
+        box-shadow: 0px 4px 9px 2px rgba(0, 0, 0, 0.25);
+        border-radius: 800px;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .SearchForm {
+         width: 100%;
+        display: flex;
+        justify-content: stretch;
+        
+    }
+
+    .location {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 0rem;
+        margin-left: 2rem;
+    }
+
+    .IconLocation {
+        width: 30px;
+        height: 35px;
+    }
+
+    .InputLocation {
+        width: 100%;
+        border: none;
+        border-radius: 4px;
+        background-color: none;
+    }
+
+    .InputLocation:active {
+        border: none;
+        border-color: #ffffff;
+    }
+
+    .date {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 0rem;
+        margin-left: 3rem;
+    }
+
+    input[type="date"] {
+        width: 5.5rem;
+
+    }
+
+    .checkin,
+    .checkout {
+        display: flex;
+        margin: 0 1rem;
+    }
+
+    .form-control {
+        border: none;
+    }
+
+    .checkinLabel,
+    .checkoutLabel {
+        padding-top: 1rem;
+        font-weight: 500;
+    }
+
+    /* Hide the dropdown content by default */
+    .dropdown-content {
+        display: none;
+    }
+
+    /* Show the dropdown content when the button is clicked */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content {
+        background-color: rgb(206, 120, 59);
+        padding: 1rem;
+        border-radius: 25px;
+        margin-left: -3rem;
+        margin-top: 5px;
+        color: #ffffff;
+        font-weight: 1000;
+    }
+
+    /* Style the dropdown button */
+    .dropbtn {
+        background-color: #763c16;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        margin-top: 11px;
+        font-weight: 600;
+    }
+
+    .dropbtn:hover {
+        background-color: #694126;
+    }
+
+
+    /* Change color of dropdown links on hover */
+
+
+
+    .LabelRoomCount,
+    .LabelGuestCount {
+        font-weight: 600;
+    }
+
+    .InputRoomCount,
+    .InputGuestCount {
+        width: 5rem;
+        border-radius: 15px;
+        border-width: 2px;
+        margin-left: 10px;
+    }
+
+    .Search {
+        height: 5rem;
+        width: auto;
+        display: flex;
+        margin-left: 0;
+        margin-right: auto;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 0px;
+    }
+
+    .SearchIcon {
+        width: 3rem;
+        height: auto;
+    }
+
+
+
+
+    @media screen and (max-width:781px) {
+        .mainBody {
+            display: block;
+        }
+
+        .Welcome {
+            padding-top: 2rem;
+        }
+
+        .HeroIMG {
+            height: auto;
+        }
+
+        .NAVLINKSDIV {
+            display: none;
+        }
+    }
+</style>
