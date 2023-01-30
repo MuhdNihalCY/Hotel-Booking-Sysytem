@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        {{!-- <div class="container">
             <div class="SearchRec">
                 <form action="/checkAvailability" class="SearchForm" method="post" enctype="multipart/form-data">
                     <div class="location">
@@ -43,13 +43,13 @@
                     </div>
                     <div class="date">
                         <div class="checkin">
-                            <p class="checkinLabel">CheckIn</p>
+                            <p class="checkinLabel">Check-In</p>
                             <input type="date" name="checkin" min="{{formatedToday}}" id="Checkin"
                                 value="{{formatedToday}}" class="form-control" required>
                         </div>
                         <div class="checkout">
-                            <p class="checkoutLabel">CheckIn</p>
-                            <input type="date" name="checkin" min="{{formatedToday}}" id="Checkin"
+                            <p class="checkoutLabel">Check-Out</p>
+                            <input type="date" name="checkout" min="{{formatedToday}}" id="Checkin"
                                 value="{{formatedToday}}" class="form-control" required>
                         </div>
                     </div>
@@ -59,19 +59,100 @@
                             <div class="dropdown-content">
                                 <div class="RoomCount">
                                     <label class="LabelRoomCount" for="">Room Count</label>
-                                    <input class="InputRoomCount" type="number" min="1" value="1" name="RoomCount">
+                                    <input class="InputRoomCount" type="number" min="1" value="1" name="rooms">
                                 </div>
                                 <div class="GuestCount">
                                     <label class="LabelGuestCount" for="">Guest Count</label>
-                                    <input class="InputGuestCount" type="number" min="1" value="1" name="RoomCount">
+                                    <input class="InputGuestCount" type="number" min="1" value="1" name="guests">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="RoomsForBigScreen">
+                        <div class="RoomCount">
+                            <label class="LabelRoomCount" for="">Room Count</label>
+                            <input class="InputRoomCount" type="number" min="1" value="1" name="rooms">
+                        </div>
+                        <div class="GuestCount">
+                            <label class="LabelGuestCount" for="">Guest Count</label>
+                            <input class="InputGuestCount" type="number" min="1" value="1" name="guests">
+                        </div>
+                    </div>
                     <div class="Search">
-                        <img class="SearchIcon" src="/images/homeUser/SearchIcon.svg" alt="">
+                        <button class="SearchButton" type="submit">
+                            <img class="SearchIcon" src="/images/homeUser/SearchIcon.svg" alt="">
+                            <label class="SearchRoomButton" for="">Search Room</label>
+                        </button>
                     </div>
                 </form>
+            </div>
+        </div> --}}
+        <div class="belowMain">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="RoomSearchHeading">Search Room</h2>
+                    </div>
+                    <div class="SearchHeader">
+                        <form action="" method="post">
+                            <div class="locationDiv col-md-4">
+                                <label for="" class="LocationLabel">Available Locations</label>
+                                <select class=" form-control">
+                                    <option value="" selected="true" disabled="disabled">Select Location</option>
+                                    {{#each locations}}
+                                    <option value="{{Place}}">{{Place}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="verticalLine"></div>
+                            <div class="date col-md-3">
+                                <div class="DateLabelDiv">
+                                    <span class="material-symbols-outlined">
+                                        calendar_month
+                                    </span>
+                                    <label for="" class="DateLabel">Select Date</label>
+                                </div>
+                                <div class="checkinDiv">
+                                    <label for="" class="CheckinLabel">
+                                        Check-in
+                                    </label>
+                                    <input type="date" name="checkin" onchange="CheckInDateChange()" id="checkin">
+                                </div>
+                                <div class="checkoutDiv">
+                                    <label for="" class="CheckoutLabel">
+                                        Check-out
+                                    </label>
+                                    <input type="date" name="checkout" id="checkout">
+                                </div>
+                            </div>
+                            <div class="verticalLine"></div>
+                            <div class="RoomsFor col-md-3">
+                                <div class="RoomFOr">
+                                    <span class="material-symbols-outlined">
+                                        nest_multi_room
+                                    </span>
+                                    <lablel class="RoomForLabel">
+                                        NO:of
+                                    </lablel>
+                                </div>
+
+                            </div>
+
+                            {{!-- <div class="ChecinDiv col-md-2">
+
+                            </div>
+                            <div class="ChecOutDiv col-md-2">
+
+                            </div> --}}
+                            {{!-- <div class="RoomsGuestCount col-md-2">
+
+                            </div>--}}
+                            <div class="RoomSearchDiv col-md-2">
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -114,6 +195,7 @@
 
     .MainSec {
         /*background-color: red;*/
+        display: none;
     }
 
     .flex-container {
@@ -185,7 +267,7 @@
         font-weight: 800;
     }
 
-    .SearchRec {
+    /* {{!-- .SearchRec {
         position: relative;
         height: 5rem;
         margin-top: -2rem;
@@ -196,21 +278,46 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
+        display: none;
     }
 
     .SearchForm {
-         width: 100%;
+        width: 100%;
         display: flex;
-        justify-content: stretch;
-        
+        justify-content: center;
+
     }
 
     .location {
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        margin-top: 0rem;
-        margin-left: 2rem;
+        width: 20%;
+        padding-left: 1rem;
+    }
+
+    .date {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 40%;
+    }
+
+    .roomsFor {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+
+    }
+
+    .RoomsForBigScreen {
+        display: none;
+    }
+
+    .Search {
+        display: flex;
+        justify-content: end;
+        width: 20%;
     }
 
     .IconLocation {
@@ -230,13 +337,7 @@
         border-color: #ffffff;
     }
 
-    .date {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        margin-top: 0rem;
-        margin-left: 3rem;
-    }
+
 
     input[type="date"] {
         width: 5.5rem;
@@ -260,12 +361,12 @@
     }
 
     /* Hide the dropdown content by default */
-    .dropdown-content {
+    /* .dropdown-content {
         display: none;
     }
 
     /* Show the dropdown content when the button is clicked */
-    .dropdown:hover .dropdown-content {
+    /* .dropdown:hover .dropdown-content {
         display: block;
     }
 
@@ -280,14 +381,16 @@
     }
 
     /* Style the dropdown button */
-    .dropbtn {
+    /* .dropbtn {
         background-color: #763c16;
         color: white;
         padding: 16px;
         font-size: 16px;
         border: none;
-        margin-top: 11px;
-        font-weight: 600;
+        /*margin-top: 11px;*/
+    /*    font-weight: 600;
+        width: 100%;
+        height: 100%;
     }
 
     .dropbtn:hover {
@@ -297,36 +400,170 @@
 
     /* Change color of dropdown links on hover */
 
+    /* .RoomCount,
+    .GuestCount {
+        display: flex;
+        padding: 1rem;
+    }
 
 
     .LabelRoomCount,
-    .LabelGuestCount {
+    .LabelGuestCount,
+    .SearchRoomButton {
         font-weight: 600;
     }
+
+    .LabelRoomCount,
+    .LabelGuestCount {}
 
     .InputRoomCount,
     .InputGuestCount {
         width: 5rem;
         border-radius: 15px;
         border-width: 2px;
-        margin-left: 10px;
+        margin-left: 5px;
+        margin-right: 10px;
     }
 
-    .Search {
-        height: 5rem;
-        width: auto;
-        display: flex;
-        margin-left: 0;
-        margin-right: auto;
-        justify-content: flex-end;
-        align-items: center;
-        margin-right: 0px;
+
+
+    .SearchButton {
+        height: 100%;
+        width: 100%;
+        -webkit-border-radius: 800px;
+        -moz-border-radius: 800px;
+        border-radius: 800px;
     }
 
     .SearchIcon {
         width: 3rem;
         height: auto;
+    } --}}*/
+
+
+    /*       main Section for Hotel Search In rectangle vertical       */
+
+    .belowMain {
+        width: 100%;
+        background-color: #292929;
+        height: 16rem;
+        padding: 2rem 0;
     }
+
+    .SearchHeader {
+        background-color: #ffffff;
+        width: 100%;
+        height: 7rem;
+        display: flex;
+    }
+
+    .SearchHeader>form {
+        width: 100%;
+        display: flex;
+    }
+
+    .locationDiv,
+    .date,
+    .RoomsFor {
+        height: 7rem;
+    }
+
+
+    .verticalLine {
+        border-left: 2px solid rgb(209, 209, 209);
+        height: 6rem;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .material-symbols-outlined {
+        color: #999999;
+        font-size: 15px;
+        margin: 4px;
+    }
+
+    .LocationLabel,
+    .DateLabel {
+        color: #999999;
+        font-size: 15px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    }
+
+    .date {
+        display: block;
+    }
+
+
+    .DateLabelDiv {
+        display: flex;
+        padding-top: .5rem;
+    }
+
+    .checkinDiv,
+    .checkoutDiv {
+        display: flex;
+        margin: 3px 0;
+    }
+
+    .CheckinLabel,
+    .CheckoutLabel {
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+        margin-top: auto;
+        margin-bottom: auto;
+        color: #8f8f8f;
+    }
+
+
+    input[type="date"] {
+        height: 1.5rem;
+        margin-right: 0px;
+        margin-left: auto;
+        border-radius: 15px;
+        border-color: #c9c9c9;
+        border: none;
+        cursor: pointer;
+    }
+
+    .RoomFOr {
+        display: flex;
+    }
+
+
+
+    .ChecOutDiv,
+    .RoomSearchDiv,
+    .guestCountDIv {
+        background-color: red;
+        height: 7rem;
+    }
+
+    .ChecinDiv,
+    .roomCountDiv,
+    .RoomsGuestCount {
+        background-color: rgb(242, 93, 93);
+        height: 7rem;
+    }
+
+    .RoomSearchDiv {
+        -webkit-border-top-left-radius: 500px;
+        -webkit-border-bottom-left-radius: 500px;
+        -moz-border-radius-topleft: 500px;
+        -moz-border-radius-bottomleft: 500px;
+        border-top-left-radius: 500px;
+        border-bottom-left-radius: 500px;
+    }
+
+    .RoomSearchHeading {
+        color: aliceblue;
+        font-weight: 600;
+        padding-bottom: 1rem;
+    }
+
+
+
 
 
 
@@ -348,4 +585,78 @@
             display: none;
         }
     }
+
+    @media screen and (min-width:1224px) {
+        .roomsFor {
+            display: none;
+        }
+
+        .RoomsForBigScreen {
+            display: flex;
+            width: 33.33%;
+        }
+
+        .location {
+            width: 16.66%;
+        }
+
+        .date {
+            width: 33.33%;
+        }
+    }
 </style>
+
+<script>
+    window.onload = function () {
+        // Get current date
+        var today = new Date();
+
+        var day = today.getDate().toString().padStart(2, "0");
+        var month = (today.getMonth() + 1).toString().padStart(2, "0");
+        var year = today.getFullYear();
+        // Format date as "yyyy-mm-dd"
+        var todayFormatted = year + "-" + month + "-" + day;
+
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        var day = tomorrow.getDate().toString().padStart(2, "0");
+        var month = (tomorrow.getMonth() + 1).toString().padStart(2, "0");
+        var year = tomorrow.getFullYear();
+
+        // Format date as "yyyy-mm-dd"
+        // var tomorrowFormatted = day + "-" + month + "-" + year;
+        var tomorrowFormatted = year + "-" + month + "-" + day;
+
+        // alert(tomorrowFormatted)
+
+        document.getElementById("checkin").value = todayFormatted;
+        document.getElementById("checkout").value = tomorrowFormatted;
+
+        document.getElementById("checkin").min = todayFormatted;
+        document.getElementById("checkout").min = tomorrowFormatted;
+
+    }
+
+    function CheckInDateChange() {
+        var checkindate = document.getElementById("checkin").value;
+
+        var minCheckout = new Date(checkindate);
+
+        minCheckout.setDate(minCheckout.getDate() + 1);
+
+        var day = minCheckout.getDate().toString().padStart(2, "0");
+        var month = (minCheckout.getMonth() + 1).toString().padStart(2, "0");
+        var year = minCheckout.getFullYear();
+
+        // Format date as "yyyy-mm-dd"
+        // var tomorrowFormatted = day + "-" + month + "-" + year;
+        var minCheckout = year + "-" + month + "-" + day;
+
+
+        //alert(minCheckout)
+        document.getElementById("checkout").value = minCheckout;
+        document.getElementById("checkout").min = minCheckout;
+    }
+
+</script>

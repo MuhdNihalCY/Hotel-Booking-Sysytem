@@ -1,28 +1,30 @@
 <header class="header">
-    <div class="row">
-        <button class="header__button" id="btnNav" type="button">
-            <i class="material-icons">menu</i>
-        </button>
-        <div class="brand box">
-            <div class="brandImg">
-                <img class="brand_icon" src="/images/BrandIcon.png" alt="">
+    <div class="container">
+        <div class="row">
+            <button class="header__button" id="btnNav" type="button">
+                <i class="material-icons">menu</i>
+            </button>
+            <div class="brand box">
+                <div class="brandImg">
+                    <img class="brand_icon" src="/images/BrandIcon.png" alt="">
+                </div>
+                <div class="brandName">
+                    <img class="BrandNameImg" src="/images/stayonn.png" alt="">
+                </div>
             </div>
-            <div class="brandName">
-                <img class="BrandNameImg" src="/images/stayonn.png" alt="">
-            </div>
-        </div>
-        <div class="navEnd box">
-            <div class="NavAction col-sm-2 col-md-3 col-lg-4 col-xl-9">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    {{#if user}}
-                    <li><a href="/myBookings">Bookings</a></li>
-                    <li><a class="username" href="/Profile">{{user.name}}</a></li>
-                    {{else}}
-                    <li><a href="/login">Login</a></li>
-                    {{/if}}
-                </ul>
+            <div class="navEnd box">
+                <div class="NavAction col-sm-2 col-md-3 col-lg-4 col-xl-9">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        {{#if user}}
+                        <li><a href="/myBookings">Bookings</a></li>
+                        <li><a class="username" href="/Profile">{{user.name}}</a></li>
+                        {{else}}
+                        <li><a href="/login">Login</a></li>
+                        {{/if}}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -75,7 +77,6 @@
 
     .box:last-child {
         margin-left: auto;
-        margin-right: 2rem;
     }
 
     body {
@@ -100,7 +101,7 @@
     }
 
     .brand {
-        padding-left: 10%;
+        padding-left: 0%;
     }
 
     .brandImg {
@@ -171,8 +172,8 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 2;
-        height: 100vh;
+        z-index: 25;
+        height: 100%;
         width: 200px;
         background: #393838;
         transform: translateX(-250px);
@@ -184,6 +185,7 @@
     .nav--open .nav__links {
         transform: translateX(0);
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        height: 200vh;
     }
 
     .nav__link {
@@ -199,6 +201,7 @@
 
     .navClose {
         color: #595757;
+        cursor: pointer;
     }
 
     .navClose:hover {
@@ -256,7 +259,7 @@
     }
 
     /* responsive side bar css  */
-    @media screen and (min-width:810px) {
+    @media screen and (min-width:1002px) {
         .header__button {
             display: none;
         }

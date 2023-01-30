@@ -58,14 +58,15 @@ router.get('/', function (req, res, next) {
 
     //console.log(locations)
     
-    var noHeader = true;
+    var homePage = true;
 
     if (user) {
       userHelpers.getRoomClickedDetailsReverse(user.email).then((bookingDetails) => {
-        res.render('users/home1', { user, formatedToday, formatedTomorow, bookingDetails, locations,noHeader })
+        res.render('users/home2', { user, formatedToday, formatedTomorow, bookingDetails, locations,homePage })
       })
     } else {
-      res.render('users/home1', { formatedToday, formatedTomorow, locations,noHeader })
+      
+      res.render('users/home2', { formatedToday, formatedTomorow, locations,homePage })
     }
   })
 
