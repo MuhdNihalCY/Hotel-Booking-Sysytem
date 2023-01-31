@@ -11,7 +11,8 @@
   <link href="//fonts.googleapis.com/css?family=Spartan:400,500,600,700,900&display=swap" rel="stylesheet">
 
   <!-- Template CSS -->
-  {{!-- <link rel="stylesheet" href="/assets/css/style-starter.css">   --}}
+  {{!--
+  <link rel="stylesheet" href="/assets/css/style-starter.css"> --}}
   {{/if}}
 
 
@@ -68,33 +69,51 @@
   <title>StayOnn</title>
   <link rel="icon" type="image/x-icon" href="/images/building.png">
 
+
+
 </head>
 
 <body class="preload">
-  {{#if vendor}}
-  {{#if login}}
-  {{else}}
-  {{>vendorSideBar}}
+  {{#if homePage}}
+  <div class="loader-wrapper">
+    <div id="loaderDiv">
+      <div id="loader">
+
+      </div>
+
+    </div>
+  </div>
   {{/if}}
-  {{else}}
-  {{#if admin}}
-  {{>adminSidebar}}
-  {{else}}
-  {{#if noHeader}}
-  {{else}}
-  {{>userHeader}}
-  {{/if}}
-  {{/if}}
-  {{/if}}
-  {{{body}}}
-  {{!-- user footer --}}
-  {{#if admin}}
-  {{else}}
-  {{#if noHeader}}
-  {{else}}
-  {{!-- {{>userFooter}} --}}
-  {{/if}}
-  {{/if}}
+
+
+
+
+
+
+  <div class="content">
+    {{#if vendor}}
+    {{#if login}}
+    {{else}}
+    {{>vendorSideBar}}
+    {{/if}}
+    {{else}}
+    {{#if admin}}
+    {{>adminSidebar}}
+    {{else}}
+    {{#if noHeader}}
+    {{else}}
+    {{>userHeader}}
+    {{/if}}
+    {{/if}}
+    {{/if}}
+    {{{body}}}
+    {{!-- user footer --}}
+    {{#if admin}}
+    {{else}}
+    {{>userFooter}}
+    {{/if}}
+  </div>
+
 
 
 
@@ -121,6 +140,148 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
     integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
     crossorigin="anonymous"></script>
+  {{/if}}
+
+  {{#if homePage}}
+
+  <style>
+    .loader-wrapper {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      z-index: 1000;
+      transition: opacity 2s ease;
+    }
+
+    #loaderDiv {
+
+      height: 100vh;
+      width: 100%;
+    }
+
+    /* #loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: darkslategray;
+    opacity: 1.0;
+    transition: opacity 2s ease;
+}*/
+
+    #loader {
+      display: block;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      width: 150px;
+      height: 150px;
+      margin: -75px 0 0 -75px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #3498db;
+      -webkit-animation: spin 2s linear infinite;
+      /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 2s linear infinite;
+      /* Chrome, Firefox 16+, IE 10+, Opera */
+    }
+
+    #loader:before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #e74c3c;
+      -webkit-animation: spin 3s linear infinite;
+      /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 3s linear infinite;
+      /* Chrome, Firefox 16+, IE 10+, Opera */
+    }
+
+    #loader:after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #f9c922;
+      -webkit-animation: spin 1.5s linear infinite;
+      /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 1.5s linear infinite;
+      /* Chrome, Firefox 16+, IE 10+, Opera */
+    }
+
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
+      }
+    }
+
+
+
+    .content {
+      filter: blur(20px);
+      transition: filter 0.5s ease-out;
+    }
+  </style>
+
+
+
+  <script>
+    //splash screen
+    var timeForSplash = 1000;
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        document.querySelector(".loader-wrapper").style.display = "none";
+        document.querySelector(".content").style.display = "block";
+        document.querySelector(".content").style.filter = "none";
+      }, timeForSplash);
+    });
+  </script>
+
   {{/if}}
 
 

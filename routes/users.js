@@ -3,7 +3,7 @@ const { response } = require('../app');
 var router = express.Router();
 var userHelpers = require('../helpers/userHelpers')
 var mailer = require('../helpers/mailer');
-const e = require('express');
+
 
 // function for verify login
 const verifyLogin = (req, res, next) => {
@@ -86,18 +86,12 @@ router.post('/checkAvailability', verifyLogin, (req, res) => {
 
     console.log("day count ", DayCount)
     console.log(req.body)
-
-
-
     let booking = {}
 
     let Dates = []
 
-    for (i = 0;i<DayCount ; i++){
-      
+    for (i = 0;i<DayCount ; i++){ 
     }
-
-
 
     booking = req.body;
     booking.roomCount = req.body.rooms
@@ -143,7 +137,7 @@ router.post('/signup', (req, res) => {
       res.render('users/userSignup', { errorMsg })
     } else {
       req.session.user = response.user
-      res.render('users/home')
+      res.redirect('/')
     }
   })
 })
