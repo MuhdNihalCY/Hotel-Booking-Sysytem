@@ -3,6 +3,7 @@ const { response } = require('../app');
 var router = express.Router();
 var userHelpers = require('../helpers/userHelpers')
 var mailer = require('../helpers/mailer');
+const crypto = require('crypto');
 
 
 // function for verify login
@@ -14,25 +15,25 @@ const verifyLogin = (req, res, next) => {
   }
 }
 
+//function to create random id for user to store in session
+function generateAvatarName() {
+  const hex = crypto.randomBytes(6).toString('hex')
+  // console.log(hex)
+  //  const index = parseInt(hex, 16) % wordlist.length
+  // // console.log(index)
+  //  console.log(wordlist[10])
+  return hex
+}
+
 
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  let mm = today.getMonth() + 1; // Months start at 0!
-  let dd = today.getDate();
-  let dd2 = dd + 1
-  // console.log(dd)
-  // console.log(dd2)
 
-  if (dd < 10) dd = '0' + dd;
-  if (mm < 10) mm = '0' + mm;
+  var randomId = generateAvatarName()
+  //console.log("Random Name is: "+randomId);
 
-  // const formattedToday = dd + '/' + mm + '/' + yyyy;
-  const formatedToday = yyyy + '-' + mm + '-' + dd;
-  const formatedTomorow = yyyy + '-' + mm + '-' + dd2;
-  // console.log(formatedTomorow)
+  req.session.userId = randomId;
 
 
   var user = req.session.user
@@ -57,16 +58,18 @@ router.get('/', function (req, res, next) {
     }
 
     //console.log(locations)
-    
+
     var homePage = true;
+
+    console.log(req.session)
 
     if (user) {
       userHelpers.getRoomClickedDetailsReverse(user.email).then((bookingDetails) => {
-        res.render('users/home2', { user, formatedToday, formatedTomorow, bookingDetails, locations,homePage })
+        res.render('users/home2', { user, bookingDetails, locations, homePage })
       })
     } else {
-      
-      res.render('users/home2', { formatedToday, formatedTomorow, locations,homePage })
+
+      res.render('users/home2', { locations, homePage })
     }
   })
 
@@ -76,38 +79,46 @@ router.get('/', function (req, res, next) {
 
 
 
-router.post('/checkAvailability', verifyLogin, (req, res) => {
+router.post('/checkAvailability', (req, res) => {
   var user = req.session.user
-  if (user) {
-    const checkinDt = new Date(req.body.checkin)
-    var date = checkinDt;
-    const checkoutDt = new Date(req.body.checkout)
-    var DayCount = parseInt((checkoutDt - checkinDt) / (24 * 3600 * 1000))
 
-    console.log("day count ", DayCount)
-    console.log(req.body)
-    let booking = {}
+  const checkinDt = new Date(req.body.checkin)
+  var date = checkinDt;
+  const checkoutDt = new Date(req.body.checkout)
+  var DayCount = parseInt((checkoutDt - checkinDt) / (24 * 3600 * 1000))
 
-    let Dates = []
+  //console.log("day count ", DayCount)
+  //console.log(req.body)
+  let booking = {}
 
-    for (i = 0;i<DayCount ; i++){ 
-    }
+  let Dates = []
 
-    booking = req.body;
-    booking.roomCount = req.body.rooms
-    booking.dayCount = DayCount
+  for (i = 0; i < DayCount; i++) {
+  }
+
+  booking = req.body;
+  booking.roomCount = req.body.rooms
+  booking.dayCount = DayCount
+  booking.SearchDate = Date.now()
+  booking.userId = req.session.userId;
+
+  if(user){
     booking.email = user.email
     booking.number = user.number
     booking.name = user.name
-    booking.SearchDate = Date.now()
-    userHelpers.storeBookingSearch(booking).then(() => {
-      userHelpers.getRooms(booking).then((rooms) => {
-        res.render('users/rooms', { rooms, user })
-      })
-    })
-  } else {
-    res.redirect('/login')
+  }else {
+    const UserSearchSession = JSON.parse(JSON.stringify(booking));
+    req.session.userSearch = UserSearchSession;
   }
+
+  //console.log(req.session.userSearch.destination)
+
+  userHelpers.storeBookingSearch(booking).then(() => {
+    userHelpers.getRooms(booking).then((rooms) => {
+      res.render('users/rooms', { rooms, user })
+    })
+  })
+
 
 })
 router.get('/login', (req, res) => {
@@ -287,10 +298,10 @@ router.get('/confirmOrder/:id', verifyLogin, (req, res) => {
   console.log(id)
   userHelpers.ConfirmBookingDetails(id).then((result) => {
     console.log("Confirmation DOne")
-    if(result.status){
+    if (result.status) {
       let results = result.status;
-      res.render("users/bookingConfirmed", { user,results })
-    }else{
+      res.render("users/bookingConfirmed", { user, results })
+    } else {
       res.render("users/bookingConfirmed", { user })
     }
   })
