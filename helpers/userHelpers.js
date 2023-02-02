@@ -143,13 +143,23 @@ module.exports = {
     },
     saveBookingDeatails: (details) => {
         return new Promise(async (resolve, reject) => {
-            let BookDetails = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).findOne({ "_id": ObjectId(details._id) })
+            let BookDetails = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).findOne({ "_id": details._id })
+            console.log("tetetereeteteter")
+            console.log(BookDetails)
             if (BookDetails) {
                 resolve()
             } else {
-                await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).insertOne(details).then(() => {
-                    resolve()
+                console.log(details)
+                await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).insertOne(details).then((response) => {
+                    console.log("tretgregtrgbu",details)
+                    console.log(response)
+                    console.log(collection.USER_BOOKING_TO_CONFIRM)
                 })
+                var samplTest = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).findOne({"_id":ObjectId(details._id)})
+                console.log(samplTest)
+
+                resolve()
+
             }
         })
     },
@@ -178,9 +188,17 @@ module.exports = {
             
         })
     },
+    sessionGetEditBookingDetails:(id)=>{
+        return new Promise(async(resolve,reject)=>{
+            let details = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).findOne({ "_id": id })
+            console.log(details)
+            resolve(details)
+        })
+    },
     getEditBookingDetails: (id) => {
         return new Promise(async (resolve, reject) => {
             let details = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).findOne({ "_id": ObjectId(id) })
+            console.log(details)
             resolve(details)
         })
     },
