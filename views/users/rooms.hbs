@@ -2,72 +2,131 @@
     <div class="headerDiv">
         <h2>Our Rooms</h2>
         <div class="set">
-            <h5>home</h5> <h3>></h3> <h5>rooms</h5>
+            <h5>home</h5>
+            <h3>></h3>
+            <h5>rooms</h5>
         </div>
-        
+
     </div>
-    <div class="roomsArea">
-        {{#if rooms}}
-        {{#each rooms}}
-        <div class="room">
-            <div class="row">
-                <div class="secImg col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="/room-images/{{img1}}.jpg" alt="First slide">
+    <div class="container">
+        <div class="roomsArea">
+            {{#if rooms}}
+            {{#each rooms}}
+            <div class="room">
+                <div class="row">
+                    <div class="secImg col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        {{!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="/room-images/{{img1}}.jpg" alt="First slide">
+                                </div>
+                            </div>
+                        </div> --}}
+                        <img src="/room-images/{{img1}}.jpg" class="ImgDiv" alt="">
+                        <div>
+
+                        </div>
+
+                    </div>
+                    <div class="ContentSec col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        {{!-- <h2 class="nameOfRoom">{{name}}</h2>
+                        <div class="places">
+                            <h6>Place</h6>
+                            <h6 class="place">{{Place}}</h6>
+                        </div>
+
+                        <div class="TypeSuit">
+                            <h6>Type </h6>
+                            <h6 class="typeOfroom">{{TyprOfRoom}}</h6>
+                        </div>
+                        <div class="services">
+                            <h6>Services</h6>
+                            <div class="typeOfservices">
+                                {{#if Wifi}}
+                                <span class="icon material-symbols-outlined">wifi</span>
+                                {{/if}}
+                                {{#if FoodService}}
+                                <span class="icon material-symbols-outlined">restaurant_menu</span>
+                                {{/if}}
+                                {{#if Pool}}
+                                <span class="icon material-symbols-outlined">pool</span>
+                                {{/if}}
+                                {{#if AC}}
+                                <span class="icon material-symbols-outlined">ac_unit</span>
+                                {{/if}}
+                                {{#if TV}}
+                                <span class="material-symbols-outlined">live_tv</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="More">
+                            <div class="Realprice">
+                                <h6>₹</h6>
+                                <h1 class="offerPrice">{{OfferPrice}}</h1>
+                                <h5 class="perday"><b>/</b>day</h5>
+                            </div>
+                            <div class="viewMore">
+                                <a href="/viewRoomDetails/{{_id}}">View Details</a>
+
+                            </div>
+                        </div> --}}
+
+                        <div class="title">
+                            <p class="nameOfRoom">{{name}}</p>
+                        </div>
+                        <div class="place">
+                            <p class="">Place:</p>
+                            <p class="">{{Place}}</p>
+                        </div>
+                        <div class="rating">
+                            <div class="RatingBox">
+                                <img src="/images/Rooms/Star.png" class="RatingStar" alt="">
+                                <p>3.8</p> {{!-- rating Here --}}
+                            </div>
+                            <div class="NoOFRatings">
+                                <p>( 38 Ratings )</p>
+                            </div>
+                        </div>
+                        <div class="services">
+                            <p>Services</p>
+                            <div class="typeOfservices">
+                                {{#if Wifi}}
+                                <span class="icon material-symbols-outlined">wifi</span>
+                                {{/if}}
+                                {{#if FoodService}}
+                                <span class="icon material-symbols-outlined">restaurant_menu</span>
+                                {{/if}}
+                                {{#if Pool}}
+                                <span class="icon material-symbols-outlined">pool</span>
+                                {{/if}}
+                                {{#if AC}}
+                                <span class="icon material-symbols-outlined">ac_unit</span>
+                                {{/if}}
+                                {{#if TV}}
+                                <span class="material-symbols-outlined">live_tv</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="PriceAndMore">
+                            <div class="price ">
+                                <p class="rupeeSymbol">₹</p>
+                                <p class="offerPrice">{{OfferPrice}}</p>
+                                <p class="perday"><b>/</b>day</p>
+                            </div>
+                            <div class="visit ">
+                                <a href="/viewRoomDetails/{{_id}}" class=" visitBTN">View Details</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="ContentSec col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                    <h2 class="nameOfRoom">{{name}}</h2>
-                    <div class="Realprice">
-                        <h6>₹</h6>
-                        <h1 class="offerPrice">{{OfferPrice}}</h1>
-                        <h5 class="perday"><b>/</b>day</h5>
-                    </div>
-                    <div class="TypeSuit">
-                        <h6>Type </h6>
-                        <h6 class="typeOfroom">{{TyprOfRoom}}</h6>
-                    </div>
-                    <div class="services">
-                        <h6>Services</h6>
-                        <div class="typeOfservices">
-                            {{#if Wifi}}
-                            <span class="icon material-symbols-outlined">wifi</span>
-                            {{/if}}
-                            {{#if FoodService}}
-                            <span class="icon material-symbols-outlined">restaurant_menu</span>
-                            {{/if}}
-                            {{#if Pool}}
-                            <span class="icon material-symbols-outlined">pool</span>
-                            {{/if}}
-                            {{#if AC}}
-                            <span class="icon material-symbols-outlined">ac_unit</span>
-                            {{/if}}
-                            {{#if TV}}
-                            <span class="material-symbols-outlined">live_tv</span>
-                            {{/if}}
-                        </div>
-                    </div>
-                    <div class="places">
-                        <h6>Place</h6>
-                        <h6 class="place">{{Place}}</h6>
-                    </div>
-                    <div class="viewMore">
-                        <a href="/viewRoomDetails/{{_id}}">View Details</a>
-
-                    </div>
-                </div>
             </div>
+            {{/each}}
+            {{else}}
+            <div class="noRoom">
+                <h3>No Rooms Available</h3>
+            </div>
+            {{/if}}
         </div>
-        {{/each}}
-        {{else}}
-        <div class="noRoom">
-            <h3>No Rooms Available</h3>
-        </div>
-        {{/if}}
     </div>
 </section>
 
@@ -94,14 +153,17 @@
         display: inline-flex;
         color: gray;
     }
+
     .set {
         margin: 0 auto;
         display: flex;
         justify-content: center;
     }
+
     .set h5 {
         margin-top: 4px;
     }
+
     .set h3 {
         margin: 0 .5rem;
         color: gray;
@@ -115,13 +177,22 @@
         margin: 1rem;
     }
 
-    .secImg {}
-
-    .ContentSec {
-        padding: 3rem;
+    .secImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    .nameOfRoom {
+    .ImgDiv {
+        max-width: 100%;
+        max-height: 17.5rem;
+    }
+
+    /*.ContentSec {
+        padding: 3rem;
+    }*/
+
+    /*.nameOfRoom {
         font-weight: 700;
     }
 
@@ -176,9 +247,17 @@
         margin-left: 4rem;
     }
 
+    .More {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .viewMore {
         margin-top: 1rem;
         margin-left: 1rem;
+        text-align: center;
     }
 
     .viewMore a {
@@ -192,7 +271,155 @@
         height: 80vh;
         padding-top: 10rem;
         text-align: center;
+    }*/
+
+    .ContentSec {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
     }
 
-   
+    p {
+        font-family: Inter, sans-serif;
+        font-weight: 700;
+    }
+
+    .title,
+    .place,
+    .rating,
+    .services,
+    .PriceAndMore {
+        width: 100%;
+    }
+
+    .title {
+        display: flex;
+        align-items: center;
+    }
+
+    .place {
+        display: flex;
+        align-items: center;
+
+    }
+
+    .rating {
+        margin: 0px 0;
+        display: flex;
+    }
+
+    .services {
+        display: flex;
+    }
+
+    .PriceAndMore {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .nameOfRoom {
+        font-weight: 700;
+        font-size: 30px;
+    }
+
+    .place p {
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    .place p:last-child {
+        margin-left: 1rem;
+    }
+
+    .RatingBox {
+        height: 1.5rem;
+        max-width: 4rem;
+        padding: 4px 10px;
+        background-color: #52B520;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .RatingStar {
+        width: 1rem;
+    }
+
+    .RatingBox p {
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+        font-size: 20px;
+        margin-top: 1rem;
+        padding: 0 0 0 4px;
+    }
+
+    .NoOFRatings {
+        margin-left: 1rem;
+    }
+
+    .typeOfservices {
+        margin-left: 1rem;
+    }
+
+    .price {
+        display: flex;
+
+    }
+
+    .rupeeSymbol {
+        font-size: 20px;
+        margin-top: 11px;
+    }
+
+    .price .offerPrice {
+        font-size: 45px;
+        color: red;
+    }
+
+    .perday {
+        margin-top: 30px;
+    }
+
+    .visitBTN {
+        height: auto;
+        background-color: orange;
+        padding: 1rem 2rem;
+        color: rgb(243, 243, 243);
+        font-weight: 700;
+        font-size: 25px;
+        border-radius: 10px;
+    }
+
+    .visitBTN:hover {
+        background-color: black;
+        color: orange;
+        text-decoration: none;
+    }
+
+    .place p,
+    .NoOFRatings p,
+    .services p,
+    .typeOfservices span {
+        color: gray;
+    }
+
+    @media screen and (max-width: 530px) { 
+        .PriceAndMore {
+            display: block;
+        }
+        .visit {
+            width: 100%;
+        }
+        .visitBTN {
+            padding: 1rem 2rem;
+        }
+    }
+    @media screen and (max-width:342) {
+        .visitBTN{
+            padding: 1rem ;
+        }
+    }
 </style>

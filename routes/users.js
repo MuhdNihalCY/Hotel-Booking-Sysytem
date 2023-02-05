@@ -176,7 +176,8 @@ router.post('/checkAvailability', (req, res) => {
   var DayCount = parseInt((checkoutDt - checkinDt) / (24 * 3600 * 1000))
 
   //console.log("day count ", DayCount)
-  //console.log(req.body)
+  console.log(req.body)
+  
   let booking = {}
 
   let Dates = []
@@ -210,6 +211,7 @@ router.post('/checkAvailability', (req, res) => {
 
   userHelpers.storeBookingSearch(booking).then(() => {
     userHelpers.getRooms(booking).then((rooms) => {
+      console.log(rooms)
       res.render('users/rooms', { rooms, user })
     })
   })
@@ -255,7 +257,8 @@ router.get('/viewRoomDetails/:id', (req, res) => {
       latestSearch.roomImg = room.img1;
       req.session.RoomClick = latestSearch;
       userHelpers.SaveUserClick(latestSearch).then(() => {
-        console.log(latestSearch)
+        console.log(room)
+
         res.render('users/RoomView', { room })
       })
     })

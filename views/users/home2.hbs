@@ -90,20 +90,20 @@
                                 </div>
                                 <div class="form-input col-md-4 col-sm-6 mt-3">
                                     <label>Rooms </label>
-                                    <select name="rooms" class="selectpicker InputField">
-                                        <option class="InputField options">01</option>
-                                        <option class="InputField options">02</option>
-                                        <option class="InputField options">03</option>
-                                        <option class="InputField options">04</option>
+                                    <select name="rooms" id="RoomCountSelect"  class="selectpicker InputField">
+                                        <option value="1" class="InputField options">1</option>
+                                        <option value="2" class="InputField options">2</option>
+                                        <option value="3" class="InputField options">3</option>
+                                        <option value="4" class="InputField options">4</option>
                                     </select>
                                 </div>
                                 <div class="form-input col-md-4 col-sm-6 mt-3">
                                     <label>Guests</label>
                                     <select name="guests" class="selectpicker InputField">
-                                        <option class="InputField">01</option>
-                                        <option class="InputField">02</option>
-                                        <option class="InputField">03</option>
-                                        <option class="InputField">04</option>
+                                        <option value="1" class="InputField">1</option>
+                                        <option value="2" class="InputField">2</option>
+                                        <option value="3" class="InputField">3</option>
+                                        <option value="4" class="InputField">4</option>
                                     </select>
                                 </div>
                                 <div class="bottom-btn col-md-4 col-sm-6 mt-3">
@@ -301,6 +301,12 @@
         document.getElementById("checkout").value = minCheckout;
         document.getElementById("checkout").min = minCheckout;
     }
+
+    $(document).ready(function() {
+  $("#RoomCountSelect").change(function() {
+    // Your code here
+  });
+});
 
 </script>
 
