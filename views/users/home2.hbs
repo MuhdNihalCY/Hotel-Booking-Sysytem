@@ -1,6 +1,6 @@
 <section>
     <div class="">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -80,30 +80,31 @@
                                 </div>
                                 <div class="form-input col-md-4 col-sm-6 mt-3">
                                     <label>Check-in Date</label>
-                                    <input type="date" name="checkin" class="InputField" id="checkin" onchange="CheckInDateChange()"
-                                        placeholder="Date" required="">
+                                    <input type="date" name="checkin" class="InputField" id="checkin"
+                                        onchange="CheckInDateChange()" placeholder="Date" required="">
                                 </div>
                                 <div class="form-input col-md-4 col-sm-6 mt-3">
                                     <label>Check-out Date</label>
-                                    <input type="date" name="checkout" class="InputField" id="checkout" placeholder="Date"
-                                        required="">
+                                    <input type="date" name="checkout" class="InputField" id="checkout"
+                                        placeholder="Date" required="">
                                 </div>
                                 <div class="form-input col-md-4 col-sm-6 mt-3">
                                     <label>Rooms </label>
-                                    <select name="rooms" id="RoomCountSelect"  class="selectpicker InputField">
+                                    <select name="rooms" id="RoomCountSelect" class="selectpicker InputField">
                                         <option value="1" class="InputField options">1</option>
                                         <option value="2" class="InputField options">2</option>
                                         <option value="3" class="InputField options">3</option>
                                         <option value="4" class="InputField options">4</option>
+                                        <option value="3" class="InputField options">5</option>
+                                        <option value="4" class="InputField options">6</option>
                                     </select>
                                 </div>
                                 <div class="form-input col-md-4 col-sm-6 mt-3">
                                     <label>Guests</label>
-                                    <select name="guests" class="selectpicker InputField">
+                                    <select name="guests" id="guest" class="selectpicker InputField">
                                         <option value="1" class="InputField">1</option>
                                         <option value="2" class="InputField">2</option>
                                         <option value="3" class="InputField">3</option>
-                                        <option value="4" class="InputField">4</option>
                                     </select>
                                 </div>
                                 <div class="bottom-btn col-md-4 col-sm-6 mt-3">
@@ -278,6 +279,9 @@
         document.getElementById("checkout").min = tomorrowFormatted;
 
         //alert(tomorrowFormatted)
+        //alert("Function one Called");
+        var roomCountSelect = document.getElementById("RoomCountSelect");
+        roomCountSelect.addEventListener("change", handleRoomCountChange);
 
     }
 
@@ -302,12 +306,42 @@
         document.getElementById("checkout").min = minCheckout;
     }
 
-    $(document).ready(function() {
-  $("#RoomCountSelect").change(function() {
-    // Your code here
-  });
-});
+    $(document).ready(function () {
+        $("#RoomCountSelect").change(function () {
+            // Your code here
+        });
+    });
 
+    function handleRoomCountChange() {
+        var roomCountSelect = document.getElementById("RoomCountSelect");
+        var selectedRoomCount = roomCountSelect.options[roomCountSelect.selectedIndex].value;
+
+        //removeOptions()
+        // var select = document.getElementById("select");
+        // var options = select.getElementsByClassName("CanDefaultSelect");
+        // while (options.length > 0) {
+        //     select.removeChild(options[0]);
+        // }
+
+        //alert(selectedRoomCount)
+        var PermitedGuestCount = parseInt(selectedRoomCount) * 3;
+
+        var guestSelect = document.getElementById("guest");
+        guestSelect.innerHTML = "";
+
+        for (var i = selectedRoomCount; i <= PermitedGuestCount; i++) {
+            var option = document.createElement("option");
+            option.value = i;
+            option.text = i;
+            guestSelect.appendChild(option);
+        }
+    }
+
+    /*document.addEventListener("DOMContentLoaded", function () {
+        alert("Function one Called")
+        var roomCountSelect = document.getElementById("RoomCountSelect");
+        roomCountSelect.addEventListener("change", handleRoomCountChange);
+    });*/
 </script>
 
 <style>

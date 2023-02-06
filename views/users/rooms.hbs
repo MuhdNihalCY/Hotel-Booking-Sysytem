@@ -1,10 +1,27 @@
 <section>
     <div class="headerDiv">
-        <h2>Our Rooms</h2>
-        <div class="set">
-            <h5>home</h5>
-            <h3>></h3>
-            <h5>rooms</h5>
+        {{!-- <div class="searchbar">
+            <div class="container">
+                <form action="" method="post">
+                    <select name="destination" id="" class="InputField">
+                        <option class="InputField" value="" disabled>Select Location</option>
+                        {{#each locations}}
+                        <option class="InputField" value="{{Place}}">{{Place}}</option>
+                        {{/each}}
+                    </select>
+
+                  
+
+                </form>
+            </div>
+        </div> --}}
+        <div class="HeaderText">
+            <h2>Our Rooms</h2>
+            <div class="set">
+                <h5>home</h5>
+                <h3>></h3>
+                <h5>rooms</h5>
+            </div>
         </div>
 
     </div>
@@ -114,7 +131,7 @@
                                 <p class="perday"><b>/</b>day</p>
                             </div>
                             <div class="visit ">
-                                <a href="/viewRoomDetails/{{_id}}" class=" visitBTN">View Details</a>
+                                <a href="/viewRoomDetails/{{_id}}" target="_blank" class=" visitBTN">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -140,10 +157,21 @@
         background-repeat: no-repeat;
         background-size: cover;
         text-align: center;
-        padding: 8rem;
+        /*padding: 8rem;*/
+    }
+
+    .searchbar {
+        width: 100%;
+        background-color: whitesmoke;
+        /*height: 5rem;*/
+    }
+
+    .HeaderText {
+        padding: 3rem;
     }
 
     .headerDiv h2 {
+        margin-top: 3rem;
         color: white;
         font-weight: 700;
         font-size: 34px;
@@ -406,20 +434,23 @@
         color: gray;
     }
 
-    @media screen and (max-width: 530px) { 
+    @media screen and (max-width: 530px) {
         .PriceAndMore {
             display: block;
         }
+
         .visit {
             width: 100%;
         }
+
         .visitBTN {
             padding: 1rem 2rem;
         }
     }
+
     @media screen and (max-width:342) {
-        .visitBTN{
-            padding: 1rem ;
+        .visitBTN {
+            padding: 1rem;
         }
     }
 </style>

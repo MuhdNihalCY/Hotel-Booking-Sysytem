@@ -169,6 +169,8 @@ router.get('/', function (req, res, next) {
 
 router.post('/checkAvailability', (req, res) => {
   var user = req.session.user
+  var SearchBar = true;
+
 
   const checkinDt = new Date(req.body.checkin)
   var date = checkinDt;
@@ -212,7 +214,7 @@ router.post('/checkAvailability', (req, res) => {
   userHelpers.storeBookingSearch(booking).then(() => {
     userHelpers.getRooms(booking).then((rooms) => {
       console.log(rooms)
-      res.render('users/rooms', { rooms, user })
+      res.render('users/rooms', { rooms, user,SearchBar })
     })
   })
 
