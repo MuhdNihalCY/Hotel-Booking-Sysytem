@@ -55,65 +55,147 @@
                         {{/if}}
                     </div>
                 </div>
+                <div class="Address col-md-6 col-lg-4">
+                    <p>{{room.Address}}</p>
+                </div>
                 <div class="price">
-                    <h2 class="offerprice">₹{{room.OfferPrice}}</h2>
-                    <h5 class="perday">/day</h5>
-                    <h5 class="RealPrice">₹{{room.RealPrice}}</h5>
+                    <div class="PriceOnly">
+                        <p class="offerprice">₹{{room.OfferPrice}}</p>
+                        <p class="RealPrice">₹{{room.RealPrice}}</p>
+                    </div>
+                    <p class="perday">Per Room Per Day</p>
                 </div>
-                <div class="book">
-                    <a href="/bookNow/{{room._id}}" class="booknow">Book Now</a>
-                </div>
-                <div class="discription">
-                    <h3>Description</h3>
-                    <p>{{room.description}}</p>
-                </div>
-                <div class="facilities">
-                    <h3>Facilities</h3>
-                    <div class="facilitiesIcon">
-                        <div class="IconDetails">
-                            {{#if room.wifi}}
-                            <img src="/images/wifi.png" alt="ffds" class="iconFacitilites">
-                            <h4 class="iconText">Free Wifi</h4>
-                            {{/if}}
-                        </div>
-                        <div class="IconDetails">
-                            {{#if room.FoodService}}
-                            <img src="/images/restaurant.png" alt="fds" class="iconFacitilites">
-                            <h4 class="iconText">Food Servies</h4>
-                            {{/if}}
-                        </div>
-                        <div class="IconDetails">
-                            {{#if room.Pool}}
-                            <img src="/images/swim.png" alt="dsf" class="iconFacitilites">
-                            <h4 class="iconText">Swimming Pool</h4>
-                            {{/if}}
-                        </div>
-                        <div class="IconDetails">
-                            {{#if room.AC}}
-                            <img src="/images/air-conditioner.png" alt="ds" class="iconFacitilites">
-                            <h4 class="iconText">AC</h4>
-                            {{/if}}
-                        </div>
-                        <div class="IconDetails">
-                            {{#if room.TV}}
-                            <img src="/images/tv.png" alt="dfds" class="iconFacitilites">
-                            <h4 class="iconText">TV</h4>
-                            {{/if}}
+
+                {{!-- Rattings --}}
+                <div class="rating">
+                    <div class="RatingBox">
+                        <div class="sectionRating">
+                            <p>3.8</p>
+                            <i class="fa-solid fa-star"></i>
                         </div>
                     </div>
+                    <p class="RatingsCount">
+                        ( 32 Ratings )
+                    </p>
                 </div>
-                <div class="Address">
-                    <h3 class="addressHead">Address:</h3>
-                    <div class="adress">
-                        <p>{{room.Address}}</p>
-                        <p>{{room.Place}}</p>
-                        <p>{{room.State}}</p>
-                        <p>{{room.District}}</p>
-                        <p>{{room.ZipCode}}</p>
+                {{!-- Rattings --}}
+
+
+                <div class="book">
+                    {{#if ClickedId}}
+                    <a href="/bookNowClicked/{{room._id}}/{{ClickedId}}" class="name">Book Now</a>
+                    {{else}}
+                    <a href="/bookNow/{{room._id}}" target="_blank" class="name">Book Now</a>
+                    {{/if}}
+                </div>
+
+                {{!-- Ameniteis --}}
+                <div class="Amenities">
+                    <p>Amenities</p>
+                    <div class="AmenitiesItems">
+                        <div class="row">
+
+                            <div class="Items">
+                                
+                                <p>Free Wifi</p>
+                            </div>
+
+                            {{#if room.wifi}}
+                            <div class="Items">
+                               
+                                <p>Free Wifi</p>
+                            </div>
+                            {{/if}}
+
+                            {{#if room.FoodService}}
+                            <div class="Items">
+                                <p>Food Service</p>
+                            </div>
+                            {{/if}}
+
+                            {{#if room.Pool}}
+                            <div class="Items">
+
+                                <p>Swimming Pool</p>
+                            </div>
+                            {{/if}}
+
+                            {{#if room.AC}}
+                            <div class="Items">
+
+                                <p>AC</p>
+                            </div>
+                            {{/if}}
+
+                            {{#if room.TV}}
+                            <div class="Items">
+
+                                <p>TV</p>
+                            </div>
+                            {{/if}}
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            {{!-- Ameniteis --}}
+
+
+
+
+            <div class="discription">
+                <h3>Description</h3>
+                <p>{{room.description}}</p>
+            </div>
+            <div class="facilities">
+                <h3>Facilities</h3>
+                <div class="facilitiesIcon">
+                    <div class="IconDetails">
+                        {{#if room.wifi}}
+                        <img src="/images/wifi.png" alt="ffds" class="iconFacitilites">
+                        <h4 class="iconText">Free Wifi</h4>
+                        {{/if}}
+                    </div>
+                    <div class="IconDetails">
+                        {{#if room.FoodService}}
+                        <img src="/images/restaurant.png" alt="fds" class="iconFacitilites">
+                        <h4 class="iconText">Food Servies</h4>
+                        {{/if}}
+                    </div>
+                    <div class="IconDetails">
+                        {{#if room.Pool}}
+                        <img src="/images/swim.png" alt="dsf" class="iconFacitilites">
+                        <h4 class="iconText">Swimming Pool</h4>
+                        {{/if}}
+                    </div>
+                    <div class="IconDetails">
+                        {{#if room.AC}}
+                        <img src="/images/air-conditioner.png" alt="ds" class="iconFacitilites">
+                        <h4 class="iconText">AC</h4>
+                        {{/if}}
+                    </div>
+                    <div class="IconDetails">
+                        {{#if room.TV}}
+                        <img src="/images/tv.png" alt="dfds" class="iconFacitilites">
+                        <h4 class="iconText">TV</h4>
+                        {{/if}}
                     </div>
                 </div>
             </div>
+            <div class="Address">
+                <h3 class="addressHead">Address:</h3>
+                <div class="adress">
+                    <p>{{room.Address}}</p>
+                    <p>{{room.Place}}</p>
+                    <p>{{room.State}}</p>
+                    <p>{{room.District}}</p>
+                    <p>{{room.ZipCode}}</p>
+                </div>
+            </div>
         </div>
+    </div>
     </div>
     </div>
     </div>
@@ -189,6 +271,7 @@
         height: 6rem;
         margin: 0 12px;
         transition: all 0.5s ease-in-out;
+        cursor: pointer;
     }
 
     .content {}
@@ -197,17 +280,22 @@
 
     .content h1 {
         margin-top: 10rem;
+        margin-left: 0.5rem;
         font-weight: 600;
         font-family: sans-serif;
     }
 
     .main {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
     }
 
     .booknowtop {
         margin-top: 10rem;
+        width: 19rem;
+        display: flex;
+        justify-content: flex-end;
+        height: 4rem;
     }
 
     .booknow {
@@ -241,6 +329,7 @@
         margin-top: 3rem;
         text-align: start;
         margin-bottom: 2rem;
+        margin-left: 15px;
     }
 
     .booknow:hover {
@@ -249,28 +338,117 @@
         background-color: black;
     }
 
+    .Address p {
+        font-size: 20px;
+        color: gray;
+    }
+
+
     .price {
-        margin-top: 2rem;
+        margin-top: 1rem;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .PriceOnly {
         display: flex;
+        align-items: last baseline;
+
     }
 
     .RealPrice {
-        margin-left: 1rem;
-        margin-top: 7px;
         text-decoration: line-through;
         color: rgb(110, 110, 110);
+        margin-left: 10px;
+        font-size: 20px;
     }
 
     .offerprice {
+        font-size: 40px;
         margin-left: 1rem;
-        color: orangered;
+        color: rgb(7, 7, 7);
         font-weight: 600;
     }
 
     .perday {
-        margin-top: 7px;
+        margin-top: -15px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: gray;
+        margin-left: 15px;
     }
+
+    .rating {
+        margin: 1rem;
+        display: flex;
+        color: gray;
+    }
+
+    .RatingBox {
+        display: flex;
+        background-color: rgb(77, 255, 1);
+        padding: 2px 1rem;
+        color: white;
+        font-weight: 600;
+        width: 69px;
+        margin-right: 5px;
+    }
+
+    .RatingBox i {
+        font-size: 13px;
+        margin-top: 5px;
+        margin-left: 3px;
+    }
+
+    .sectionRating {
+        display: flex;
+    }
+
+    .Amenities {
+        margin-left: 15px;
+        color: black;
+        padding-bottom: 1rem;
+    }
+
+    .Amenities p {
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .AmenitiesItems {
+        float: left;
+        margin-left: 10px;
+    }
+
+    .Items {
+        display: flex;
+        margin: 0 10px;
+    }
+
+    .Items i {
+        font-size: 18px;
+        color: gray;
+        margin-top: 5px;
+        margin-right: 6px;
+    }
+
+    .Items img {
+        width: 15px;
+    }
+
+    .Items p {
+        color: gray;
+        font-size: 20px;
+    }
+
+    
+
+
+
+
+
+
 
     .discription,
     .facilities {
@@ -299,10 +477,10 @@
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
 
-    .Address {
+    /* .Address {
         margin: 2rem 1rem;
         margin-bottom: 10rem;
-    }
+    }*/
 
     .addressHead {}
 

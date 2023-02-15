@@ -236,13 +236,14 @@ router.get('/viewRoomDetails/:id', (req, res) => {
   //console.log(req.body)
   if (user) {
     userHelpers.getlatestSearch(user.email).then((latestSearch) => {
-      console.log("latestSearch: ", latestSearch)
+      //console.log("latestSearch: ", latestSearch)
       userHelpers.getRoomData(id).then((room) => {
         latestSearch.roomId = room._id;
         latestSearch.roomName = room.name;
         latestSearch.roomPlace = room.Place;
         latestSearch.roomImg = room.img1;
         userHelpers.SaveUserClick(latestSearch).then(() => {
+          console.log(room)
           res.render('users/RoomView', { room, user })
         })
       })
