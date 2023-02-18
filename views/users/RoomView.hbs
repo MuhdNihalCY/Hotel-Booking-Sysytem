@@ -71,7 +71,7 @@
                     <div class="RatingBox">
                         <div class="sectionRating">
                             <p>3.8</p>
-                            <i class="fa-solid fa-star"></i>
+                            <img class="RatingStar1" src="/images/Rooms/Star.png" alt="">
                         </div>
                     </div>
                     <p class="RatingsCount">
@@ -95,41 +95,41 @@
                     <div class="AmenitiesItems">
                         <div class="row">
 
-                            <div class="Items">
-                                
+                            {{!-- <div class="Items">
+                                <img src="/images/Rooms/internet.png" class="ImageAmenities" alt="">
                                 <p>Free Wifi</p>
-                            </div>
+                            </div> --}}
 
                             {{#if room.wifi}}
                             <div class="Items">
-                               
-                                <p>Free Wifi</p>
+                                <img src="/images/Rooms/internet.png" class="ImageAmenities" alt="" <p>Free Wifi</p>
                             </div>
                             {{/if}}
 
                             {{#if room.FoodService}}
                             <div class="Items">
+                                <img src="/images/Rooms/restaurant (1).png" class="ImageAmenities" alt="">
                                 <p>Food Service</p>
                             </div>
                             {{/if}}
 
                             {{#if room.Pool}}
                             <div class="Items">
-
+                                <img src="/images/Rooms/swimming-pool.png" class="ImageAmenities" alt="">
                                 <p>Swimming Pool</p>
                             </div>
                             {{/if}}
 
                             {{#if room.AC}}
                             <div class="Items">
-
+                                <img src="/images/Rooms/air-conditioner.png" class="ImageAmenities" alt="">
                                 <p>AC</p>
                             </div>
                             {{/if}}
 
                             {{#if room.TV}}
                             <div class="Items">
-
+                                <img src="/images/Rooms/smart-tv.png" class="ImageAmenities" alt="">
                                 <p>TV</p>
                             </div>
                             {{/if}}
@@ -146,10 +146,82 @@
 
 
             <div class="discription">
-                <h3>Description</h3>
-                <p>{{room.description}}</p>
+                <p class="DescriptionHead">Description</p>
+                <p class="Desc">{{room.description}}</p>
             </div>
-            <div class="facilities">
+
+            <hr class="HRline">
+
+            <div class="Ratingss">
+                <p class="ratingsHead">
+                    Ratings and reviews
+                </p>
+                <div class="RatingsDetailedBox">
+                    <div class="RatingLeft">
+                        <div class="innerBoxSecction">
+                            <div class="RatingGreenBox">
+                                <p>3.8</p>
+                                <img class="RatingStar2" src="/images/Rooms/Star.png" alt="">
+                            </div>
+                            <p class="RatingStatus">
+                                Good
+                            </p>
+                            <p class="RatingConts">
+                                (38 Rating)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ratingRight">
+                        <div class="SingleRating">
+                            <p>5</p>
+                            <img class="RatingStar3" src="/images/Rooms/Star.png" alt="">
+                            <div class="RatingSlider">
+                                <div class="RatingSelected" style="width:59%;"></div>
+                            </div>
+                            <p>59%</p>
+                        </div>
+
+                        <div class="SingleRating">
+                            <p>4</p>
+                            <img class="RatingStar3" src="/images/Rooms/Star.png" alt="">
+                            <div class="RatingSlider">
+                                <div class="RatingSelected" style="width:25%;"></div>
+                            </div>
+                            <p>25%</p>
+                        </div>
+
+                        <div class="SingleRating">
+                            <p>3</p>
+                            <img class="RatingStar3" src="/images/Rooms/Star.png" alt="">
+                            <div class="RatingSlider">
+                                <div class="RatingSelected" style="width:10%;"></div>
+                            </div>
+                            <p>10%</p>
+                        </div>
+
+                        <div class="SingleRating">
+                            <p>2</p>
+                            <img class="RatingStar3" src="/images/Rooms/Star.png" alt="">
+                            <div class="RatingSlider">
+                                <div class="RatingSelected" style="width:6%;"></div>
+                            </div>
+                            <p>6%</p>
+                        </div>
+
+                        <div class="SingleRating">
+                            <p>1</p>
+                            <img class="RatingStar3" src="/images/Rooms/Star.png" alt="">
+                            <div class="RatingSlider">
+                                <div class="RatingSelected" style="width:0%;"></div>
+                            </div>
+                            <p>0%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {{!-- <div class="facilities">
                 <h3>Facilities</h3>
                 <div class="facilitiesIcon">
                     <div class="IconDetails">
@@ -183,8 +255,8 @@
                         {{/if}}
                     </div>
                 </div>
-            </div>
-            <div class="Address">
+            </div> --}}
+            {{!-- <div class="Address">
                 <h3 class="addressHead">Address:</h3>
                 <div class="adress">
                     <p>{{room.Address}}</p>
@@ -193,7 +265,7 @@
                     <p>{{room.District}}</p>
                     <p>{{room.ZipCode}}</p>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     </div>
@@ -387,7 +459,7 @@
 
     .RatingBox {
         display: flex;
-        background-color: rgb(77, 255, 1);
+        background-color: rgb(36, 119, 0);
         padding: 2px 1rem;
         color: white;
         font-weight: 600;
@@ -395,10 +467,11 @@
         margin-right: 5px;
     }
 
-    .RatingBox i {
-        font-size: 13px;
-        margin-top: 5px;
-        margin-left: 3px;
+    .RatingStar1 {
+        width: 16px;
+        height: 13px;
+        margin-top: 4px;
+        margin-left: 6px;
     }
 
     .sectionRating {
@@ -411,7 +484,10 @@
         padding-bottom: 1rem;
     }
 
-    .Amenities p {
+    .Amenities p,
+    .DescriptionHead,
+    .ratingsHead {
+        color: black;
         font-size: 25px;
         font-weight: 600;
     }
@@ -423,7 +499,7 @@
 
     .Items {
         display: flex;
-        margin: 0 10px;
+        margin: 5px 10px;
     }
 
     .Items i {
@@ -433,8 +509,12 @@
         margin-right: 6px;
     }
 
-    .Items img {
-        width: 15px;
+    .ImageAmenities {
+        width: 31px;
+        height: 27px;
+        filter: grayscale(100%) invert(60%);
+        margin-left: 1rem;
+        margin-right: 0.5rem;
     }
 
     .Items p {
@@ -442,7 +522,132 @@
         font-size: 20px;
     }
 
-    
+    .discription {
+        margin: 2rem 1rem;
+    }
+
+    .Desc {
+        color: gray;
+    }
+
+
+    hr {
+        border: 1px solid rgba(210, 210, 210, 0.64);
+        border-radius: 25px;
+    }
+
+    .Ratingss {
+        margin: 1rem;
+        padding-top: 1rem;
+    }
+
+    .RatingsDetailedBox {
+        margin-top: 1rem;
+        border: 1px solid gray;
+        width: 100%;
+        height: 15rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .RatingLeft {
+        border: 1px solid gray;
+        width: 30%;
+        height: 15rem;
+        float: left;
+        padding: 3rem 4rem;
+    }
+
+
+
+    .innerBoxSecction {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .RatingGreenBox {
+        width: 7rem;
+        height: 3rem;
+        background-color: rgb(36, 119, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .RatingStar2 {
+        width: 31px;
+        height: 28px;
+        margin-left: 10px;
+        margin-top: -5px;
+    }
+
+    .RatingGreenBox p {
+        color: white;
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .RatingStatus,
+    .RatingConts {
+        font-size: 25px;
+        font-weight: 500;
+        color: rgb(74, 74, 74);
+    }
+
+    .RatingStatus {
+        font-weight: 700;
+    }
+
+    .ratingRight {
+        border: 1px solid gray;
+        width: 75%;
+        height: 15rem;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .SingleRating {
+        display: flex;
+    }
+
+    .SingleRating p {
+        font-size: 25px;
+        font-weight: bold;
+        color: gray;
+        margin-top: -5px;
+        margin-right: 5px;
+        /*width: 2%;*/
+    }
+
+    .RatingStar3 {
+        filter: grayscale(100%) invert(60%);
+        width: 24px;
+        height: 24px;
+    }
+
+    .RatingSlider {
+        width: 73%;
+        height: 1rem;
+        background-color: rgb(202, 202, 202);
+        margin: 6px 0 15px;
+        border-radius: 25px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .RatingSelected {
+        width: 0%;
+        height: 1rem;
+        background-color: orange;
+        border-radius: 25px;
+
+    }
 
 
 
@@ -450,7 +655,15 @@
 
 
 
-    .discription,
+
+
+
+
+
+
+
+
+    /* .discription,
     .facilities {
         margin: 2rem 1rem;
     }
@@ -475,19 +688,19 @@
     .iconText {
         margin: 32px 1rem;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    }
+    }*/
 
     /* .Address {
         margin: 2rem 1rem;
         margin-bottom: 10rem;
     }*/
 
-    .addressHead {}
+    /* .addressHead {}
 
     .adress {
         color: gray;
 
-    }
+    }*/
 
 
     @media screen and (min-width:545px) {
@@ -496,9 +709,31 @@
         }
     }
 
+    @media screen and (max-width:1040px){
+        .RatingConts {
+            font-size: 20px;
+        }
+    }
+
     @media screen and (max-width:545px) {
         .booknowtop {
             display: none;
         }
+
+        .ratingRight {
+            display: none;
+        }
+
+        .RatingsDetailedBox {
+            border: none;
+        }
+        .RatingLeft {
+            width: 100%;
+        }
+
+        .RatingConts {
+            font-size: 25px;
+        }
+        
     }
 </style>
