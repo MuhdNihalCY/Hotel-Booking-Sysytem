@@ -100,9 +100,10 @@
                                 <p>Free Wifi</p>
                             </div> --}}
 
-                            {{#if room.wifi}}
+                            {{#if room.Wifi}}
                             <div class="Items">
-                                <img src="/images/Rooms/internet.png" class="ImageAmenities" alt="" <p>Free Wifi</p>
+                                <img src="/images/Rooms/internet.png" class="ImageAmenities" alt="">
+                                <p>Free Wifi</p>
                             </div>
                             {{/if}}
 
@@ -220,56 +221,95 @@
                 </div>
             </div>
 
+            {{!-- Reviews --}}
+            <div class="ReviewsOfUser">
+                <div class="MainFeedback">
+                    <div class="ReviewHead">
+                        <div class="ReviewRightSide">
+                            <img class="userHeadIcon" src="/images/Rooms/user.png" alt="">
+                            <p class="ReviewUserName">Alfferd KNii</p>
+                        </div>
+                        <div class="ReviewLeftSide">
+                            <div class="ReviewRatingGreenBox">
+                                <div class="sectionRating">
+                                    <p>3.8</p>
+                                    <img class="RatingStar1" src="/images/Rooms/Star.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ReviewFeedback">
+                        <p class="review-text">1500s, when an unknown printer took a galley of type and scrambled it to
+                            make a type specimen
+                            book. It has survived not only five centuries, but also</p>
+                        <span class="read-more">Read more</span>
+                    </div>
+                </div>
+                <div class="SeeallReview">
+                    <p onclick="SeeAllReviews()">See all reviews</p>
+                </div>
+                <div class="RemainingReviews">
+                    <div class="ReviewHead">
+                        <div class="ReviewRightSide">
+                            <img class="userHeadIcon" src="/images/Rooms/user.png" alt="">
+                            <p class="ReviewUserName">Alfferd KNii</p>
+                        </div>
+                        <div class="ReviewLeftSide">
+                            <div class="ReviewRatingGreenBox">
+                                <div class="sectionRating">
+                                    <p>3.8</p>
+                                    <img class="RatingStar1" src="/images/Rooms/Star.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ReviewFeedback">
+                        <p>1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+                            book. It has survived not only five centuries, but also</p>
+                    </div>
 
-            {{!-- <div class="facilities">
-                <h3>Facilities</h3>
-                <div class="facilitiesIcon">
-                    <div class="IconDetails">
-                        {{#if room.wifi}}
-                        <img src="/images/wifi.png" alt="ffds" class="iconFacitilites">
-                        <h4 class="iconText">Free Wifi</h4>
-                        {{/if}}
+                    <div class="ReviewHead">
+                        <div class="ReviewRightSide">
+                            <img class="userHeadIcon" src="/images/Rooms/user.png" alt="">
+                            <p class="ReviewUserName">Alfferd KNii</p>
+                        </div>
+                        <div class="ReviewLeftSide">
+                            <div class="ReviewRatingGreenBox">
+                                <div class="sectionRating">
+                                    <p>3.8</p>
+                                    <img class="RatingStar1" src="/images/Rooms/Star.png" alt="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="IconDetails">
-                        {{#if room.FoodService}}
-                        <img src="/images/restaurant.png" alt="fds" class="iconFacitilites">
-                        <h4 class="iconText">Food Servies</h4>
-                        {{/if}}
-                    </div>
-                    <div class="IconDetails">
-                        {{#if room.Pool}}
-                        <img src="/images/swim.png" alt="dsf" class="iconFacitilites">
-                        <h4 class="iconText">Swimming Pool</h4>
-                        {{/if}}
-                    </div>
-                    <div class="IconDetails">
-                        {{#if room.AC}}
-                        <img src="/images/air-conditioner.png" alt="ds" class="iconFacitilites">
-                        <h4 class="iconText">AC</h4>
-                        {{/if}}
-                    </div>
-                    <div class="IconDetails">
-                        {{#if room.TV}}
-                        <img src="/images/tv.png" alt="dfds" class="iconFacitilites">
-                        <h4 class="iconText">TV</h4>
-                        {{/if}}
+                    <div class="ReviewFeedback">
+                        <p>1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+                            book. It has survived not only five centuries, but also</p>
                     </div>
                 </div>
-            </div> --}}
-            {{!-- <div class="Address">
-                <h3 class="addressHead">Address:</h3>
-                <div class="adress">
-                    <p>{{room.Address}}</p>
-                    <p>{{room.Place}}</p>
-                    <p>{{room.State}}</p>
-                    <p>{{room.District}}</p>
-                    <p>{{room.ZipCode}}</p>
+            </div>
+
+            {{!-- Reviews --}}
+
+
+            {{!-- Hotel Policies --}}
+            {{!-- <div class="HotelPolicies">
+                <div class="PoliciesHead">
+                    <p>Hotel Policies</p>
+                </div>
+                <div class="Polices">
+                    <p id="Polices">{{HotelPolices}}</p>
+                    <ul>
+                        {{#each HotelPolices}}
+                        <li>{{this.HotelPolices}}1</li>
+                        {{/each}}
+                    </ul>
                 </div>
             </div> --}}
+
+            {{!-- Hotel Policies --}}
+
         </div>
-    </div>
-    </div>
-    </div>
     </div>
 </section>
 
@@ -486,7 +526,8 @@
 
     .Amenities p,
     .DescriptionHead,
-    .ratingsHead {
+    .ratingsHead,
+    .PoliciesHead {
         color: black;
         font-size: 25px;
         font-weight: 600;
@@ -649,6 +690,83 @@
 
     }
 
+    .ReviewsOfUser {
+        margin: 33px 15px;
+        width: 100%;
+    }
+
+    .ReviewHead {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .ReviewRightSide {
+        display: flex;
+        align-items: center;
+    }
+
+    .userHeadIcon {
+        filter: grayscale(100%) invert(60%);
+        width: 40px;
+        height: 40px;
+    }
+
+    .ReviewUserName {
+        font-size: 20px;
+        font-weight: 600;
+        margin-left: 11px;
+        color: rgb(53, 53, 53);
+    }
+
+    .ReviewRatingGreenBox {
+        display: flex;
+        background-color: rgb(36, 119, 0);
+        padding: 2px 1rem;
+        color: white;
+        font-weight: 600;
+        width: 69px;
+        height: 30px;
+        margin-right: 5px;
+
+    }
+
+    .ReviewFeedback {
+        margin: 1rem 1rem;
+        font-size: 17px;
+        color: gray;
+    }
+
+    .review-text {
+        /* display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+       /* overflow: hidden;
+        /*text-overflow: ellipsis;*/
+
+    }
+
+    .read-more {
+        display: none;
+    }
+
+    .SeeallReview {
+        font-size: 20px;
+        color: red;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .RemainingReviews {
+        display: none;
+    }
+
+    .PoliciesHead {}
+
+    .Polices {}
+
+
 
 
 
@@ -709,7 +827,7 @@
         }
     }
 
-    @media screen and (max-width:1040px){
+    @media screen and (max-width:1040px) {
         .RatingConts {
             font-size: 20px;
         }
@@ -727,6 +845,7 @@
         .RatingsDetailedBox {
             border: none;
         }
+
         .RatingLeft {
             width: 100%;
         }
@@ -734,6 +853,22 @@
         .RatingConts {
             font-size: 25px;
         }
-        
+
     }
 </style>
+
+<script>
+
+
+
+
+    function SeeAllReviews() {
+        //      alert("Clicked See More Reviews")
+        var SeeMoreDetails = document.getElementsByClassName("SeeallReview");
+        var RemainingReview = document.getElementsByClassName("RemainingReviews");
+
+        SeeMoreDetails[0].style.display = "none";
+        RemainingReview[0].style.display = "block";
+    }
+
+</script>

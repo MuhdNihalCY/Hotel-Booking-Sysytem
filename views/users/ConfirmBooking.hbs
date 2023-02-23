@@ -1,3 +1,31 @@
+<section>
+    <div class="container">
+        <div class="ModifyBooking col-12 col-sm-6">
+            <a href="">
+                <div class="LessthanIcon">
+                    <img src="/images/COnfirmBooking/reply (1).png" alt="" class="backIcon">
+                </div>
+                <p class="BackMessage">Modify your Booking</p>
+            </a>
+        </div>
+        <div class="row">
+            <div class="MainContent">
+                <div class="HotelDetails col-12 col-md-4">
+                    <div class="HotelTitleDiv">
+
+                    </div>
+                </div>
+                <div class="CustomerDetails col-12 col-md-7">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
 <section class="section">
     <div class="container">
         <div class="topHeader">
@@ -23,7 +51,7 @@
                 <div class="ItemView">
                     <h5>CheckIn:</h5>
                     <h4>{{bookingDetails.checkin}}</h4>
-                </div> 
+                </div>
                 <div class="ItemView">
                     <h5>CheckOut:</h5>
                     <h4>{{bookingDetails.checkout}}</h4>
@@ -61,7 +89,8 @@
                     </div>
                 </div>
                 <div class="Confirm">
-                    <a href="/confirmOrder/{{bookingDetails._id}}" class="btn btn-primary" target="_blank" >Confirm Booking</a>
+                    <a href="/confirmOrder/{{bookingDetails._id}}" class="btn btn-primary" target="_blank">Confirm
+                        Booking</a>
                 </div>
             </div>
         </div>
@@ -69,7 +98,71 @@
 </section>
 
 <style>
-    .section {}
+    .ModifyBooking {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .ModifyBooking a {
+        width: 100%;
+        display: flex;
+        margin-top: 50px;
+    }
+
+    .ModifyBooking a:hover {
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+        transform: scale(1.005);
+    }
+
+    .LessthanIcon {
+        width: 15px;
+        height: 15px;
+    }
+
+    .backIcon {
+        width: 15px;
+        height: 15px;
+    }
+
+    .BackMessage {
+        margin-left: 5px;
+        color: red;
+        font-weight: 600;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    .MainContent {
+        margin-top: 15px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: row-reverse;
+    }
+
+    .HotelDetails {
+        border: 1px solid gray;
+        border-radius: 10px;
+        height: 10rem;
+        margin: 5px;
+    }
+
+    .CustomerDetails {
+        border: 1px solid gray;
+        border-radius: 10px;
+        height: 10rem;
+        margin: 5px;
+    }
+
+    .HotelTitleDiv {}
+
+
+
+    .section {
+        display: none;
+    }
+
+    /* .section {}
 
     .topHeader {
         margin-top: 2rem;
@@ -167,5 +260,5 @@
     }
     .Confirm {
         margin-top: 1rem;
-    }
+    }*/
 </style>

@@ -179,7 +179,7 @@ router.post('/checkAvailability', (req, res) => {
 
   //console.log("day count ", DayCount)
   console.log(req.body)
-  
+
   let booking = {}
 
   let Dates = []
@@ -214,7 +214,7 @@ router.post('/checkAvailability', (req, res) => {
   userHelpers.storeBookingSearch(booking).then(() => {
     userHelpers.getRooms(booking).then((rooms) => {
       console.log(rooms)
-      res.render('users/rooms', { rooms, user,SearchBar })
+      res.render('users/rooms', { rooms, user, SearchBar })
     })
   })
 
@@ -244,6 +244,8 @@ router.get('/viewRoomDetails/:id', (req, res) => {
         latestSearch.roomImg = room.img1;
         userHelpers.SaveUserClick(latestSearch).then(() => {
           console.log(room)
+          
+
           res.render('users/RoomView', { room, user })
         })
       })
@@ -262,7 +264,11 @@ router.get('/viewRoomDetails/:id', (req, res) => {
       userHelpers.SaveUserClick(latestSearch).then(() => {
         console.log(room)
 
-        res.render('users/RoomView', { room })
+        //console.log(room.HotelPolices)
+        var HotelPolices = room.HotelPolices
+
+
+        res.render('users/RoomView', { room,HotelPolices })
       })
     })
   }
@@ -341,7 +347,7 @@ router.get('/bookNow/:id', (req, res) => {
       userHelpers.saveBookingDeatails(bookingDetails).then(() => {
         var Id = bookingDetails._id;
         console.log(Id)
-        userHelpers.sessionGetEditBookingDetails(Id).then((details)=>{
+        userHelpers.sessionGetEditBookingDetails(Id).then((details) => {
           bookingDetails = details;
           console.log(details)
           res.render('users/ConfirmBooking', { bookingDetails, room })
