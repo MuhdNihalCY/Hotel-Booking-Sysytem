@@ -350,6 +350,7 @@ router.get('/bookNow/:id', (req, res) => {
         userHelpers.sessionGetEditBookingDetails(Id).then((details) => {
           bookingDetails = details;
           console.log(details)
+          console.log(room)
           res.render('users/ConfirmBooking', { bookingDetails, room })
         })
         // userHelpers.getEditBookingDetails(Id).then((details) => {

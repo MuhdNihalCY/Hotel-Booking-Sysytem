@@ -1,103 +1,150 @@
 <section>
     <div class="container">
         <div class="ModifyBooking col-12 col-sm-6">
-            <a href="">
+            <a href="/viewRoomDetails/{{room._id}}">
                 <div class="LessthanIcon">
                     <img src="/images/COnfirmBooking/reply (1).png" alt="" class="backIcon">
                 </div>
                 <p class="BackMessage">Modify your Booking</p>
             </a>
         </div>
-        <div class="row">
-            <div class="MainContent">
-                <div class="HotelDetails col-12 col-md-4">
-                    <div class="HotelTitleDiv">
-
-                    </div>
-                </div>
-                <div class="CustomerDetails col-12 col-md-7">
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-<section class="section">
-    <div class="container">
-        <div class="topHeader">
+        <div class="MainContent">
             <div class="row">
-                <div class="imageDiv col-xs-12 col-sm-7 col-md-7 col-lg-4 col-xl-4">
-                    <img class="image" src="/room-images/632ac6170cd5f2d92b87f45a1.jpg" alt="">
-                </div>
-                <div class="HotelDetails col-xs-12 col-sm-6 col-md-5 col-lg-5 col-xl-5">
-                    <h3>{{room.name}}</h3>
-                    <h5>{{room.Place}}</h5>
-                    <h5>{{room.State}} {{room.District}}</h5>
-                    <h5>{{room.description}}</h5>
-                    <h5>Ph: {{room.contact}}</h5>
-                </div>
-            </div>
-        </div>
-        <div class="OrderDetails col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-            <div class="BookingHeadin">
-                <h3>Booking Details</h3>
-                <a href="/editBooking/{{bookingDetails._id}}" class="btn btn-primary">Edit</a>
-            </div>
-            <div class="BooingDetails">
-                <div class="ItemView">
-                    <h5>CheckIn:</h5>
-                    <h4>{{bookingDetails.checkin}}</h4>
-                </div>
-                <div class="ItemView">
-                    <h5>CheckOut:</h5>
-                    <h4>{{bookingDetails.checkout}}</h4>
-                </div>
-                <div class="ItemView">
-                    <h5>No:Of Rooms:</h5>
-                    <h4>{{bookingDetails.roomCount}}</h4>
-                </div>
-                <div class="ItemView">
-                    <h5>No:Of Guests:</h5>
-                    <h4>{{bookingDetails.guests}}</h4>
-                </div>
-            </div>
-            <hr class="horiLine">
-            <div class="Summery">
-                <h3>Summary</h3>
-                <h4>Deluxe Room </h4>
-                <h6>MAP Rate ({{bookingDetails.roomCount}} Room)</h6>
-                <div class="finalSummary">
-                    <div class="FinalSummaryItem">
-                        <h6>Room Price:</h6>
-                        <h6>₹{{room.OfferPrice}}</h6>
+                <div class="HotelDetails col-12 col-lg-4">
+                    <div class="HotelTitleDiv">
+                        <div class="HotelDetailsHeadDiv">
+                            <p class="HotelHeading">{{room.name}}</p>
+                        </div>
+                        <div class="Image_AddressDiv">
+                            <div class="HotelImageDiv">
+                                <img src="/room-images/{{room.img1}}.jpg" alt="" class="HotelImg">
+                            </div>
+                            <div class="Address_Rating">
+                                <div class="AddressDiv">
+                                    <p class="Address">{{room.Address}}</p>
+                                </div>
+                                <div class="rating">
+                                    <div class="RatingBox">
+                                        <div class="sectionRating">
+                                            <p>3.8</p>
+                                            <img class="RatingStar1" src="/images/Rooms/Star.png" alt="">
+                                        </div>
+                                    </div>
+                                    <p class="RatingsCount">
+                                        ( 32 Ratings )
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="RoomCountInfo">
+                            <div class="dates">
+                                <img class="RoomCountInfoIcon" src="/images/COnfirmBooking/2012.png" alt="">
+                                <p id="CheckinDate" class="DateOfBooking"></p>
+                            </div>
+                            <div class="RoomAndGuestCount">
+                                <img class="RoomCountInfoIcon" src="/images/COnfirmBooking/Hotel Door Hanger.png"
+                                    alt="">
+                                <p class="RoomAndGuest">{{bookingDetails.roomCount}} Room, {{bookingDetails.guests}}
+                                    Guest</p>
+                            </div>
+                            <div class="RoomStandard">
+                                <img class="RoomCountInfoIcon" src="/images/COnfirmBooking/Door Sensor.png" alt="">
+                                <p class="RoonStandardInfo">{{bookingDetails.roomType}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="RoomPaymentCalulations">
+                            <div class="RealRoomPrice">
+                                <p>Real Room Price: </p>
+                                <p class="PaymentCalcNo">₹ {{room.RealPrice}}</p>
+                            </div>
+                            <div class="RoomOfferPrice">
+                                <p>Room Offer Price: </p>
+                                <p class="PaymentCalcNo">₹ {{room.OfferPrice}}</p>
+                            </div>
+                            <div class="NoOfRooms">
+                                <p>No:Of Days: </p>
+                                <p class="PaymentCalcNo"> {{bookingDetails.roomCount}}</p>
+                            </div>
+                            <div class="NoOfDays">
+                                <p>No:Of Days: </p>
+                                <p class="PaymentCalcNo"> {{bookingDetails.dayCount}}</p>
+                            </div>
+                            <hr>
+                            <div class="TotalPay">
+                                <p>Payable Amount: </p>
+                                <p class="PaymentCalcNo">₹ {{bookingDetails.TotalPrice}}</p>
+                            </div>
+                            <hr>
+                            <div class="PaymentOPtions">
+                                <a href="" class="btn btn-success payBTN ">Pay at Hotel</a>
+                                <a href="" class="btn btn-success payBTN">Pay Now</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="FinalSummaryItem">
-                        <h6>Room Count:</h6>
-                        <h6>{{bookingDetails.roomCount}}</h6>
-                    </div>
-                    <div class="FinalSummaryItem">
-                        <h6>Stay Day Count:</h6>
-                        <h6>{{bookingDetails.dayCount}}</h6>
-                    </div>
-                    <div class="FinalSummaryItem">
-                        <h6>Total:</h6>
-                        <h6>₹{{bookingDetails.TotalPrice}}</h6>
-                    </div>
                 </div>
-                <div class="Confirm">
-                    <a href="/confirmOrder/{{bookingDetails._id}}" class="btn btn-primary" target="_blank">Confirm
-                        Booking</a>
+                <div class="CustomerDetails col-12 col-lg-7">
+                    <p class="Customer_Details_Head">Enter Your Details</p>
+                    <p class="Custoomer_details_SubHeading">We will use these details to share your booking information
+                    </p>
+                    <form action="" method="post">
+                        <div class="FormTopSection">
+                            <div class="row">
+                                <div class="NameSection  col-sm-6 ">
+                                    <p class="Label">Full Name</p>
+                                    <input type="text" placeholder="Enter your First and Last name" name="FullName">
+                                </div>
+
+                                <div class="EmailSection col-sm-6">
+                                    <p class="Label">Email Address</p>
+                                    <input type="text" placeholder="Enter your Email Address" name="FullName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="FormMidSection">
+                            <div class="row">
+                                <div class="Mobile  col-sm-6 ">
+                                    <p class="Label">Mobile Number</p>
+                                    <input type="text" placeholder="Enter your First and Last name" name="FullName">
+                                </div>
+
+                                <div class="SendOTPSection col-sm-6">
+                                    <a href="" SendOTP() class="btn btn-success">Send OTP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="FormBottomSection">
+                            <div class="row">
+                                <div class="OTP  col-sm-6 ">
+                                    <p class="Label">Enter OTP</p>
+                                    <input type="text" placeholder="Enter four digit OTP" name="FullName">
+                                </div>
+
+                                <div class="SendOTPSection col-sm-6">
+                                    <input type="submit" class="btn btn-success" value="Verify details">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
+
 
 <style>
+    section {
+        min-height: 100vh;
+    }
+
+    hr {
+        background-color: gray;
+    }
+
     .ModifyBooking {
         display: flex;
         justify-content: flex-start;
@@ -135,26 +182,186 @@
     .MainContent {
         margin-top: 15px;
         width: 100%;
-        display: flex;
-        justify-content: center;
-        flex-direction: row-reverse;
     }
 
     .HotelDetails {
         border: 1px solid gray;
         border-radius: 10px;
-        height: 10rem;
         margin: 5px;
+        padding: 22px 14px;
     }
+
+    .HotelTitleDiv {}
+
+    .HotelImg {
+        height: 110px;
+        border-radius: 10px;
+    }
+
+    .Image_AddressDiv {
+        margin-top: 10px;
+        display: flex;
+    }
+
+    .Address_Rating {
+        margin-left: 18px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Address {
+        font-size: 15px;
+        color: black;
+    }
+
+    .rating {
+        display: flex;
+        align-items: baseline;
+    }
+
+    .RatingBox {
+        display: flex;
+        background-color: rgb(36, 119, 0);
+        padding: 2px 1rem;
+        color: white;
+        font-weight: 600;
+        width: 69px;
+        margin-right: 5px;
+        height: 30px;
+    }
+
+    .sectionRating {
+        display: flex;
+    }
+
+    .RatingStar1 {
+        width: 16px;
+        height: 13px;
+        margin-top: 6px;
+        margin-left: 6px;
+    }
+
+    .RatingsCount {
+        color: gray;
+        font-size: 12px;
+    }
+
+    .RoomCountInfo {
+        margin: 24px 0px;
+    }
+
+    .dates,
+    .RoomStandard,
+    .RoomAndGuestCount {
+        display: flex;
+        margin: 5px 0px;
+    }
+
+    .RoomCountInfoIcon {
+        height: 30px;
+        width: 30px;
+        margin-right: 10px;
+    }
+
+    .DateOfBooking,
+    .RoomAndGuest,
+    .RoonStandardInfo {
+        font-weight: 700;
+        margin-top: 3px;
+        margin-bottom: 0px;
+    }
+
+    .RoomPaymentCalulations {
+        padding: 1px 1px;
+    }
+
+    .RealRoomPrice,
+    .RoomOfferPrice,
+    .NoOfDays,
+    .NoOfRooms,
+    .TotalPay {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 10px;
+    }
+
+    .PaymentCalcNo {
+        font-weight: 600;
+    }
+
+    .TotalPay p {
+        font-size: 25px;
+        margin-bottom: 0;
+    }
+
+    .PaymentOPtions {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .payBTN {
+        width: 45%;
+        
+    }
+
 
     .CustomerDetails {
         border: 1px solid gray;
         border-radius: 10px;
-        height: 10rem;
         margin: 5px;
+        height: fit-content;
     }
 
-    .HotelTitleDiv {}
+    .Customer_Details_Head {
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: 18px;
+        margin-bottom: 0px;
+    }
+
+    .Custoomer_details_SubHeading {
+        color: gray;
+    }
+
+    .FormTopSection {
+        width: 100%;
+    }
+
+    .Label,
+    .HotelHeading {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    input[type="text"] {
+        border-radius: 10px;
+        border: 1px solid gray;
+        padding: 5px 10px;
+        margin-bottom: 18px;
+        max-width: 260px;
+        min-width: 240px;
+    }
+
+    .SendOTPSection .btn {
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin-bottom: 30px;
+        max-width: 260px;
+        min-width: 240px;
+        margin-top: 32px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+    }
+
+    .FormBottomSection {
+        margin-bottom: 5px;
+    }
+
+
+
+
 
 
 
@@ -262,3 +469,37 @@
         margin-top: 1rem;
     }*/
 </style>
+
+<script>
+    // function to convert date format from yyyy-mm-dd to dd-mm-yyyy
+    function convertDateFormat() {
+        // input date string in yyyy-mm-dd format
+        const checkin = '{{bookingDetails.checkin}}';
+        const checkout = '{{bookingDetails.checkout}}';
+
+        // extract day, month, and year components
+        const year = checkin.substring(0, 4);
+        const month = checkin.substring(5, 7);
+        const day = checkin.substring(8);
+
+        const year2 = checkout.substring(0, 4);
+        const month2 = checkout.substring(5, 7);
+        const day2 = checkout.substring(8);
+
+
+        // re-arrange components in dd-mm-yyyy order
+        const newcheckin = `${day}-${month}-${year}`;
+
+        const newcheckout = `${day2}-${month2}-${year2}`;
+        //alert(newcheckin)
+
+        var Dates = newcheckin + ' to ' + newcheckout
+
+        document.getElementById('CheckinDate').textContent = Dates
+
+        //console.log(newDateStr); // output: 25-02-2023
+    }
+
+    // call the function when the page loads
+    window.onload = convertDateFormat;
+</script>
