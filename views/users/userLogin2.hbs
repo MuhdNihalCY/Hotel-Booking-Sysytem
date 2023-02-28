@@ -1,0 +1,99 @@
+<section>
+    <div class="parentDiv col-sm-8">
+        <div class="innerDiv col-xs-12 col-sm-12 col-md-6">
+            <img class="LoginImg" src="/images/login.png" alt="">
+            <form action="/login/{{UrlPath}}/{{UrlId}}" method="post" enctype="multipart/form-data"><br>
+                {{#if errorMsg}}
+                <p class="status">{{errorMsg}}</p>
+                {{/if}}
+                <input type="email" name="email" placeholder="Email" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <div class="forPass"><a href="/forgottenPassword">forgotten password?</a></div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <hr class="hr">
+                <a href="/OTPlogin">Login With OTP</a>
+                <div class="singupSec">
+                    <p>Need an account? <a href="/signup">SIGNUP</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<style>
+    section {
+        background-color: rgb(233, 233, 233);
+        height: fit-content;
+        padding-bottom: 8rem;
+        padding-top: 2rem;
+    }
+
+    .parentDiv {
+        height: 500px;
+        margin: 0 auto;
+        margin-top: 80px;
+
+    }
+
+    .innerDiv {
+        margin: 0 auto;
+        height: 550px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        padding-top: 2rem;
+        border: 1px solid #BFBFBF;
+        border-radius: 2rem;
+        box-shadow: 10px 10px 5px #aaaaaa;
+        
+    }
+
+    .LoginImg {
+        height: 7rem;
+    }
+
+    input[type=email],
+    input[type=password] {
+        margin: 1rem 0;
+        padding: .5rem 1rem;
+        border-radius: 1rem;
+        border-color: rgb(144, 143, 142);
+    }
+
+    .btn {
+        width: 180px;
+        border-radius: 2rem;
+    }
+
+    .hr {
+        background-color: gray;
+        height: 1px;
+        width: 75%;
+    }
+    .innerDiv a {
+        color: gray;
+        font-family: sans-serif;
+    }
+    .singupSec {
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+    }
+    .singupSec p {
+        font-size: 12px;
+        color: gray;
+    }
+    .singupSec p a {
+        color: gray;
+        text-decoration: underline;
+    }
+    .status {
+        color: red;
+    }
+    .forPass {
+        text-align: center;
+        padding-bottom: 1rem;
+    }
+    .forPass a {
+        color: blueviolet;
+    }
+</style>

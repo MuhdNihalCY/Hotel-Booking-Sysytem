@@ -5,14 +5,16 @@ var userHelpers = require('../helpers/userHelpers')
 var mailer = require('../helpers/mailer');
 const crypto = require('crypto');
 const { json } = require('express');
+const { isBooleanObject } = require('util/types');
 
 
 // function for verify login
 const verifyLogin = (req, res, next) => {
+  //console.log("Requested ", req.url)
   if (req.session.user) {
     next();
   } else {
-    res.redirect('/login');
+    res.redirect(`/login${req.url}`);
   }
 }
 
@@ -33,6 +35,33 @@ function generateAvatarName() {
 router.get('/login', (req, res) => {
   res.render('users/userLogin')
 })
+
+router.get('/login/:path/:id', (req, res) => {
+  var UrlId = req.params.id;
+  var UrlPath = req.params.path
+  //console.log(UrlPath)
+  res.render('users/userLogin2', { UrlId, UrlPath })
+})
+
+router.post('/login/:path/:id', (req, res) => {
+  var UrlPath = req.params.path;
+  var UrlId = req.params.id;
+  userHelpers.DoLogin(req.body).then((response) => {
+    if (response.status) {
+      req.session.user = response.user
+      res.redirect(`/${UrlPath}/${UrlId}`);
+    } else if (response.incorrectPass) {
+      var errorMsg = "Invalid password"
+      res.render('users/userLogin2', { errorMsg, UrlPath, UrlId })
+    } else {
+      var errorMsg = "Invalid Email"
+      res.render('users/userLogin2', { errorMsg, UrlPath, UrlId })
+    }
+  })
+})
+
+
+
 router.post('/login', (req, res) => {
   userHelpers.DoLogin(req.body).then((response) => {
     if (response.status) {
@@ -47,6 +76,8 @@ router.post('/login', (req, res) => {
     }
   })
 })
+
+
 router.get('/signup', (req, res) => {
   res.render('users/userSignup')
 })
@@ -178,7 +209,7 @@ router.post('/checkAvailability', (req, res) => {
   var DayCount = parseInt((checkoutDt - checkinDt) / (24 * 3600 * 1000))
 
   //console.log("day count ", DayCount)
-  console.log(req.body)
+  //console.log(req.body)
 
   let booking = {}
 
@@ -195,7 +226,7 @@ router.post('/checkAvailability', (req, res) => {
   booking.SearchDate = Date.now()
   booking.userId = req.session.userId;
 
-  //console.log(booking)
+  console.log(booking)
   //console.log(req.session)
 
   if (user) {
@@ -213,7 +244,7 @@ router.post('/checkAvailability', (req, res) => {
 
   userHelpers.storeBookingSearch(booking).then(() => {
     userHelpers.getRooms(booking).then((rooms) => {
-      console.log(rooms)
+      //console.log(rooms)
       res.render('users/rooms', { rooms, user, SearchBar })
     })
   })
@@ -242,65 +273,279 @@ router.get('/viewRoomDetails/:id', (req, res) => {
         latestSearch.roomName = room.name;
         latestSearch.roomPlace = room.Place;
         latestSearch.roomImg = room.img1;
+        //console.log("Latest DAtta",latestSearch,"dfsfdsfs")
         userHelpers.SaveUserClick(latestSearch).then(() => {
-          console.log(room)
-          
+          //console.log("No problems Here")
+          // console.log(room)
+          var roomSearch = latestSearch
+          var HotelPolices = room.HotelPolices
 
-          res.render('users/RoomView', { room, user })
+          res.render('users/RoomView', { room, user, HotelPolices, roomSearch })
         })
       })
     })
   } else {
     var latestSearch = req.session.userSearch;
-    console.log(req.session)
+    //console.log(req.session)
     userHelpers.getRoomData(id).then((room) => {
-      console.log(room)
-      console.log(room._id)
+      //console.log(room)
+      //console.log(room._id)
       latestSearch.roomId = room._id;
       latestSearch.roomName = room.name;
       latestSearch.roomPlace = room.Place;
       latestSearch.roomImg = room.img1;
+      latestSearch.userId = req.session.userId;
       req.session.RoomClick = latestSearch;
       userHelpers.SaveUserClick(latestSearch).then(() => {
-        console.log(room)
+        //console.log(room)
 
         //console.log(room.HotelPolices)
         var HotelPolices = room.HotelPolices
+        console.log("User ID")
+        console.log(req.session.userId);
 
-
-        res.render('users/RoomView', { room,HotelPolices })
+        userHelpers.GetNotLoggedUserSearchData(req.session.userId).then((roomSearch) => {
+          res.render('users/RoomView', { room, HotelPolices, roomSearch })
+        })
       })
     })
   }
 })
 
-// router.get('/viewClickedRoomDetails/:id', (req, res) => {
-//   var user = req.session.user;
-//   var ClickedId = req.params.id;
-//   userHelpers.getClickedSearchData(ClickedId).then((ClickedRoom) => {
-//     var roomId = ClickedRoom.roomId;
-//     userHelpers.getRoomData(roomId).then((room) => {
 
-//       console.log("Room", room);
-//       console.log("User", user);
-//       console.log("ClickedId", ClickedId);
+router.get('/ModifyviewRoomDetails/:id/:RoomId',(req,res)=>{
+  var user = req.session.user
+  let id = req.params.id;
+ 
+  //console.log("RoomId",RoomId)
 
-//       res.render('users/RoomView', { room, user, ClickedId })
+  userHelpers.getLatestDetailsForModidfy(id).then((latestSearch)=>{
+    console.log("Latest Search Here: ",latestSearch);
+    var RoomId = latestSearch.roomId;
+    userHelpers.getRoomData(RoomId).then((room) => {
+      var HotelPolices = room.HotelPolices
+      var roomSearch = latestSearch
+      res.render('users/RoomView', { room, user, HotelPolices, roomSearch })
+    })
+  })
+})
 
-//     }) 
-//   })
-// })
+  // router.get('/viewClickedRoomDetails/:id', (req, res) => {
+  //   var user = req.session.user;
+  //   var ClickedId = req.params.id;
+  //   userHelpers.getClickedSearchData(ClickedId).then((ClickedRoom) => {
+  //     var roomId = ClickedRoom.roomId;
+  //     userHelpers.getRoomData(roomId).then((room) => {
 
+  //       console.log("Room", room);
+  //       console.log("User", user);
+  //       console.log("ClickedId", ClickedId);
 
-router.get('/bookNow/:id', (req, res) => {
+  //       res.render('users/RoomView', { room, user, ClickedId })
+
+  //     }) 
+  //   })
+  // })
+
+router.post('/saveEditodrequest/:id', (req, res) => {
+  let Searchid = req.params.id;
+  let RoomId = req.body.RoomId;
+  console.log(req.body)
+  var data = req.body;
+
+  const checkinDt = new Date(req.body.checkin)
+  //console.log(checkinDt);
+  //var date = checkinDt;
+  const checkoutDt = new Date(req.body.checkout)
+  //console.log(checkoutDt);
+  var DayCount = parseInt((checkoutDt - checkinDt) / (24 * 3600 * 1000))
+  //console.log(DayCount);
+
+  data.DayCount = DayCount;
+
+  console.log(DayCount)
+  console.log(data.DayCount)
+
+  if (!req.session.user) {
+    var SearchEdit = req.session.RoomClick;
+    SearchEdit.checkin = req.body.checkin;
+    SearchEdit.checkout = req.body.checkin;
+    SearchEdit.rooms = req.body.rooms;
+    SearchEdit.guests = req.body.guests;
+    SearchEdit.roomCount = req.body.rooms;
+    SearchEdit.dayCount = DayCount;
+    SearchEdit.totalQTY = parseInt(req.body.rooms) * parseInt(DayCount);
+    SearchEdit.TotalPrice = parseInt(SearchEdit.roomPrice) * SearchEdit.totalQTY;
+
+    req.session.RoomClick = SearchEdit;
+  }
+
+  userHelpers.UpdateSearchData(data, Searchid).then(() => {
+    res.redirect(`/viewRoomDetails/${RoomId}`)
+  })
+})
+
+router.get('/bookNow/:id', verifyLogin, (req, res) => {      //
   let id = req.params.id;
   var user = req.session.user;
+  console.log("Sesion User: ", req.session.user)
   let room
+  var TimeAtRegisteredUserSearch;
+  var TimeAtNotRegisteredUserSearch;
   userHelpers.GetBookingRoom(id).then((response) => {
     room = response
     //console.log("room:", room)
-    if (user) {
-      userHelpers.RoomSearch(user).then((bookingDetails) => {
+
+    userHelpers.FindLatestSearchByUser(req.session).then((UserLoggedStatus) => {
+
+      if (UserLoggedStatus){
+        userHelpers.RoomSearch(user).then((bookingDetails) => {
+
+          //console.log("Booking Details before adding",bookingDetails)
+
+          // console.log("User: Booking Details: ",bookingDetails);
+
+          // TimeAtRegisteredUserSearch = bookingDetails.SearchDate;
+          // console.log("TimeAtRegisteredUserSearch: ", TimeAtRegisteredUserSearch)
+
+          let TotalQTY = bookingDetails.roomCount * bookingDetails.dayCount;
+          let TotalPrice = TotalQTY * room.OfferPrice;
+          bookingDetails.roomId = id;
+          bookingDetails.roomName = room.name;
+          bookingDetails.roomType = room.TyprOfRoom;
+          bookingDetails.roomPlace = room.Place;
+          bookingDetails.roomImg = room.img1;
+          bookingDetails.roomContact = room.contact;
+          bookingDetails.roomPrice = room.OfferPrice;
+          bookingDetails.totalQTY = TotalQTY;
+          bookingDetails.TotalPrice = TotalPrice;
+          bookingDetails.Confirm = false;
+          bookingDetails.payment = false;
+          // console.log(bookingDetails)
+          userHelpers.saveBookingDeatails(bookingDetails).then(() => {
+            var Id = bookingDetails._id;
+            userHelpers.getEditBookingDetails(Id).then((details) => {
+              bookingDetails = details;
+              console.log("iDD",Id)
+              console.log("Booking Details:::", bookingDetails)
+              res.render('users/ConfirmBooking', { user, bookingDetails, room, Id })
+            })
+          })
+        })
+      }else{
+         // session data should procced
+         console.log("Session Data Procced")
+         console.log(TimeAtRegisteredUserSearch, "<<user  session>>", TimeAtNotRegisteredUserSearch)
+         let bookingDetails = req.session.RoomClick
+         console.log(bookingDetails);
+ 
+         // TimeAtNotRegisteredUserSearch = bookingDetails.SearchDate;
+         // console.log("TimeAtNotRegisteredUserSearch: ", TimeAtNotRegisteredUserSearch)
+ 
+         let TotalQTY = bookingDetails.roomCount * bookingDetails.dayCount;
+         let TotalPrice = TotalQTY * room.OfferPrice;
+         bookingDetails.email = user.email;
+         bookingDetails.number = user.number;
+         bookingDetails.name = user.name;
+         bookingDetails.roomId = id;
+         bookingDetails.roomName = room.name;
+         bookingDetails.roomType = room.TyprOfRoom;
+         bookingDetails.roomPlace = room.Place;
+         bookingDetails.roomImg = room.img1;
+         bookingDetails.roomContact = room.contact;
+         bookingDetails.roomPrice = room.OfferPrice;
+         bookingDetails.totalQTY = TotalQTY;
+         bookingDetails.TotalPrice = TotalPrice;
+         bookingDetails.Confirm = false;
+         bookingDetails.payment = false;
+ 
+        //  console.log("7878787878787877787")
+        //  console.log(bookingDetails)
+ 
+         userHelpers.saveBookingDeatails(bookingDetails).then(() => {
+           var Id = bookingDetails._id;
+           console.log(Id)
+           userHelpers.sessionGetEditBookingDetails(Id).then((details) => {
+             bookingDetails = details;
+            //  console.log(details)
+            //  console.log(room)
+             res.render('users/ConfirmBooking', { bookingDetails, room, Id })
+           })
+           // userHelpers.getEditBookingDetails(Id).then((details) => {
+           //   bookingDetails = details;
+           //   console.log(details)
+           //   res.render('users/ConfirmBooking', { user, bookingDetails, room })
+           // })
+         })
+      }
+
+
+      /*if (user.email) {
+        console.log("Checking User")
+        userHelpers.RoomSearch(user).then((bookingDetails) => {
+
+          console.log("Booking Details ", bookingDetails)
+
+          // console.log("User: Booking Details: ",bookingDetails);
+
+          TimeAtRegisteredUserSearch = bookingDetails.SearchDate;
+          console.log("TimeAtRegisteredUserSearch: ", TimeAtRegisteredUserSearch)
+        })
+      }
+
+      if (req.session.RoomClick) {
+
+        console.log("Checking Sessoin")
+
+        let bookingDetails = req.session.RoomClick
+
+        TimeAtNotRegisteredUserSearch = bookingDetails.SearchDate;
+        console.log("TimeAtNotRegisteredUserSearch: ", TimeAtNotRegisteredUserSearch)
+      }
+
+      if (TimeAtRegisteredUserSearch > TimeAtNotRegisteredUserSearch) {
+        // user data should work
+        console.log("Registerd Data Procced")
+
+        userHelpers.RoomSearch(user).then((bookingDetails) => {
+
+          // console.log("User: Booking Details: ",bookingDetails);
+
+          // TimeAtRegisteredUserSearch = bookingDetails.SearchDate;
+          // console.log("TimeAtRegisteredUserSearch: ", TimeAtRegisteredUserSearch)
+
+          let TotalQTY = bookingDetails.roomCount * bookingDetails.dayCount;
+          let TotalPrice = TotalQTY * room.OfferPrice;
+          bookingDetails.roomId = id;
+          bookingDetails.roomName = room.name;
+          bookingDetails.roomType = room.TyprOfRoom;
+          bookingDetails.roomPlace = room.Place;
+          bookingDetails.roomImg = room.img1;
+          bookingDetails.roomContact = room.contact;
+          bookingDetails.roomPrice = room.OfferPrice;
+          bookingDetails.totalQTY = TotalQTY;
+          bookingDetails.TotalPrice = TotalPrice;
+          bookingDetails.Confirm = false;
+          bookingDetails.payment = false;
+          // console.log(bookingDetails)
+          userHelpers.saveBookingDeatails(bookingDetails).then(() => {
+            var Id = bookingDetails._id;
+            userHelpers.getEditBookingDetails(Id).then((details) => {
+              bookingDetails = details;
+              res.render('users/ConfirmBooking', { user, bookingDetails, room })
+            })
+          })
+        })
+      } else {
+        // session data should procced
+        console.log("Session Data Procced")
+        console.log(TimeAtRegisteredUserSearch, "<<user  session>>", TimeAtNotRegisteredUserSearch)
+        let bookingDetails = req.session.RoomClick
+        console.log(bookingDetails);
+
+        // TimeAtNotRegisteredUserSearch = bookingDetails.SearchDate;
+        // console.log("TimeAtNotRegisteredUserSearch: ", TimeAtNotRegisteredUserSearch)
+
         let TotalQTY = bookingDetails.roomCount * bookingDetails.dayCount;
         let TotalPrice = TotalQTY * room.OfferPrice;
         bookingDetails.roomId = id;
@@ -314,52 +559,33 @@ router.get('/bookNow/:id', (req, res) => {
         bookingDetails.TotalPrice = TotalPrice;
         bookingDetails.Confirm = false;
         bookingDetails.payment = false;
-        // console.log(bookingDetails)
+
+        console.log("7878787878787877787")
+        console.log(bookingDetails)
+
         userHelpers.saveBookingDeatails(bookingDetails).then(() => {
           var Id = bookingDetails._id;
-          userHelpers.getEditBookingDetails(Id).then((details) => {
+          console.log(Id)
+          userHelpers.sessionGetEditBookingDetails(Id).then((details) => {
             bookingDetails = details;
-            res.render('users/ConfirmBooking', { user, bookingDetails, room })
+            console.log(details)
+            console.log(room)
+            res.render('users/ConfirmBooking', { bookingDetails, room })
           })
+          // userHelpers.getEditBookingDetails(Id).then((details) => {
+          //   bookingDetails = details;
+          //   console.log(details)
+          //   res.render('users/ConfirmBooking', { user, bookingDetails, room })
+          // })
         })
-      })
-    } else {
-      //console.log(req.session)
-      let bookingDetails = req.session.RoomClick
+      }*/
 
-      let TotalQTY = bookingDetails.roomCount * bookingDetails.dayCount;
-      let TotalPrice = TotalQTY * room.OfferPrice;
-      bookingDetails.roomId = id;
-      bookingDetails.roomName = room.name;
-      bookingDetails.roomType = room.TyprOfRoom;
-      bookingDetails.roomPlace = room.Place;
-      bookingDetails.roomImg = room.img1;
-      bookingDetails.roomContact = room.contact;
-      bookingDetails.roomPrice = room.OfferPrice;
-      bookingDetails.totalQTY = TotalQTY;
-      bookingDetails.TotalPrice = TotalPrice;
-      bookingDetails.Confirm = false;
-      bookingDetails.payment = false;
+    })
 
-      console.log("7878787878787877787")
-      console.log(bookingDetails)
 
-      userHelpers.saveBookingDeatails(bookingDetails).then(() => {
-        var Id = bookingDetails._id;
-        console.log(Id)
-        userHelpers.sessionGetEditBookingDetails(Id).then((details) => {
-          bookingDetails = details;
-          console.log(details)
-          console.log(room)
-          res.render('users/ConfirmBooking', { bookingDetails, room })
-        })
-        // userHelpers.getEditBookingDetails(Id).then((details) => {
-        //   bookingDetails = details;
-        //   console.log(details)
-        //   res.render('users/ConfirmBooking', { user, bookingDetails, room })
-        // })
-      })
-    }
+
+
+
 
   })
 })
@@ -390,7 +616,8 @@ router.get('/bookNowClicked/:id/:clickedId', verifyLogin, (req, res) => {
         var Id = bookingDetails._id;
         userHelpers.getEditBookingDetails(Id).then((details) => {
           bookingDetails = details;
-          res.render('users/ConfirmBooking', { user, bookingDetails, room })
+          console.log("ID : ",Id)
+          res.render('users/ConfirmBooking', { user, bookingDetails, room, Id })
         })
       })
     })
@@ -401,7 +628,7 @@ router.get('/confirmOrder/:id', verifyLogin, (req, res) => {
   var user = req.session.user;
   let id = req.params.id;
   console.log(id)
-  userHelpers.ConfirmBookingDetails(id).then((result) => {
+  userHelpers.ConfirmBookingDetails(id,user).then((result) => {
     console.log("Confirmation DOne")
     if (result.status) {
       let results = result.status;

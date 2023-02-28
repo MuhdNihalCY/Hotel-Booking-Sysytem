@@ -292,6 +292,79 @@
             {{!-- Reviews --}}
 
 
+
+            {{!-- Booking Details --}}
+            {{!-- <div class="SearchedData">
+                <form action="/saveEditodrequest/{{roomSearch._id}}" method="post">
+                    <div class="SearchDataHead">
+                        <p class="HeadText">Confirm Search Details</p>
+                        <div class="EditOption" id="Edit" onclick="EditOptionEnable()">
+                            <img src="/images/Rooms/Edit Row.png" alt="" class="EditIcon">
+                            <p>Edit</p>
+                        </div>
+                        <div class="SaveOption" id="save" onclick="SaveOptionEnable()">
+                            {{!-- <img src="/images/Rooms/Edit Row.png" alt="" class="EditIcon "> --}}
+                            <input class=" btn btn-primary" value="Save" type="submit">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="SearchDataMid">
+                        <div class="container">
+                            <div id="toEdit" class="tomakeItCenter toEdit">
+                                <div class="row">
+                                    <div class="chechInDIV">
+                                        <p class="label">Check-In</p>
+                                        <p class="Answer" id="Checkin"></p>
+                                    </div>
+                                    <div class="chechOutDIV">
+                                        <p class="label">Check-Out</p>
+                                        <p class="Answer" id="CheckOut"></p>
+                                    </div>
+                                    <div class="RoomsCountDiv">
+                                        <p class="label">Rooms: </p>
+                                        <p class="Answer"  id="Rooms">{{roomSearch.rooms}}</p>
+                                    </div>
+                                    <div class="GuestCountDiv">
+                                        <p class="label">Guest: </p>
+                                        <p class="Answer"  id="Guest">{{roomSearch.guests}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="toSave" class="tomakeItCenter toSave">
+                                <div class="row">
+                                    {{#if user}}
+                                    <input type="text" name="email" value="{{user.email}}" hidden>
+                                    {{/if}}
+                                    <input type="text" name="RoomId" value="{{room._id}}" hidden>
+
+                                    <div class="chechInDIVSave">
+                                        <p class="label">Check-In</p>
+                                        <input name="checkin" type="date" value="{{roomSearch.checkin}}">
+                                    </div>
+                                    <div class="chechOutDIVSave">
+                                        <p class="label">Check-Out</p>
+                                        <input name="checkout" type="date" value="{{roomSearch.checkout}}">
+                                    </div>
+                                    <div class="RoomsCountDivSave">
+                                        <p class="label">Rooms: </p>
+                                        <input type="number" name="rooms" value="{{roomSearch.rooms}}" id="">
+                                    </div>
+                                    <div class="GuestCountDivSave">
+                                        <p class="label">Guest: </p>
+                                        <input type="number" name="guests" value="{{roomSearch.guests}}" id="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div> --}}
+            {{!-- Booking Details --}}
+
+
+
+
+
             {{!-- Hotel Policies --}}
             {{!-- <div class="HotelPolicies">
                 <div class="PoliciesHead">
@@ -762,63 +835,118 @@
         display: none;
     }
 
+    .SearchedData {
+        width: 100%;
+        border: 1px solid gray;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .SearchDataHead {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .SearchDataHead p {
+        margin-bottom: 0px;
+    }
+
+    .HeadText {
+        font-size: 25px;
+        font-weight: 700;
+        color: black;
+    }
+
+    .EditOption {
+        display: flex;
+        font-size: 20px;
+        color: gray;
+        font-weight: 600;
+    }
+
+    .EditIcon {
+        height: 30px;
+        margin-right: 3px;
+    }
+
+    hr {
+        background-color: gray;
+    }
+
+    .tomakeItCenter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .chechInDIV,
+    .chechOutDIV,
+    .RoomsCountDiv,
+    .GuestCountDiv {
+        margin: 10px 30px;
+        display: flex;
+    }
+
+    .label,
+    .Answer {
+        margin: 0px 10px;
+        font-size: 20px;
+    }
+
+   
+
+    .Answer {
+        font-weight: 700;
+    }
+
+    .SaveOption {
+        display: none;
+    }
+
+    .toSave {
+        display: none;
+    }
+
+    .tomakeItCenter {
+        justify-content: center;
+    }
+
+    .chechInDIVSave,
+    .chechOutDIVSave,
+    .RoomsCountDivSave,
+    .GuestCountDivSave {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input[type="date"] {
+        border: 1px solid rgb(182, 182, 182);
+        font-size: 25px;
+        font-weight: 600;
+        width: 172px;
+        border-radius: 10px;
+        margin-right: 10px;
+        padding: 5px;
+    }
+
+    input[type="number"] {
+        border: 1px solid rgb(182, 182, 182);
+        padding: 5px;
+        font-size: 25px;
+        font-weight: 600;
+        width: 50px;
+        border-radius: 10px;
+         margin-right: 10px;
+    }
+
+
+
     .PoliciesHead {}
 
     .Polices {}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /* .discription,
-    .facilities {
-        margin: 2rem 1rem;
-    }
-
-    .discription p {
-        color: gray;
-    }
-
-    .facilitiesIcon {
-        display: block;
-    }
-
-    .iconFacitilites {
-        height: 5rem;
-        margin: 1rem 1rem;
-    }
-
-    .IconDetails {
-        display: flex;
-    }
-
-    .iconText {
-        margin: 32px 1rem;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    }*/
-
-    /* .Address {
-        margin: 2rem 1rem;
-        margin-bottom: 10rem;
-    }*/
-
-    /* .addressHead {}
-
-    .adress {
-        color: gray;
-
-    }*/
 
 
     @media screen and (min-width:545px) {
@@ -860,7 +988,13 @@
 <script>
 
 
+    function EditOptionEnable() {
+        document.getElementById("Edit").style.display = "none";
+        document.getElementById("toEdit").style.display = "none";
 
+        document.getElementById("save").style.display = "block";
+        document.getElementById("toSave").style.display = "flex";
+    }
 
     function SeeAllReviews() {
         //      alert("Clicked See More Reviews")
@@ -871,4 +1005,36 @@
         RemainingReview[0].style.display = "block";
     }
 
+    // function to convert date format from yyyy-mm-dd to dd-mm-yyyy
+    function convertDateFormat() {
+        // input date string in yyyy-mm-dd format
+        const checkin = '{{roomSearch.checkin}}';
+        const checkout = '{{roomSearch.checkout}}';
+
+        // extract day, month, and year components
+        const year = checkin.substring(0, 4);
+        const month = checkin.substring(5, 7);
+        const day = checkin.substring(8);
+
+        const year2 = checkout.substring(0, 4);
+        const month2 = checkout.substring(5, 7);
+        const day2 = checkout.substring(8);
+
+
+        // re-arrange components in dd-mm-yyyy order
+        const newcheckin = `${day}-${month}-${year}`;
+
+        const newcheckout = `${day2}-${month2}-${year2}`;
+        //alert(newcheckin)
+
+        //var Dates = newcheckin + ' to ' + newcheckout
+
+        document.getElementById('Checkin').textContent = newcheckin
+        document.getElementById('CheckOut').textContent = newcheckout
+
+        //console.log(newDateStr); // output: 25-02-2023
+    }
+
+    // call the function when the page loads
+    window.onload = convertDateFormat;
 </script>

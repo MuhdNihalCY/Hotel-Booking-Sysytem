@@ -1,13 +1,13 @@
 <section>
     <div class="container">
-        <div class="ModifyBooking col-12 col-sm-6">
-            <a href="/viewRoomDetails/{{room._id}}">
+        {{!-- <div class="ModifyBooking col-12 col-sm-6">
+            <a href="/ModifyviewRoomDetails/{{bookingDetails._id}}/{{room._id}}">
                 <div class="LessthanIcon">
                     <img src="/images/COnfirmBooking/reply (1).png" alt="" class="backIcon">
                 </div>
                 <p class="BackMessage">Modify your Booking</p>
             </a>
-        </div>
+        </div> --}}
         <div class="MainContent">
             <div class="row">
                 <div class="HotelDetails col-12 col-lg-4">
@@ -63,7 +63,7 @@
                                 <p class="PaymentCalcNo">₹ {{room.OfferPrice}}</p>
                             </div>
                             <div class="NoOfRooms">
-                                <p>No:Of Days: </p>
+                                <p>No:Of Rooms: </p>
                                 <p class="PaymentCalcNo"> {{bookingDetails.roomCount}}</p>
                             </div>
                             <div class="NoOfDays">
@@ -77,7 +77,7 @@
                             </div>
                             <hr>
                             <div class="PaymentOPtions">
-                                <a href="" class="btn btn-success payBTN ">Pay at Hotel</a>
+                                <a href="/confirmOrder/{{Id}}" class="btn btn-success payBTN ">Pay at Hotel</a>
                                 <a href="" class="btn btn-success payBTN">Pay Now</a>
                             </div>
                         </div>
