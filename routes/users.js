@@ -6,7 +6,6 @@ var mailer = require('../helpers/mailer');
 const crypto = require('crypto');
 const { json } = require('express');
 const { isBooleanObject } = require('util/types');
-const { compareSync } = require('bcrypt');
 
 
 // function for verify login
