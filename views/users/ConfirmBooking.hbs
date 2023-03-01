@@ -77,8 +77,9 @@
                             </div>
                             <hr>
                             <div class="PaymentOPtions">
-                                <a href="/confirmOrder/{{Id}}" class="btn btn-success payBTN ">Pay at Hotel</a>
-                                <a href="" class="btn btn-success payBTN">Pay Now</a>
+                                <a href="/confirmOrder/{{Id}}" id="payAtHotel" class="btn btn-success payBTN ">Pay at
+                                    Hotel</a>
+                                <a href="" id="payNow" class="btn btn-success payBTN">Pay Now</a>
                             </div>
                         </div>
                     </div>
@@ -87,17 +88,19 @@
                     <p class="Customer_Details_Head">Enter Your Details</p>
                     <p class="Custoomer_details_SubHeading">We will use these details to share your booking information
                     </p>
-                    <form action="" method="post">
+                    {{!-- <form id="VerifyForm" action="" method="post"> --}}
                         <div class="FormTopSection">
                             <div class="row">
                                 <div class="NameSection  col-sm-6 ">
                                     <p class="Label">Full Name</p>
-                                    <input type="text" placeholder="Enter your First and Last name" name="FullName">
+                                    <input type="text" id="Fullname" value="{{user.name}}"
+                                        placeholder="Enter your First and Last name" name="FullName" required>
                                 </div>
 
                                 <div class="EmailSection col-sm-6">
                                     <p class="Label">Email Address</p>
-                                    <input type="text" placeholder="Enter your Email Address" name="FullName">
+                                    <input type="text" value="{{user.email}}" placeholder="Enter your Email Address"
+                                        id="Email" name="FullName" required>
                                 </div>
                             </div>
                         </div>
@@ -105,11 +108,12 @@
                             <div class="row">
                                 <div class="Mobile  col-sm-6 ">
                                     <p class="Label">Mobile Number</p>
-                                    <input type="text" placeholder="Enter your First and Last name" name="FullName">
+                                    <input type="text" value="{{user.number}}" id="MobNumber"
+                                        placeholder="Enter your First and Last name" name="FullName" required>
                                 </div>
 
                                 <div class="SendOTPSection col-sm-6">
-                                    <a href="" SendOTP() class="btn btn-success">Send OTP</a>
+                                    <button onclick="SendOTP()" id="OTPBTN" class="btn btn-success">Send OTP</button>
                                 </div>
                             </div>
                         </div>
@@ -117,15 +121,18 @@
                             <div class="row">
                                 <div class="OTP  col-sm-6 ">
                                     <p class="Label">Enter OTP</p>
-                                    <input type="text" placeholder="Enter four digit OTP" name="FullName">
+                                    <input type="text" id="OTP" placeholder="Enter four digit OTP" name="FullName">
                                 </div>
 
                                 <div class="SendOTPSection col-sm-6">
-                                    <input type="submit" class="btn btn-success" value="Verify details">
+                                    <button onclick="VerifyOTP()" id="VerifyOTPbtn" class="btn btn-success"
+                                        value="">Verify
+                                        details</button>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                        {{!--
+                    </form> --}}
                 </div>
             </div>
         </div>
@@ -302,7 +309,7 @@
 
     .payBTN {
         width: 45%;
-        
+
     }
 
 
@@ -471,8 +478,14 @@
 </style>
 
 <script>
+
+
+    // call the function when the page loads
+    window.onload = convertDateFormat;
+
     // function to convert date format from yyyy-mm-dd to dd-mm-yyyy
     function convertDateFormat() {
+        alert("Accdsfsd");
         // input date string in yyyy-mm-dd format
         const checkin = '{{bookingDetails.checkin}}';
         const checkout = '{{bookingDetails.checkout}}';
@@ -497,9 +510,89 @@
 
         document.getElementById('CheckinDate').textContent = Dates
 
+        // disable pay button
+        var payAtHotel = document.getElementById("payAtHotel")
+        var payNow = document.getElementById("payNow")
+
+        payAtHotel.hidden = true;
+        payNow.hidden = true;
+
         //console.log(newDateStr); // output: 25-02-2023
     }
 
-    // call the function when the page loads
-    window.onload = convertDateFormat;
+
+
+
+
+    // calling For OTP
+    function SendOTP() {
+        const Mobile = document.getElementById("MobNumber").value;
+        const Email = document.getElementById("Email").value;
+        const url = `http://localhost:3300/OTPRequestToConfirmRoom/${Email}`
+        alert(url)
+
+        if (Mobile.length == 10) {
+            //Procced with OTP
+            fetch(url).then(response => {
+                if (response) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            }).then(data => {
+                console.log(data);
+                alert(data)
+                alert("asdfasdfa");
+            }).catch(error => {
+                console.log("There was a problem with the fetch operations:", error);
+            });
+        } else {
+            alert("Please provide Correct Mobile Number ");
+        }
+    }
+
+
+    function VerifyOTP() {
+        const OTP = document.getElementById('OTP').value;
+        const Email = document.getElementById("Email").value;
+        const url = `http://localhost:3300/VerifyDetailsBeforeConfirm/${Email}/${OTP}`
+
+        fetch(url).then(response => {
+            if (response) {
+                return response.json();
+            }
+            throw new Error('Network response was not ok.');
+        }).then(data => {
+            if (data.status) {
+                OPTVerified()
+                console.log(data)
+            }
+        }).catch(error => {
+            console.log("There was a problem with the fetch operations:", error);
+        });
+    }
+
+    function OPTVerified() {
+        var verifyBTN = document.getElementById("VerifyOTPbtn")
+        var OTPBTN = document.getElementById("OTPBTN")
+        var Fullname = document.getElementById("Fullname")
+        var Email = document.getElementById("Email")
+        var MobNumber = document.getElementById("MobNumber")
+        var OTP = document.getElementById("OTP")
+
+        var payAtHotel = document.getElementById("payAtHotel")
+        var payNow = document.getElementById("payNow")
+
+        verifyBTN.disabled = true;
+        OTPBTN.disabled = true;
+        Fullname.disabled = true;
+        Email.disabled = true;
+        MobNumber.disabled = true;
+        OTP.disabled = true;
+
+        payAtHotel.hidden = false;
+        payNow.hidden = false;
+
+    }
+
+
 </script>

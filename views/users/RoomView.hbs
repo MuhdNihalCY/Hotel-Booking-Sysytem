@@ -295,17 +295,16 @@
 
             {{!-- Booking Details --}}
             {{!-- <div class="SearchedData">
-                <form action="/saveEditodrequest/{{roomSearch._id}}" method="post">
+                <form action="/saveEditodrequest/{{roomSearch._id}}" method="post"> --}}
                     <div class="SearchDataHead">
                         <p class="HeadText">Confirm Search Details</p>
-                        <div class="EditOption" id="Edit" onclick="EditOptionEnable()">
+                        {{!-- <div class="EditOption" id="Edit" onclick="EditOptionEnable()">
                             <img src="/images/Rooms/Edit Row.png" alt="" class="EditIcon">
                             <p>Edit</p>
                         </div>
                         <div class="SaveOption" id="save" onclick="SaveOptionEnable()">
-                            {{!-- <img src="/images/Rooms/Edit Row.png" alt="" class="EditIcon "> --}}
                             <input class=" btn btn-primary" value="Save" type="submit">
-                        </div>
+                        </div> --}}
                     </div>
                     <hr>
                     <div class="SearchDataMid">
@@ -322,11 +321,11 @@
                                     </div>
                                     <div class="RoomsCountDiv">
                                         <p class="label">Rooms: </p>
-                                        <p class="Answer"  id="Rooms">{{roomSearch.rooms}}</p>
+                                        <p class="Answer" id="Rooms">{{roomSearch.rooms}}</p>
                                     </div>
                                     <div class="GuestCountDiv">
                                         <p class="label">Guest: </p>
-                                        <p class="Answer"  id="Guest">{{roomSearch.guests}}</p>
+                                        <p class="Answer" id="Guest">{{roomSearch.guests}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -358,7 +357,7 @@
                         </div>
                     </div>
                 </form>
-            </div> --}}
+            </div>
             {{!-- Booking Details --}}
 
 
@@ -893,7 +892,7 @@
         font-size: 20px;
     }
 
-   
+
 
     .Answer {
         font-weight: 700;
@@ -937,7 +936,7 @@
         font-weight: 600;
         width: 50px;
         border-radius: 10px;
-         margin-right: 10px;
+        margin-right: 10px;
     }
 
 

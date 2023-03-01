@@ -176,12 +176,12 @@ module.exports = {
                 await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).updateOne({ "_id": ObjectId(id) }, { $set: { Confirm: "Confirmed" } }).then((response) => {
                     console.log("Confirmed")
                     console.log(response);
-    
+
                 })
-                let ConfirmedBooking = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).findOne({ "_id":ObjectId(id) });
-                console.log("After Update: ",ConfirmedBooking);
+                let ConfirmedBooking = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).findOne({ "_id": ObjectId(id) });
+                console.log("After Update: ", ConfirmedBooking);
                 let ifConfirmedBooking = await db.get().collection(collection.USER_CONFIRMED_BOOKING).findOne({ "_id": ObjectId(id) }).then((bookingData) => {
-                    console.log("Booking Details If already:",bookingData);
+                    console.log("Booking Details If already:", bookingData);
                     if (bookingData) {
                         let result = {
                             status: "Already confirmed, retry your hotel search if you would like to make another reservation."
@@ -191,7 +191,7 @@ module.exports = {
                     } else {
                         console.log(ConfirmedBooking)
                         db.get().collection(collection.USER_CONFIRMED_BOOKING).insertOne(ConfirmedBooking).then((response) => {
-                            console.log("fds",response)
+                            console.log("fds", response)
                             let result = {}
                             resolve(result)
                         })
@@ -262,7 +262,7 @@ module.exports = {
     },
     getRoomBookingDetails: (email) => {
         return new Promise(async (resolve, reject) => {
-            let bookingDetails = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).find({ "email": email }).sort({SearchDate: -1}).toArray()
+            let bookingDetails = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).find({ "email": email }).sort({ SearchDate: -1 }).toArray()
             //console.log(bookingDetails);
             resolve(bookingDetails)
         })
@@ -385,6 +385,75 @@ module.exports = {
             var LatestSearch = await db.get().collection(collection.USER_ROOM_CLICK).findOne({ "_id": ObjectId(id) });
             console.log("Latest search in userhears", LatestSearch)
             resolve(LatestSearch)
+        })
+    },
+    AddOTPStatusVerifyBooking: (OTP, Email) => {
+        return new Promise(async (resolve, reject) => {
+            var BookingDetails = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).find({ "email": Email }).sort({ "SearchDate": -1 }).toArray();
+            BookingDetails = BookingDetails[0];
+            var ID = BookingDetails._id;
+            const now = Date.now(); // current timestamp in milliseconds
+            const fiveMinutesLater = new Date(now + 5 * 60 * 1000); // timestamp 5 minutes later
+            //console.log(fiveMinutesLater);
+            var OTPsetDetails = {
+                _id: ID,
+                OTP: OTP,
+                email: Email,
+                ValidTill: fiveMinutesLater
+            }
+            await db.get().collection(collection.USER_OTP_REQUEST).insertOne(OTPsetDetails).then((response) => {
+                resolve()
+            })
+        })
+    },
+    AddOTPStatus: (email, data) => {
+        return new Promise(async (resolve, reject) => {
+            var OTPStatus = {}
+
+
+            var SavedOTP = await db.get().collection(collection.USER_OTP_REQUEST).find({ "email": email }).sort({ "ValidTill": -1 }).toArray();
+            SavedOTP = SavedOTP[0];
+
+            var timeToday = Date.now();
+            // timeToday = new Date();
+
+            // const hours = timeToday.getHours().toString().padStart(2, '0'); // hours with leading zero
+            // const minutes = timeToday.getMinutes().toString().padStart(2, '0'); // minutes with leading zero
+            // const formattedTime = `${hours}:${minutes}`; // formatted time as string
+            // console.log(formattedTime, " Today");
+
+            // const hours1 = SavedOTP.ValidTill.getHours().toString().padStart(2, '0'); // hours with leading zero
+            // const minutes1 = SavedOTP.ValidTill.getMinutes().toString().padStart(2, '0'); // minutes with leading zero
+            // const formattedTime1 = `${hours1}:${minutes1}`; // formatted time as string
+            // console.log(formattedTime1, " OTp Save Time");
+
+            console.log("savedOTP ", SavedOTP);
+            console.log('Time Today ', timeToday)
+
+            var savedTime = SavedOTP.ValidTill
+            savedTime = savedTime.getTime();
+            console.log(savedTime, "Saved Time")
+
+            console.log("Saved OTP: ",SavedOTP.OTP , "Now OTP: ",data.OTP);
+
+
+
+            if (savedTime > timeToday) {
+                if (SavedOTP.OTP == data.OTP) {
+                    //procced
+                    OTPStatus.status = true
+                    
+                    resolve(OTPStatus)
+                } else {
+                    //wrong OTP
+                    OTPStatus.error = "Wrong OTP"
+                    resolve(OTPStatus)
+                }
+            } else {
+                //TimeOut
+                OTPStatus.error = "OTP Timeout"
+                resolve(OTPStatus)
+            }
         })
     }
 }

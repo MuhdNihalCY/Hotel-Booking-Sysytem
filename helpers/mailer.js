@@ -5,7 +5,7 @@ var nodemailer = require('nodemailer');
 
 module.exports ={
     sendEmail:(Details)=>{
-        let mailSentStatus
+        let mailSent = {}
         return new Promise(async(resolve,reject)=>{
             var from = "mnihal.cy123@gmail.com";
             var to = Details.email;
@@ -16,7 +16,7 @@ module.exports ={
                 service:"gmail",
                 auth:{
                     user: 'mnihal.cy123@gmail.com',            // mnihalcy@gmail.com      'mnihal.cy123@gmail.com',
-                    pass: 'zprlzdbhmotpzqem'               // btpyaxmlighzzaok              'zprlzdbhmotpzqem'
+                    pass: 'wpbdwpjsasatxvma'               // btpyaxmlighzzaok              'wpbdwpjsasatxvma'
                 }
             });
             var mailOptions={
@@ -25,14 +25,16 @@ module.exports ={
                 subject: subject,
                 text: message
             };
-            transporter.sendMail(mailOptions, (error, info) => {
+            transporter.sendMail(mailOptions, (error, _info) => {
                 if (error) {
-                    console.log(error)
+                    console.log(error);
+                    mailSent.error;
                 } else {
-                    console.log("Email sent " )
+                    mailSent.Status = true;
+                    console.log("Email sent ");
                 }
             })
-            resolve();
+            resolve(mailSent);
         })
     }
 }
