@@ -13,8 +13,11 @@ const verifyLogin = (req, res, next) => {
   //console.log("Requested ", req.url)
   if (req.session.user) {
     next();
+  } else if (req.url == "/checkAvailability") {
+    res.redirect(`/login`);
   } else {
     res.redirect(`/login${req.url}`);
+
   }
 }
 
@@ -41,6 +44,12 @@ router.get('/login/:path/:id', (req, res) => {
   var UrlPath = req.params.path
   //console.log(UrlPath)
   res.render('users/userLogin2', { UrlId, UrlPath })
+})
+
+router.get('/login/:path/', (req, res) => {
+  var UrlPath = req.params.path
+  //console.log(UrlPath)
+  res.render('users/userLogin2', { UrlPath })
 })
 
 router.post('/login/:path/:id', (req, res) => {
@@ -198,7 +207,7 @@ router.get('/', function (req, res, next) {
 
 
 
-router.post('/checkAvailability', (req, res) => {
+router.post('/checkAvailability', verifyLogin, (req, res) => {
   var user = req.session.user
   var SearchBar = true;
 
@@ -667,6 +676,7 @@ router.post('/saveEditedBookingDetails', (req, res) => {
 router.get('/myBookings', verifyLogin, (req, res) => {
   var user = req.session.user;
   userHelpers.getRoomBookingDetails(user.email).then((bookingDetails) => {
+    console.log(bookingDetails);
     res.render('users/MyBookings', { user, bookingDetails })
   })
 })
@@ -683,24 +693,37 @@ router.get("/OTPRequestToConfirmRoom/:Email", verifyLogin, (req, res) => {
   }
   mailer.sendEmail(Details).then((response) => {
 
-    userHelpers.AddOTPStatusVerifyBooking(Otps,Email)
+    userHelpers.AddOTPStatusVerifyBooking(Otps, Email)
 
     console.log(response)
     var OtpStatus = "OTP sent succesfully"
     res.json(OtpStatus);
-  }) 
+  })
 })
 
 router.get('/VerifyDetailsBeforeConfirm/:email/:OTP', (req, res) => {
   var Email = req.params.email;
-  var OTP = req.params,OTP;
+  var OTP = req.params, OTP;
 
   console.log(Email, OTP);
 
-  userHelpers.AddOTPStatus(Email,OTP).then((response)=>{
+  userHelpers.AddOTPStatus(Email, OTP).then((response) => {
     res.json(response);
   })
 })
+
+
+
+
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect('/');
+    }
+  });
+});
 
 router.get('/sample', (req, res) => {
   var user = req.session.user; //sample checking purpose

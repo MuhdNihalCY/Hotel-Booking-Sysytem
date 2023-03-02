@@ -1,5 +1,5 @@
 <div class="formArea  ">
-    <h3>StayOnn DashBoard</h3>
+    <h1>StayOnn DashBoard</h1>
     {{!-- overView Desktop --}}
     <div class="overView row">
         <div class="ViewBox col-sm-5 col-lg-3">
@@ -52,61 +52,65 @@
     </div>
 
 
-    {{!-- table --}}
-    <div class="VendorTable">
-        <h3>Rooms </h3>
-        <div class="pane pane--table2">
-            <table>
-                <thead>
-                    <th>foo</th>
-                    <th>foo</th>
-                    <th>foo</th>
-                    <th>foo</th>
-                    <th>foo</th>
-                    <th>foo</th>
-                    <th>foo</th>
-                    <th>foo</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                        <td>1</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                        <td>1</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                        <td>1</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                        <td>foo</td>
-                    </tr>
-                </tbody>
-            </table>
+    {{!-- table for actions --}}
+    <div class="ActionTable">
+        <div class="HeadBarActionTable">
+            <p class="ActionsText">Actions</p>
+            <div class="Dropdown">
+                <select class="ActionDropdown" name="" id="">
+                    <option value="1">Latest Action</option>
+                    <option value="2">Latest Booking</option>
+                    <option value="3">Latest Cancellations</option>
+                    <option value="4">Latest Review</option>
+                    <option value="5">Most Viewed</option>
+                    <option value="6">Least Viewed</option>
+                    <option value="6">View All Rooms</option>
+                </select>
+            </div>
+        </div>
+        <div class="mainActions">
+            <hr class="Hori">
+            {{#each BookedRooms}}
+            <div class="ActionSection">
+                <div class="row">
+                    <div class="ActionSectionLeft col-12 col-md-6 ">
+                        <div class="imageSection col-12 col-md-6">
+                            <img class="img" src="/room-images/{{roomImg}}.jpg" alt="">
+                        </div>
+                        <div class="RoomBasicData">
+                            <p class="NameOfROOM">{{roomName}}</p>
+                            <div class="PriceSEc">
+                                <p class="OfferPrice">₹ {{roomPrice}}</p>
+                                {{!-- <p class="RealPrice">₹ {{}}</p> --}}
+                            </div>
+                            <p class="NORooms">NO:of Rooms: {{rooms}}</p>
+                            <p class="RoomType">Room Type: {{roomType}}</p>
+                        </div>
+                    </div>
+                    <div class="ActionSectionRight col-12 col-md-6 ">
+                        <div class="ActionRtTop">
+                            <p class="ACtions">Booked</p>
+                            <a href="" class="ViewBTN">View Details </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="Hori">
+            {{/each}}
         </div>
     </div>
+    {{!-- End Action Table --}}
+
+
 </div>
 
 <style>
+    p {
+        margin: 0;
+    }
+
     .formArea {
-        background-color: rgb(215, 226, 236);
+        background-color: rgba(227, 226, 221, 0.434);
         height: 300vh;
         float: left;
         width: 100%;
@@ -154,55 +158,6 @@
         font-size: 30px;
     }
 
-    .VendorTable {
-        margin: 2rem 4rem;
-    }
-
-    table {
-        border-collapse: collapse;
-        background: rgb(62, 59, 59);
-        table-layout: auto;
-        color: white;
-    }
-
-    th,
-    td {
-        padding: 8px 16px;
-        border: 1px solid #ddd;
-        width: 160px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    
-
-    .pane--table2 {
-        width: 100%;
-        overflow-x: scroll;
-        border-radius: 15px;
-        scrollbar-color: red;
-       
-    }
-
-
-
-    .pane--table2 th,
-    .pane--table2 td {
-        width: auto;
-        min-width: 160px;
-    }
-
-    .pane--table2 tbody {
-        overflow-y: scroll;
-        overflow-x: hidden;
-        display: block;
-        max-height: 80vh;
-    }
-
-    .pane--table2 thead {
-        display: table-row;
-    }
 
     .overViewMob {
         margin: 2rem;
@@ -221,35 +176,192 @@
         box-shadow: 6px 6px 20px #b1b1b1,
             -6px -6px 20px #ffffff;
     }
+
     .ViewBoxMob span {
         margin: 1rem 2rem;
         color: rgb(255, 255, 255);
         display: flex;
     }
+
     .ViewBoxMob p {
         margin: 0rem 1rem;
         font-size: 25px;
         color: white;
     }
 
+    .ActionTable {
+        width: 90%;
+        height: 100vh;
+        margin: 10px 30px;
+        border: 2px solid gray;
+        border-radius: 25px;
+        margin-top: 8rem;
+    }
 
-    @media screen and (max-width:388px) { /*388px*/
-    /* this will work if display size is above 388 px */
+    .mainActions {
+        overflow: scroll;
+        height: 95vh;
+    }
+
+    .HeadBarActionTable {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 10px;
+        padding: 0 15px;
+    }
+
+    .ActionsText {
+        font-size: 25px;
+        color: gray;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    .ActionDropdown {
+        font-size: 25px;
+        color: gray;
+        font-weight: 500;
+        margin-bottom: 0;
+        background-color: FBF9FF;
+        border-radius: 10px;
+        padding: 5px 10px;
+    }
+
+    .Hori {
+        background-color: gray;
+        height: 2px;
+    }
+
+    .ActionSection {
+        padding: 10px 5px;
+        width: 100%;
+    }
+
+    .ActionSectionLeft,
+    .ActionSectionRight {}
+
+    .imageSection {
+        height: 50%%;
+        width: 230px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .ActionSectionLeft {
+        display: flex;
+    }
+
+    .img {
+        width: 200px;
+        border-radius: 10px;
+    }
+
+    .RoomBasicData {
+        padding: 0px 5px;
+    }
+
+    .NameOfROOM {
+        font-size: 23px;
+        color: rgb(75, 75, 75);
+        font-weight: 800;
+    }
+
+    .Address {
+        color: gray;
+        font-size: 15px;
+    }
+
+    .PriceSEc {
+        display: flex;
+        align-items: center;
+    }
+
+    .OfferPrice {
+        font-size: 25px;
+        font-weight: 800;
+        color: black;
+    }
+
+    .RealPrice {
+        font-size: 15px;
+        color: gray;
+        text-decoration: line-through;
+    }
+
+    .ActionRtTop {
+        display: flex;
+        flex-direction: column;
+        font-size: 20px;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding-right: 10px;
+        padding-left: 15px;
+    }
+
+    .NORooms,
+    .RoomType {
+        font-weight: 600;
+        color: gray;
+    }
+
+    .ACtions {
+        font-size: 35px;
+        font-weight: 800;
+        color: red;
+    }
+
+    .ViewBTN {
+        width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 20px;
+        border: 3px solid gray;
+        font-weight: 800;
+        font-size: 25px;
+        color: black;
+        border-radius: 25px;
+    }
+
+    .ViewBTN:hover {
+        text-decoration: none;
+        background-color: rgb(58, 58, 58);
+        color: white;
+    }
+
+
+
+
+    @media screen and (max-width:388px) {
+
+        /*388px*/
+        /* this will work if display size is above 388 px */
         .overView {
             display: none;
         }
     }
 
-    @media screen and (min-width:388px) { /*388px*/
-    /* this will work if display size is below 388 px */
+    @media screen and (min-width:388px) {
+
+        /*388px*/
+
+        /* this will work if display size is below 388 px */
         .overViewMob {
             display: none;
         }
     }
+
     @media (min-width:388px) and (max-width:1105px) {
         .overViewMob {
             display: none;
         }
+
         .overView {
             display: flex;
         }
@@ -261,24 +373,4 @@
             width: 100%;
             padding-left: 0;
         }
-
-        .VendorTable {
-            margin: 3rem 1rem;
-        }
-
-        /*.overView {
-            display: none;
-        }*/
-    }
 </style>
-<script>
-    $('.pane-hScroll').scroll(function () {
-        $('.pane-vScroll').width($('.pane-hScroll').width() + $('.pane-hScroll').scrollLeft());
-    });
-
-    // Example 2
-    $('.pane--table2').scroll(function () {
-        $('.pane--table2 table').width($('.pane--table2').width() + $('.pane--table2').scrollLeft());
-    });
-
-</script>

@@ -25,7 +25,34 @@ let vendor
 router.get('/', verifyLogin, function (req, res, next) {
   let user = req.session.vendorUserData
   vendor = true
-  res.render('room/home', { vendor, user });
+  var BookedRooms = [];
+
+  console.log(user)
+  vendorHelper.getRooms(user).then((AllRooms) => {
+    //console.log(AllRooms.length);
+
+    const BookedRoomspromises = [];
+
+    for (i = 0; i < AllRooms.length; i++) {
+      var OneRoom = AllRooms[i];
+      //console.log(OneRoom._id);
+
+      BookedRoomspromises.push(vendorHelper.GetAllActionsRoom(OneRoom._id));
+    }
+
+    Promise.all(BookedRoomspromises).then((results) => {
+      results.forEach((bookedRooms) => {
+        //console.log("Rooms: ", bookedRooms);
+        BookedRooms.push(...bookedRooms);
+
+      })
+      //console.log(BookedRooms);
+      BookedRooms.sort((b,a)=> a.SearchDate - b.SearchDate);
+      //console.log("Booked Rooms sorted : ",BookedRooms);
+      res.render('room/home', { vendor, user, AllRooms,BookedRooms });
+    })
+  })
+
 });
 
 router.get('/addroom', verifyLogin, (req, res) => {

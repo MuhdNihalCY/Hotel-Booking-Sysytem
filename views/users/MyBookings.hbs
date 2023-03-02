@@ -11,7 +11,7 @@
                     <div class="card mb-3" style="max-width: 100%;">
                         <div class="row no-gutters">
                             <div class="imageSec col-md-4">
-                                <img src="/room-images/632ac6170cd5f2d92b87f45a1.jpg" class="card-img" alt="...">
+                                <img src="/room-images/{{roomImg}}.jpg" class="card-img" alt="...">
                             </div>
 
                             
@@ -34,10 +34,14 @@
                                     </div>
                                     <div class="checkINOUT">
                                         <h5 class="Bookingstatus">Booking Status:</h5>
+                                        {{#if Confirm}}
                                         <h5 class="Bookingstatus">{{Confirm}}</h5>
+                                        {{else}}
+                                        <h5 class="Bookingstatus">Not Confirmed</h5>
+                                        {{/if}}
                                     </div>
                                     <div class="cancel">
-                                        <a href="/cancelBooking/{{_id}}" class="cancelBTN btn btn-primary">Request Cancel Booking</a>
+                                        <a href="/cancelBooking/{{_id}}" class="cancelBTN btn btn-danger">Request Cancel Booking</a>
                                     </div>
                                 </div>
                             </div>
@@ -101,5 +105,10 @@
     }
     .cancel {
         text-align: center;
+        margin: 2rem 0;
+    }
+    .cancelBTN {
+        border-radius: 10px;
+        width: 50%;
     }
 </style>

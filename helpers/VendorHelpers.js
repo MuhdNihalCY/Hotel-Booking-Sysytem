@@ -118,5 +118,15 @@ module.exports = {
                 resolve(response)
             })
         })
+    },
+    GetAllActionsRoom:(id)=>{
+        id = id.toString();
+        return new Promise(async(resolve,reject)=>{
+            var BookedRooms = await db.get().collection(collection.USER_CONFIRMED_BOOKING).find({"roomId":id}).toArray();
+            //console.log(BookedRooms);
+
+            //get all action, but currently only having booked details.
+            resolve(BookedRooms)
+        })
     }
 }

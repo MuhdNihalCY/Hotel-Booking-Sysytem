@@ -1,5 +1,6 @@
 <nav class="nav">
     <div class="nav_links">
+        <h1 class="MainHeading">StayOnn</h1>
         <div class="navClose">
             <span class="material-symbols-outlined ">
                 close
@@ -42,6 +43,7 @@
 </nav>
 <section class="section col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="sideSection  ">
+    <h1 class="MainHeading1">StayOnn</h1>
         <div class="sideSecLinks">
             <a href="/vendor">
                 <span class="material-symbols-outlined">
@@ -64,24 +66,24 @@
                 </span>Booking
             </a>
             <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{#if user}}
-                {{user.name}}
-                {{/if}}
-            </a>
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{#if user}}
+                    {{user.name}}
+                    {{/if}}
+                </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="/vendor/logout">Logout</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="/vendor/logout">Logout</a>
+                </div>
             </div>
-        </div>
         </div>
     </div>
     <div id="btnNav" class="menuBar">
         <span class="menuIcon material-symbols-outlined">menu</span>
     </div>
-    
+
 </section>
 
 <style>
@@ -89,6 +91,21 @@
         padding: 0;
         background-color: rgb(255, 255, 255);
     }
+
+    .MainHeading {
+        z-index: 3;
+        color: white;
+        margin: 10px 30px;
+        font-weight: 700;
+    }
+
+    .MainHeading1 {
+        z-index: 3;
+        color: white;
+        margin: 10px 15px;
+        font-weight: 700;
+    }
+
 
     .sideSecLinks {
         margin-top: 3rem;
@@ -258,12 +275,14 @@
         width: 7rem !important;
         text-align: center;
     }
+
     .dropdown-item:hover {
         color: whitesmoke;
     }
+
     .dropdown a {
-        overflow:hidden; 
-        white-space:nowrap; 
+        overflow: hidden;
+        white-space: nowrap;
         text-overflow: ellipsis;
     }
 </style>
