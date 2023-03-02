@@ -528,7 +528,7 @@
     function SendOTP() {
         const Mobile = document.getElementById("MobNumber").value;
         const Email = document.getElementById("Email").value;
-        const url = `http://localhost:3300/OTPRequestToConfirmRoom/${Email}`
+        const url = `http://3.239.165.192/OTPRequestToConfirmRoom/${Email}`
         alert(url)
 
         if (Mobile.length == 10) {
@@ -554,7 +554,7 @@
     function VerifyOTP() {
         const OTP = document.getElementById('OTP').value;
         const Email = document.getElementById("Email").value;
-        const url = `http://localhost:3300/VerifyDetailsBeforeConfirm/${Email}/${OTP}`
+        const url = `http://3.239.165.192/VerifyDetailsBeforeConfirm/${Email}/${OTP}`
 
         fetch(url).then(response => {
             if (response) {
