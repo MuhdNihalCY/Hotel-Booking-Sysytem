@@ -8,6 +8,7 @@ module.exports={
         USER_ROOM_SEARCH_COLLECTION: 'user_room_search',
         USER_BOOKING_TO_CONFIRM:'user_booking_to_confirm',
         USER_ROOM_CLICK:'user_room_click',
-        USER_CONFIRMED_BOOKING:'user_confirmed_booking'
+        USER_CONFIRMED_BOOKING:'user_confirmed_booking',
+        LIVE_ROOM_BOOKED_COLLECTION: 'Live_Room_booked_Collection'
         
 }

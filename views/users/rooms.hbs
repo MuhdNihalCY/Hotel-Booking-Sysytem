@@ -10,7 +10,7 @@
                         {{/each}}
                     </select>
 
-                  
+
 
                 </form>
             </div>
@@ -142,6 +142,121 @@
             <div class="noRoom">
                 <h3>No Rooms Available</h3>
             </div>
+            {{/if}}
+            {{#if RoomsNotAvailableRooms}}
+            {{#each RoomsNotAvailableRooms}}
+            <div class="room ">
+                <p class="NoRoomTExt">No Rooms Available</p>
+                <div class="row noRoom">
+                    <div class="secImg col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        {{!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="/room-images/{{img1}}.jpg" alt="First slide">
+                                </div>
+                            </div>
+                        </div> --}}
+                        <img src="/room-images/{{img1}}.jpg" class="ImgDiv" alt="">
+                        <div>
+
+                        </div>
+
+                    </div>
+                    <div class="ContentSec col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        {{!-- <h2 class="nameOfRoom">{{name}}</h2>
+                        <div class="places">
+                            <h6>Place</h6>
+                            <h6 class="place">{{Place}}</h6>
+                        </div>
+
+                        <div class="TypeSuit">
+                            <h6>Type </h6>
+                            <h6 class="typeOfroom">{{TyprOfRoom}}</h6>
+                        </div>
+                        <div class="services">
+                            <h6>Services</h6>
+                            <div class="typeOfservices">
+                                {{#if Wifi}}
+                                <span class="icon material-symbols-outlined">wifi</span>
+                                {{/if}}
+                                {{#if FoodService}}
+                                <span class="icon material-symbols-outlined">restaurant_menu</span>
+                                {{/if}}
+                                {{#if Pool}}
+                                <span class="icon material-symbols-outlined">pool</span>
+                                {{/if}}
+                                {{#if AC}}
+                                <span class="icon material-symbols-outlined">ac_unit</span>
+                                {{/if}}
+                                {{#if TV}}
+                                <span class="material-symbols-outlined">live_tv</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="More">
+                            <div class="Realprice">
+                                <h6>₹</h6>
+                                <h1 class="offerPrice">{{OfferPrice}}</h1>
+                                <h5 class="perday"><b>/</b>day</h5>
+                            </div>
+                            <div class="viewMore">
+                                <a href="/viewRoomDetails/{{_id}}">View Details</a>
+
+                            </div>
+                        </div> --}}
+
+                        <div class="title">
+                            <p class="nameOfRoom">{{name}}</p>
+                        </div>
+                        <div class="place">
+                            <p class="">Place:</p>
+                            <p class="">{{Place}}</p>
+                        </div>
+                        <div class="rating">
+                            <div class="RatingBox">
+                                <img src="/images/Rooms/Star.png" class="RatingStar" alt="">
+                                <p>3.8</p> {{!-- rating Here --}}
+                            </div>
+                            <div class="NoOFRatings">
+                                <p>( 38 Ratings )</p>
+                            </div>
+                        </div>
+                        <div class="services">
+                            <p>Services</p>
+                            <div class="typeOfservices">
+                                {{#if Wifi}}
+                                <span class="icon material-symbols-outlined">wifi</span>
+                                {{/if}}
+                                {{#if FoodService}}
+                                <span class="icon material-symbols-outlined">restaurant_menu</span>
+                                {{/if}}
+                                {{#if Pool}}
+                                <span class="icon material-symbols-outlined">pool</span>
+                                {{/if}}
+                                {{#if AC}}
+                                <span class="icon material-symbols-outlined">ac_unit</span>
+                                {{/if}}
+                                {{#if TV}}
+                                <span class="material-symbols-outlined">live_tv</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="PriceAndMore">
+                            <div class="price ">
+                                <p class="rupeeSymbol">₹</p>
+                                <p class="offerPrice">{{OfferPrice}}</p>
+                                <p class="perday"><b>/</b>day</p>
+                            </div>
+                            <div class="visit ">
+                                <p class="noRoom">No Room Available</p>
+                                <p href="/viewRoomDetails/{{_id}}" target="_blank" class=" visitBTN" aria-disabled="true" >View Details</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            {{else}}
             {{/if}}
         </div>
     </div>
@@ -432,6 +547,15 @@
     .services p,
     .typeOfservices span {
         color: gray;
+    }
+
+    .noRoom * {
+        filter: blur(2px);
+    }
+
+    .NoRoomTExt {
+        color: red;
+        font-size: 25px;
     }
 
     @media screen and (max-width: 530px) {

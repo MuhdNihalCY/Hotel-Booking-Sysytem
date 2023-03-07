@@ -169,6 +169,9 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             console.log("Id : ", id)
             console.log("user", user)
+            let LiveBooking = false;
+
+            let result = {}
             let ConfirmedBooking2 = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).findOne({ "_id": id });
             console.log("Before Update :", ConfirmedBooking2);
 
@@ -183,20 +186,137 @@ module.exports = {
                 let ifConfirmedBooking = await db.get().collection(collection.USER_CONFIRMED_BOOKING).findOne({ "_id": ObjectId(id) }).then((bookingData) => {
                     console.log("Booking Details If already:", bookingData);
                     if (bookingData) {
-                        let result = {
-                            status: "Already confirmed, retry your hotel search if you would like to make another reservation."
-                        }
+                        result.status = "Already confirmed, retry your hotel search if you would like to make another reservation.";
+
                         console.log("Already Booked")
-                        resolve(result)
+
                     } else {
                         console.log(ConfirmedBooking)
                         db.get().collection(collection.USER_CONFIRMED_BOOKING).insertOne(ConfirmedBooking).then((response) => {
                             console.log("fds", response)
-                            let result = {}
-                            resolve(result)
+                        })
+                        LiveBooking = true;
+                    }
+
+                })
+                console.log(LiveBooking);
+
+
+                // create a data to insert to database to booked Room data.
+                // this data is for new entry
+
+                var checkIn = ConfirmedBooking.checkin;
+                var checkOut = ConfirmedBooking.checkout;
+                var RoomCount = parseInt(ConfirmedBooking.roomCount);
+                const dayCount = ConfirmedBooking.dayCount;
+                var RoomId = ConfirmedBooking.roomId;
+                var BookedId = ConfirmedBooking._id;
+                BookedId = BookedId.toString();
+
+                var BookedData = []
+
+
+                for (i = 0; i <= dayCount; i++) {
+                    var BookDate = new Date(checkIn);
+                    BookDate.setDate(BookDate.getDate() + i);
+                    BookDate = BookDate.toISOString().substring(0, 10);
+
+
+                    var Booking = {
+                        date: BookDate,
+                        RoomsBooked: [],
+                        BookedIDs: []
+
+                    }
+
+                    for (j = 1; j <= RoomCount; j++) {
+                        console.log("legnht: ", j.toString().length)
+                        if (j.toString().length == 1) {
+                            var RId = RoomId + '0' + j;
+                        } else {
+                            var RId = RoomId + j;
+                        }
+                        Booking.RoomsBooked.push(RId);
+                    }
+
+                    Booking.BookedIDs.push(BookedId);
+
+                    BookedData.push(Booking);
+
+
+
+                }
+                console.log("Data Booked RO each room");
+                console.log(BookedData);
+
+                var BookedInformation = {
+                    Room: ConfirmedBooking.roomId,
+                    Booked: BookedData
+                }
+
+
+
+
+                if (LiveBooking) {
+                    // add room to booked status Collection for count checking and takin report;
+                    var RoomBookedData = await db.get().collection(collection.LIVE_ROOM_BOOKED_COLLECTION).findOne({ "Room": ConfirmedBooking.roomId })
+                    if (RoomBookedData) {
+                        //update with adding the new entry
+                        console.log("Update Required");
+                        console.log("Old Data: ", RoomBookedData);
+                        console.log("new Data: ", BookedInformation);
+
+
+                        console.log("Old Data OGJ: ", RoomBookedData.Booked);
+                        console.log("new Data OGL: ", BookedInformation.Booked);
+
+                        var arr1 = RoomBookedData.Booked;
+                        var arr2 = BookedInformation.Booked;
+
+
+                        // BookedInformation =  RoomBookedData.Booked + BookedInformation.Booked
+
+                        // Combine the two arrays
+                        const combinedArr = [];
+
+                        arr1.forEach(obj1 => {
+                            const obj2 = arr2.find(obj2 => obj2.date === obj1.date);
+                            if (obj2) {
+                                combinedArr.push({
+                                    date: obj1.date,
+                                    RoomsBooked: [...obj1.RoomsBooked, ...obj2.RoomsBooked],
+                                    BookedIDs: [...obj1.BookedIDs, ...obj2.BookedIDs]
+                                });
+                            } else {
+                                combinedArr.push(obj1);
+                            }
+                        });
+
+                        arr2.forEach(obj2 => {
+                            const obj1 = arr1.find(obj1 => obj1.date === obj2.date);
+                            if (!obj1) {
+                                combinedArr.push(obj2);
+                            }
+                        });
+
+                        console.log(combinedArr);
+
+
+
+                        var finalBookedInfo = combinedArr
+                        console.log("this is added data to update", finalBookedInfo)
+
+                        await db.get().collection(collection.LIVE_ROOM_BOOKED_COLLECTION).updateOne({ "Room": ConfirmedBooking.roomId }, { $set: { "Booked": finalBookedInfo } })
+
+                    } else {
+                        // insert a new Entry
+                        await db.get().collection(collection.LIVE_ROOM_BOOKED_COLLECTION).insertOne(BookedInformation).then((response) => {
+                            console.log(response);
                         })
                     }
-                })
+                }
+                resolve(result)
+
             } else {
                 await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).updateOne({ "_id": id }, { $set: { Confirm: "Confirmed" } }).then((response) => {
                     console.log("Confirmed")
@@ -401,9 +521,27 @@ module.exports = {
                 email: Email,
                 ValidTill: fiveMinutesLater
             }
-            await db.get().collection(collection.USER_OTP_REQUEST).insertOne(OTPsetDetails).then((response) => {
-                resolve()
-            })
+
+            console.log("New OTP", OTPsetDetails.OTP)
+
+            var OLDOTP = await db.get().collection(collection.USER_OTP_REQUEST).findOne({ "_id": ID })
+
+            if (OLDOTP) {
+                await db.get().collection(collection.USER_OTP_REQUEST).updateOne({ "_id": ID }, {
+                    $set: {
+                        "OTP": OTPsetDetails.OTP,
+                        "email": OTPsetDetails.email,
+                        "ValidTill": OTPsetDetails.ValidTill
+                    }
+                }).then(() => {
+                    resolve();
+                })
+            } else {
+                await db.get().collection(collection.USER_OTP_REQUEST).insertOne(OTPsetDetails).then((response) => {
+                    resolve()
+                })
+            }
+
         })
     },
     AddOTPStatus: (email, data) => {
@@ -415,17 +553,6 @@ module.exports = {
             SavedOTP = SavedOTP[0];
 
             var timeToday = Date.now();
-            // timeToday = new Date();
-
-            // const hours = timeToday.getHours().toString().padStart(2, '0'); // hours with leading zero
-            // const minutes = timeToday.getMinutes().toString().padStart(2, '0'); // minutes with leading zero
-            // const formattedTime = `${hours}:${minutes}`; // formatted time as string
-            // console.log(formattedTime, " Today");
-
-            // const hours1 = SavedOTP.ValidTill.getHours().toString().padStart(2, '0'); // hours with leading zero
-            // const minutes1 = SavedOTP.ValidTill.getMinutes().toString().padStart(2, '0'); // minutes with leading zero
-            // const formattedTime1 = `${hours1}:${minutes1}`; // formatted time as string
-            // console.log(formattedTime1, " OTp Save Time");
 
             console.log("savedOTP ", SavedOTP);
             console.log('Time Today ', timeToday)
@@ -434,15 +561,15 @@ module.exports = {
             savedTime = savedTime.getTime();
             console.log(savedTime, "Saved Time")
 
-            console.log("Saved OTP: ",SavedOTP.OTP , "Now OTP: ",data.OTP);
+            console.log("Saved OTP: ", SavedOTP.OTP, "Now OTP: ", parseInt(data.OTP));
 
 
 
             if (savedTime > timeToday) {
-                if (SavedOTP.OTP == data.OTP) {
+                if (SavedOTP.OTP == parseInt(data.OTP)) {
                     //procced
                     OTPStatus.status = true
-                    
+
                     resolve(OTPStatus)
                 } else {
                     //wrong OTP
@@ -454,6 +581,78 @@ module.exports = {
                 OTPStatus.error = "OTP Timeout"
                 resolve(OTPStatus)
             }
+        })
+    },
+    CheckIfRoomsAvailable: (Rooms, SearchData) => {
+        return new Promise(async (resolve, reject) => {
+            var RoomsNotAvailableRooms;
+            var Rooms_ids = [];
+            console.log(Rooms);
+            console.log("Rooms_id : ", Rooms_ids);
+
+            for (i = 1; i <= Rooms.length; i++) {
+                var Rooms1 = Rooms[i - 1];
+                Rooms_ids.push(Rooms1._id.toString());
+            }
+
+            console.log("Rooms_id : ", Rooms_ids);
+
+            var ThisRoomBookedData = await db.get().collection(collection.LIVE_ROOM_BOOKED_COLLECTION).find({ "Room": { $in: Rooms_ids } }).toArray();
+
+            console.log("This Room Booked data", ThisRoomBookedData[0], "ends Here");
+            console.log(SearchData);
+
+            var availableRoom = [];
+
+            for (j = 0; j < ThisRoomBookedData.length; j++) {
+                var ThisRoom = ThisRoomBookedData[j]
+                var RoomCount
+                var RoomId
+                //var selectedRoom
+
+                // to find room count
+                for (k = 0; k < Rooms_ids.length; k++) {
+                    console.log(Rooms[k]._id.toString(), " = ", Rooms_ids[k]);
+                    if (Rooms[k]._id.toString() == ThisRoom.Room) {
+                        // selectedRoom = Rooms[i]
+                        RoomCount = parseInt(Rooms[k].roomCount)
+                        RoomId = Rooms[k]._id
+                    }
+                }
+
+                var RoomBooked = ThisRoom.Booked;
+                console.log(RoomBooked);
+
+                // Define the check-in and check-out dates
+                const checkIn = new Date(SearchData.checkin);
+                const checkOut = new Date(SearchData.checkout);
+
+                // Loop through each day between the check-in and check-out dates
+                for (let day = new Date(checkIn); day <= checkOut; day.setDate(day.getDate() + 1)) {
+                    console.log("each day: ", day.toISOString().slice(0, 10)); // Output the current date in yyyy-mm-dd format
+                    var dayOne = day.toISOString().slice(0, 10)
+                    for (l = 0; l < RoomBooked.length; l++) {
+                        var OneBooked = RoomBooked[l];
+                        if (OneBooked.date == dayOne) {
+                            console.log(RoomCount, " - ", OneBooked.RoomsBooked.length, " < ", SearchData.roomCount)
+                            if (RoomCount - OneBooked.RoomsBooked.length < SearchData.roomCount) {
+                                //console.log(Rooms[k]);
+                                RoomsNotAvailableRooms = Rooms.filter(item => item._id == RoomId)
+                                Rooms = Rooms.filter(item => item._id !== RoomId)
+                                console.log("This is the process of removing filled Rooms");
+                            }
+                        }
+                    }
+                }
+            }
+            console.log("No ROmm: ",RoomsNotAvailableRooms)
+
+            var response = {
+                Rooms : Rooms,
+                RoomsNotAvailableRooms : RoomsNotAvailableRooms
+            }
+
+            resolve(response);
         })
     }
 }

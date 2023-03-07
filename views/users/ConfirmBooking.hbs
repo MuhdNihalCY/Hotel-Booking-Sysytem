@@ -121,7 +121,8 @@
                             <div class="row">
                                 <div class="OTP  col-sm-6 ">
                                     <p class="Label">Enter OTP</p>
-                                    <input type="text" id="OTP" placeholder="Enter four digit OTP" name="FullName">
+                                    <p id="OTPError"></p>
+                                    <input type="number" id="OTP" placeholder="Enter four digit OTP" name="FullName">
                                 </div>
 
                                 <div class="SendOTPSection col-sm-6">
@@ -367,6 +368,12 @@
     }
 
 
+    #OTPError {
+        color: red;
+        font-size: 15px;
+        margin: 0px;
+    }
+
 
 
 
@@ -485,7 +492,7 @@
 
     // function to convert date format from yyyy-mm-dd to dd-mm-yyyy
     function convertDateFormat() {
-        alert("Accdsfsd");
+        //alert("Accdsfsd");
         // input date string in yyyy-mm-dd format
         const checkin = '{{bookingDetails.checkin}}';
         const checkout = '{{bookingDetails.checkout}}';
@@ -529,7 +536,7 @@
         const Mobile = document.getElementById("MobNumber").value;
         const Email = document.getElementById("Email").value;
         const url = `http://localhost:3300/OTPRequestToConfirmRoom/${Email}`
-        alert(url)
+        //alert(url)
 
         if (Mobile.length == 10) {
             //Procced with OTP
@@ -540,8 +547,8 @@
                 throw new Error('Network response was not ok.');
             }).then(data => {
                 console.log(data);
-                alert(data)
-                alert("asdfasdfa");
+                //alert(data)
+                //alert("asdfasdfa");
             }).catch(error => {
                 console.log("There was a problem with the fetch operations:", error);
             });
@@ -556,19 +563,32 @@
         const Email = document.getElementById("Email").value;
         const url = `http://localhost:3300/VerifyDetailsBeforeConfirm/${Email}/${OTP}`
 
-        fetch(url).then(response => {
-            if (response) {
-                return response.json();
-            }
-            throw new Error('Network response was not ok.');
-        }).then(data => {
-            if (data.status) {
-                OPTVerified()
-                console.log(data)
-            }
-        }).catch(error => {
-            console.log("There was a problem with the fetch operations:", error);
-        });
+        //alert(OTP.length);
+        if (OTP.length == 4) {
+            fetch(url).then(response => {
+                if (response) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            }).then(data => {
+                if (data.status) {
+                    OPTVerified()
+                    console.log(data)
+                } else {
+                    alert("Invalid OTP")
+                    document.getElementById('OTP').value = null
+                    document.getElementById('OTPError').innerHTML = 'Wrong OTP, Enter correct OTP.'
+                }
+            }).catch(error => {
+                console.log("There was a problem with the fetch operations:", error);
+            });
+        } else {
+            alert("Invalid OTP, only Four digits")
+            document.getElementById('OTP').value = null
+            document.getElementById('OTPError').innerHTML = 'Wrong OTP, Enter correct OTP.'
+        }
+
+
     }
 
     function OPTVerified() {

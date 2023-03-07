@@ -253,8 +253,14 @@ router.post('/checkAvailability', verifyLogin, (req, res) => {
 
   userHelpers.storeBookingSearch(booking).then(() => {
     userHelpers.getRooms(booking).then((rooms) => {
+
+      userHelpers.CheckIfRoomsAvailable(rooms,booking).then((response)=>{
+        rooms = response.Rooms
+        var RoomsNotAvailableRooms = response.RoomsNotAvailableRooms
+        console.log("No room : ",RoomsNotAvailableRooms)
+        res.render('users/rooms', { rooms, user, RoomsNotAvailableRooms, SearchBar })
+      })
       //console.log(rooms)
-      res.render('users/rooms', { rooms, user, SearchBar })
     })
   })
 
