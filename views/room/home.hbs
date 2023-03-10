@@ -3,26 +3,42 @@
     {{!-- overView Desktop --}}
     <div class="overView row">
         <div class="ViewBox col-sm-5 col-lg-3">
-            <span class="material-symbols-outlined">network_ping</span>
-            <p>Rooms Available</p>
+            <span class="material-symbols-outlined">calendar_view_month</span>
+            <p class="ViewBoxHead">Live Customers</p>
             <div class="DashCount">
-                <p>34</p>
+                <p class="DashCountSmall">For today: </p>
+                {{#if RoomsInfo}}
+                <p class="DashCountBIG">{{RoomsInfo.LiveCustomers}}</p>
+                {{else}}
+                <p class="DashCountBIG">0</p>
+                {{/if}}
+            </div>
+        </div>
+        <div class="ViewBox col-sm-5 col-lg-3">
+            <span class="material-symbols-outlined">network_ping</span>
+            <p class="ViewBoxHead">Rooms Available</p>
+            <div class="DashCount">
+                <p class="DashCountSmall">For today: </p>
+                {{#if RoomsInfo}}
+                <p class="DashCountBIG"> {{RoomsInfo.RoomAvailableForToday}}</p>
+                {{else}}
+                <p class="DashCountBIG"> 0</p>
+                {{/if}}
             </div>
         </div>
         <div class="ViewBox col-sm-5 col-lg-3">
             <span class="material-symbols-outlined">event_available</span>
-            <p>Rooms Booked</p>
+            <p class="ViewBoxHead">Rooms Booked</p>
             <div class="DashCount">
-                <p>12</p>
+                <p class="DashCountSmall">For Future: </p>
+                {{#if RoomsInfo}}
+                <p class="DashCountBIG">{{RoomsInfo.RoomsFutureBooked}}</p>
+                {{else}}
+                <p class="DashCountBIG">0</p>
+                {{/if}}
             </div>
         </div>
-        <div class="ViewBox col-sm-5 col-lg-3">
-            <span class="material-symbols-outlined">calendar_view_month</span>
-            <p>Live Customers</p>
-            <div class="DashCount">
-                <p>6</p>
-            </div>
-        </div>
+
     </div>
 
 
@@ -144,7 +160,7 @@
         color: rgb(255, 255, 255);
     }
 
-    .ViewBox p {
+    .ViewBoxHead {
         margin: 0rem 2rem;
         font-size: 25px;
         color: white;
@@ -152,10 +168,21 @@
 
     .DashCount {
         text-align: end;
+        display: flex;
+        justify-content: end;
+        margin: 0rem 2rem;
+        color: white;
+
     }
 
-    .DashCount p {
+    .DashCountBIG {
         font-size: 30px;
+    }
+
+    .DashCountSmall {
+        font-size: 15px;
+        margin-top: 10px;
+        margin-right: 5px;
     }
 
 

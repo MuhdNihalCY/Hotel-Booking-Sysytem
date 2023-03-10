@@ -11,6 +11,7 @@
                         <th scope="col">State</th>
                         <th scope="col">Place</th>
                         <th scope="col">Image</th>
+                        <th scope="col" >Action</th>
                         <th scope="col">Verification</th>
                     </tr>
                 </thead>
@@ -24,6 +25,10 @@
                         <td>{{State}}</td>
                         <td>{{Place}}</td>
                         <td><img class="tableImg" src="/room-images/{{img1}}.jpg" alt=""></td>
+                        <td>
+                            <a href="/vendor/DeleteRoom/{{_id}}" onclick="return confirm(`Are you sure to delete the Room {{name}}`)" class="btn btn-danger actionBTN " >Delete</a>
+                            <a href="" class="btn btn-primary actionBTN ">Edit</a>
+                        </td>
                         <td>
                             {{#if VerificationStatus}}
                             Approved
@@ -70,5 +75,11 @@
     }
     .tableImg {
         height: 5rem;
+        aspect-ratio: 16/9;
+    }
+    
+    .actionBTN {
+        margin: 2px;
+        width: 80px;
     }
 </style>

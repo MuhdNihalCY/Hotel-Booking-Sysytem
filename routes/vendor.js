@@ -49,7 +49,11 @@ router.get('/', verifyLogin, function (req, res, next) {
       //console.log(BookedRooms);
       BookedRooms.sort((b,a)=> a.SearchDate - b.SearchDate);
       //console.log("Booked Rooms sorted : ",BookedRooms);
-      res.render('room/home', { vendor, user, AllRooms,BookedRooms });
+      
+      vendorHelper.GetRoomsLeftforToday(user).then((RoomsInfo)=>{
+        res.render('room/home', { vendor, user, AllRooms,BookedRooms, RoomsInfo });
+      })
+
     })
   })
 
@@ -118,6 +122,16 @@ router.get('/viewbookings', verifyLogin, (req, res) => {
   let user = req.session.vendorUserData
   res.render('room/viewbookings', { vendor, user })
 })
+router.get('/DeleteRoom/:id',verifyLogin,(req,res)=>{
+  vendorHelper.DeleteRoomVendor(req.params.id).then(()=>{
+    res.redirect('/vendor/viewrooms');
+  })
+})
+
+
+
+
+//auth
 router.get('/login', (req, res) => {
   vendor = true
   let login = true

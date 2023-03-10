@@ -79,7 +79,7 @@
                             <div class="PaymentOPtions">
                                 <a href="/confirmOrder/{{Id}}" id="payAtHotel" class="btn btn-success payBTN ">Pay at
                                     Hotel</a>
-                                <a href="" id="payNow" class="btn btn-success payBTN">Pay Now</a>
+                                <div href="#" id="payNow" onclick="PaymentOnline()" class="btn btn-success payBTN">Pay Now</div>
                             </div>
                         </div>
                     </div>
@@ -612,6 +612,10 @@
         payAtHotel.hidden = false;
         payNow.hidden = false;
 
+    }
+
+    function PaymentOnline() {
+        alert("This feature will Coming Soon....");
     }
 
 
