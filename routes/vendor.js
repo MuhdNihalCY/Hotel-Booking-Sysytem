@@ -47,11 +47,11 @@ router.get('/', verifyLogin, function (req, res, next) {
 
       })
       //console.log(BookedRooms);
-      BookedRooms.sort((b,a)=> a.SearchDate - b.SearchDate);
+      BookedRooms.sort((b, a) => a.SearchDate - b.SearchDate);
       //console.log("Booked Rooms sorted : ",BookedRooms);
-      
-      vendorHelper.GetRoomsLeftforToday(user).then((RoomsInfo)=>{
-        res.render('room/home', { vendor, user, AllRooms,BookedRooms, RoomsInfo });
+
+      vendorHelper.GetRoomsLeftforToday(user).then((RoomsInfo) => {
+        res.render('room/home', { vendor, user, AllRooms, BookedRooms, RoomsInfo });
       })
 
     })
@@ -122,9 +122,63 @@ router.get('/viewbookings', verifyLogin, (req, res) => {
   let user = req.session.vendorUserData
   res.render('room/viewbookings', { vendor, user })
 })
-router.get('/DeleteRoom/:id',verifyLogin,(req,res)=>{
-  vendorHelper.DeleteRoomVendor(req.params.id).then(()=>{
+router.get('/DeleteRoom/:id', verifyLogin, (req, res) => {
+  vendorHelper.DeleteRoomVendor(req.params.id).then(() => {
     res.redirect('/vendor/viewrooms');
+  })
+})
+router.get('/EditRooms/:id', verifyLogin, (req, res) => {
+  vendor = true;
+  vendorHelper.getOneRoom(req.params.id).then((Room) => {
+    console.log(Room)
+    var RoomType = Room.TyprOfRoom;
+    res.render('room/addroom', { Room, RoomType, vendor })
+  })
+})
+router.post('/editRoom/:id', (req, res) => {
+  var id = req.params.id
+
+  console.log(req.files);
+
+  if (req.files) {
+    if (req.files.img1) {
+
+      var img1 = req.files.img1;
+      img1.mv('./public/room-images/' + id + 1 + ".jpg", (err) => {
+        if (!err) {
+        } else {
+          console.log("Error at img1 " + err)
+        }
+      })
+    }
+
+    if (req.files.img2) {
+      var img2 = req.files.img2;
+      img2.mv('./public/room-images/' + id + 2 + ".jpg", (err) => {
+        if (!err) {
+        } else {
+          console.log("Error at img2 " + err)
+        }
+      })
+    }
+
+    if (req.files.img3) {
+      var img3 = req.files.img3;
+      img3.mv('./public/room-images/' + id + 3 + ".jpg", (err) => {
+        if (!err) {
+        } else {
+          console.log("Error at img2 " + err)
+        }
+      })
+    }
+
+  }
+
+
+
+  //console.log(RoomsImg);
+  vendorHelper.SaveEditedRoom(req.body, id).then(() => {
+    res.redirect('/vendor/viewrooms')
   })
 })
 
@@ -241,6 +295,7 @@ router.post('/resetPassword', (req, res) => {
     res.redirect("/vendor/login")
   })
 })
+
 
 
 

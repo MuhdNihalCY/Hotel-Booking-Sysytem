@@ -79,7 +79,8 @@
                             <div class="PaymentOPtions">
                                 <a href="/confirmOrder/{{Id}}" id="payAtHotel" class="btn btn-success payBTN ">Pay at
                                     Hotel</a>
-                                <div href="#" id="payNow" onclick="PaymentOnline()" class="btn btn-success payBTN">Pay Now</div>
+                                <div href="#" id="payNow" onclick="PaymentOnline()" class="btn btn-success payBTN">Pay
+                                    Now</div>
                             </div>
                         </div>
                     </div>
@@ -535,11 +536,11 @@
     function SendOTP() {
         const Mobile = document.getElementById("MobNumber").value;
         const Email = document.getElementById("Email").value;
-        const url = `http://3.239.165.192/OTPRequestToConfirmRoom/${Email}`
-        //alert(url)
+        const url = `http://localhost:3300/OTPRequestToConfirmRoom/${Email}`
 
         if (Mobile.length == 10) {
             //Procced with OTP
+           // alert(url)
             fetch(url).then(response => {
                 if (response) {
                     return response.json();
@@ -561,7 +562,7 @@
     function VerifyOTP() {
         const OTP = document.getElementById('OTP').value;
         const Email = document.getElementById("Email").value;
-        const url = `http://3.239.165.192/VerifyDetailsBeforeConfirm/${Email}/${OTP}`
+        const url = `http://localhost:3300/VerifyDetailsBeforeConfirm/${Email}/${OTP}`
 
         //alert(OTP.length);
         if (OTP.length == 4) {

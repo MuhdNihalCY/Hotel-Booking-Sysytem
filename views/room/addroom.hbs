@@ -5,111 +5,286 @@
                 <img class="addroomIcon" src="/images/addroom.png" alt="">
             </div>
             <div class="FOrm">
-                <form action="/vendor/addroom" method="post" enctype="multipart/form-data">
-                    <div class="InsideForm">
-                        <div class="container">
-                            <div class="row">
-                                <div class="FormTextContent col-12 col-md-12 col-lg-6 ">
-                                    <input type="email" name="email" value="{{user.email}}" hidden>
-                                    <input type="text" name="name" id="name" placeholder="Name of Building" required>
-                                    <br>
-                                    <input type="number" name="contact" id="contact" placeholder="Contact No"
-                                        required><br>
-                                    <input type="text" name="State" placeholder="State" required><br>
-                                    <input type="text" name="District" placeholder="District" required><br>
-                                    <input type="text" name="Address" placeholder="Address" required><br>
-                                    <input type="text" name="Place" placeholder="Place" required><br>
-                                    <input type="text" name="City" placeholder="City" required><br>
-                                    <input type="number" name="ZipCode" placeholder="Zip Code" required><br><br>
-                                    <input type="text" name="Landmark" placeholder="Landmark" required><br>
-                                    <div class="form-group description">
-                                        <label for="">Description</label>
-                                        <textarea type="text" class="form-control item" placeholder="Description"
-                                            name="description" required id="" cols="30" rows="10"></textarea>
-                                    </div>
-                                    <input type="text" name="Verification" value="false" hidden>
-                                </div>
+                {{#if Room}}
+                <form action="/vendor/editRoom/{{Room._id}}" method="post" enctype="multipart/form-data">
+                    {{else}}
+                    <form action="/vendor/addroom" method="post" enctype="multipart/form-data">
+                        {{/if}}
 
-                                <div class="FormImages col-12 col-md-12 col-lg-6 ">
-                                    <input type="number" name="RealPrice" id="RealPrice" placeholder="Real Price"
-                                        required><br>
-                                    <input type="number" name="OfferPrice" id="OfferPrice" placeholder="Offer Price"
-                                        required><br>
-                                    <input type="number" name="roomCount" id="RoomCount" placeholder="No of Rooms"
-                                        required><br>
-                                    <select class="item" name="TyprOfRoom" id="TypeOfRoom"
-                                        aria-placeholder="Type of Room" required>
-                                        <option value="" disabled selected>Type of Room</option>
-                                        <option value="Standard Room">Standard Room</option>
-                                        <option value="Minimalist">Minimalist</option>
-                                        <option value="Deluxe">Deluxe</option>
-                                        <option value="Studio">Studio</option>
-                                        <option value="Connecting">Connecting</option>
-                                        <option value="Standard Suite">Standard Suite</option>
-                                        <option value="Junior Suite">Junior Suite</option>
-                                        <option value="Presidential Suite">Presidential Suite</option>
-                                        <option value="Penthouse Suite">Penthouse Suite</option>
-                                        <option value="Honeymoon Suite">Honeymoon Suite</option>
-                                        <option value="Bridal Suite">Bridal Suite</option>
-                                    </select><br><br>
-                                    <div class="services">
-                                        <div class="amenities">
-                                            <label for="">Amenities</label><br>
-                                            <div class="Checkbox">
-                                                <input type="checkbox" name="Wifi" id="Wifi"> <label for="Wifi"> Free
-                                                    Wifi </label><br>
-                                                <input type="checkbox" name="ServiceTime" id="service"><label
-                                                    for="service">Service 24/7</label><br>
-                                                <input type="checkbox" name="FoodService" id="FoodService"><label
-                                                    for="FoodService">Food Service</label><br>
-                                                <input type="checkbox" name="Pool" id="Pool"><label
-                                                    for="Pool">Pool</label><br>
-                                                <input type="checkbox" name="AC" id="AC"><label for="AC"> AC
-                                                </label><br>
-                                                <input type="checkbox" name="TV" id="TV"> <label for="TV"> TV </label>
-                                                <br>
-                                            </div>
+                        {{#if Room}}
 
+                        <div class="InsideForm">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="FormTextContent col-12 col-md-12 col-lg-6 ">
+                                        <input type="email" name="email" value="{{user.email}}" hidden>
+                                        <input type="text" value="{{Room.name}}" name="name" id="name"
+                                            placeholder="Name of Building" required>
+                                        <br>
+                                        <input type="number" value="{{Room.contact}}" name="contact" id="contact"
+                                            placeholder="Contact No" required><br>
+                                        <input type="text" value="{{Room.State}}" name="State" placeholder="State"
+                                            required><br>
+                                        <input type="text" value="{{Room.District}}" name="District"
+                                            placeholder="District" required><br>
+                                        <input type="text" value="{{Room.Address}}" name="Address" placeholder="Address"
+                                            required><br>
+                                        <input type="text" value="{{Room.Place}}" name="Place" placeholder="Place"
+                                            required><br>
+                                        <input type="text" value="{{Room.City}}" name="City" placeholder="City"
+                                            required><br>
+                                        <input type="number" value="{{Room.ZipCode}}" name="ZipCode"
+                                            placeholder="Zip Code" required><br><br>
+                                        <input type="text" value="{{Room.Landmark}}" name="Landmark"
+                                            placeholder="Landmark" required><br>
+                                        <div class="form-group description">
+                                            <label for="">Description</label>
+                                            <textarea type="text" class="form-control item" placeholder="Description"
+                                                name="description" required id="" cols="30"
+                                                rows="10">{{Room.description}}</textarea>
                                         </div>
+                                        <input type="text" value="{{Room.Verification}}" name="Verification"
+                                            value="false" hidden>
                                     </div>
-                                    <label class="imgUploadlabel" for="">Upload Image Of the Room</label>
-                                    <br>
-                                    <div class="imagesection">
-                                        <input type="file" name="img1" id="fileInput1" required>
-                                        <div id="preview1" class="preview"></div>
+
+                                    <div class="FormImages col-12 col-md-12 col-lg-6 ">
+                                        <input type="number" value="{{Room.RealPrice}}" name="RealPrice" id="RealPrice"
+                                            placeholder="Real Price" required><br>
+                                        <input type="number" value="{{Room.OfferPrice}}" name="OfferPrice"
+                                            id="OfferPrice" placeholder="Offer Price" required><br>
+                                        <input type="number" value="{{Room.roomCount}}" name="roomCount" id="RoomCount"
+                                            placeholder="No of Rooms" required><br>
+                                        {{!-- <select class="item" name="TyprOfRoom" id="TypeOfRoom"
+                                            aria-placeholder="Type of Room" required>
+                                            <option value="" disabled selected>Type of Room</option>
+                                            <option value="Standard Room">Standard Room</option>
+                                            <option value="Minimalist">Minimalist</option>
+                                            <option value="Deluxe">Deluxe</option>
+                                            <option value="Studio">Studio</option>
+                                            <option value="Connecting">Connecting</option>
+                                            <option value="Standard Suite">Standard Suite</option>
+                                            <option value="Junior Suite">Junior Suite</option>
+                                            <option value="Presidential Suite">Presidential Suite</option>
+                                            <option value="Penthouse Suite">Penthouse Suite</option>
+                                            <option value="Honeymoon Suite">Honeymoon Suite</option>
+                                            <option value="Bridal Suite">Bridal Suite</option>
+                                        </select> --}}
+                                        <input type="text" name="TyprOfRoom" id="TypeOfRoom" value="{{RoomType}}"
+                                            aria-placeholder="Type of Room" required>
+                                        <br><br>
+                                        <div class="services">
+                                            <div class="amenities">
+                                                <label for="">Amenities</label><br>
+                                                <div class="Checkbox">
+                                                    {{#if Room.Wifi}}
+                                                    <input type="checkbox" checked name="Wifi" id="Wifi"> <label
+                                                        for="Wifi">
+                                                        Free
+                                                        Wifi </label><br>
+                                                    {{else}}
+                                                    <input type="checkbox" name="Wifi" id="Wifi"> <label for="Wifi">
+                                                        Free
+                                                        Wifi </label><br>
+                                                    {{/if}}
+
+                                                    {{#if Room.ServiceTime}}
+                                                    <input type="checkbox" name="ServiceTime" id="service"
+                                                        checked><label for="service">Service 24/7</label><br>
+                                                    {{else}}
+                                                    <input type="checkbox" name="ServiceTime" id="service"><label
+                                                        for="service">Service 24/7</label><br>
+                                                    {{/if}}
+
+                                                    {{#if Room.FoodService}}
+                                                    <input type="checkbox" name="FoodService" id="FoodService"
+                                                        checked><label for="FoodService">Food Service</label><br>
+                                                    {{else}}
+                                                    <input type="checkbox" name="FoodService" id="FoodService"><label
+                                                        for="FoodService">Food Service</label><br>
+                                                    {{/if}}
+
+                                                    {{#if Room.Pool}}
+                                                    <input type="checkbox" name="Pool" id="Pool" checked><label
+                                                        for="Pool">Pool</label><br>
+                                                    {{else}}
+                                                    <input type="checkbox" name="Pool" id="Pool"><label
+                                                        for="Pool">Pool</label><br>
+                                                    {{/if}}
+
+                                                    {{#if Room.AC}}
+                                                    <input type="checkbox" name="AC" id="AC" checked><label for="AC"> AC
+                                                    </label><br>
+                                                    {{else}}
+                                                    <input type="checkbox" name="AC" id="AC"><label for="AC"> AC
+                                                    </label><br>
+                                                    {{/if}}
+
+                                                    {{#if Room.TV}}
+                                                    <input type="checkbox" name="TV" id="TV" checked> <label for="TV">
+                                                        TV
+                                                    </label>
+                                                    <br>
+                                                    {{else}}
+                                                    <input type="checkbox" name="TV" id="TV"> <label for="TV"> TV
+                                                    </label>
+                                                    <br>
+                                                    {{/if}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <label class="imgUploadlabel" for="">Upload Image Of the Room</label>
                                         <br>
-                                    </div>
-                                    <div class="imagesection">
-                                        <input type="file" name="img2" id="fileInput2" required>
-                                        <div id="preview2" class="preview"></div>
-                                        <br>
-                                    </div>
-                                    <div class="imagesection">
-                                        <input type="file" name="img3" id="fileInput3" required>
-                                        <div id="preview3" class="preview"></div>
-                                        <br>
-                                    </div>
+                                        <div class="imagesection">
+                                            <input type="file" name="img1" id="fileInput1">
+                                            <div id="preview1" class="preview">
+                                                 <img src="/room-images/{{Room.img1}}.jpg" alt="Preview">
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div class="imagesection">
+                                            <input type="file" name="img2" id="fileInput2">
+                                            <div id="preview2" class="preview">
+                                                 <img src="/room-images/{{Room.img2}}.jpg" alt="Preview">
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div class="imagesection">
+                                            <input type="file" name="img3" id="fileInput3">
+                                            <div id="preview3" class="preview"> <img
+                                                    src="/room-images/{{Room.img3}}.jpg" alt="Preview"></div>
+                                            <br>
+                                        </div>
 
 
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="container">
+                        <div class="container">
 
-                        <div class="HotelPoliciesDiv">
-                            <label for="">Hotel Polices</label>
-                            <textarea name="HotelPolices" class="form-control item" id="" cols="30" rows="10"
-                                placeholder="Hotel Polices"></textarea>
+                            <div class="HotelPoliciesDiv">
+                                <label for="">Hotel Polices</label>
+                                <textarea name="HotelPolices" class="form-control item" id="" cols="30" rows="10"
+                                    placeholder="Hotel Polices">{{Room.HotelPolices}}</textarea>
+                            </div>
+                            <div class="bottuhn">
+                                <button class="btn btn-primary addroomBtn" type="submit">Save Edited Room</button>
+                            </div>
+
+
                         </div>
-                        <div class="bottuhn">
-                            <button class="btn btn-primary addroomBtn" type="submit">Add Room</button>
+
+                        {{else}}
+                        <div class="InsideForm">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="FormTextContent col-12 col-md-12 col-lg-6 ">
+                                        <input type="email" name="email" value="{{user.email}}" hidden>
+                                        <input type="text" name="name" id="name" placeholder="Name of Building"
+                                            required>
+                                        <br>
+                                        <input type="number" name="contact" id="contact" placeholder="Contact No"
+                                            required><br>
+                                        <input type="text" name="State" placeholder="State" required><br>
+                                        <input type="text" name="District" placeholder="District" required><br>
+                                        <input type="text" name="Address" placeholder="Address" required><br>
+                                        <input type="text" name="Place" placeholder="Place" required><br>
+                                        <input type="text" name="City" placeholder="City" required><br>
+                                        <input type="number" name="ZipCode" placeholder="Zip Code" required><br><br>
+                                        <input type="text" name="Landmark" placeholder="Landmark" required><br>
+                                        <div class="form-group description">
+                                            <label for="">Description</label>
+                                            <textarea type="text" class="form-control item" placeholder="Description"
+                                                name="description" required id="" cols="30" rows="10"></textarea>
+                                        </div>
+                                        <input type="text" name="Verification" value="false" hidden>
+                                    </div>
+
+                                    <div class="FormImages col-12 col-md-12 col-lg-6 ">
+                                        <input type="number" name="RealPrice" id="RealPrice" placeholder="Real Price"
+                                            required><br>
+                                        <input type="number" name="OfferPrice" id="OfferPrice" placeholder="Offer Price"
+                                            required><br>
+                                        <input type="number" name="roomCount" id="RoomCount" placeholder="No of Rooms"
+                                            required><br>
+                                        <select class="item" name="TyprOfRoom" id="TypeOfRoom"
+                                            aria-placeholder="Type of Room" required>
+                                            <option value="" disabled selected>Type of Room</option>
+                                            <option value="Standard Room">Standard Room</option>
+                                            <option value="Minimalist">Minimalist</option>
+                                            <option value="Deluxe">Deluxe</option>
+                                            <option value="Studio">Studio</option>
+                                            <option value="Connecting">Connecting</option>
+                                            <option value="Standard Suite">Standard Suite</option>
+                                            <option value="Junior Suite">Junior Suite</option>
+                                            <option value="Presidential Suite">Presidential Suite</option>
+                                            <option value="Penthouse Suite">Penthouse Suite</option>
+                                            <option value="Honeymoon Suite">Honeymoon Suite</option>
+                                            <option value="Bridal Suite">Bridal Suite</option>
+                                        </select><br><br>
+                                        <div class="services">
+                                            <div class="amenities">
+                                                <label for="">Amenities</label><br>
+                                                <div class="Checkbox">
+                                                    <input type="checkbox" name="Wifi" id="Wifi"> <label for="Wifi">
+                                                        Free
+                                                        Wifi </label><br>
+                                                    <input type="checkbox" name="ServiceTime" id="service"><label
+                                                        for="service">Service 24/7</label><br>
+                                                    <input type="checkbox" name="FoodService" id="FoodService"><label
+                                                        for="FoodService">Food Service</label><br>
+                                                    <input type="checkbox" name="Pool" id="Pool"><label
+                                                        for="Pool">Pool</label><br>
+                                                    <input type="checkbox" name="AC" id="AC"><label for="AC"> AC
+                                                    </label><br>
+                                                    <input type="checkbox" name="TV" id="TV"> <label for="TV"> TV
+                                                    </label>
+                                                    <br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <label class="imgUploadlabel" for="">Upload Image Of the Room</label>
+                                        <br>
+                                        <div class="imagesection">
+                                            <input type="file" name="img1" id="fileInput1" required>
+                                            <div id="preview1" class="preview"></div>
+                                            <br>
+                                        </div>
+                                        <div class="imagesection">
+                                            <input type="file" name="img2" id="fileInput2" required>
+                                            <div id="preview2" class="preview"></div>
+                                            <br>
+                                        </div>
+                                        <div class="imagesection">
+                                            <input type="file" name="img3" id="fileInput3" required>
+                                            <div id="preview3" class="preview"></div>
+                                            <br>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="container">
+
+                            <div class="HotelPoliciesDiv">
+                                <label for="">Hotel Polices</label>
+                                <textarea name="HotelPolices" class="form-control item" id="" cols="30" rows="10"
+                                    placeholder="Hotel Polices"></textarea>
+                            </div>
+                            <div class="bottuhn">
+                                <button class="btn btn-primary addroomBtn" type="submit">Add Room</button>
+                            </div>
 
 
-                    </div>
-                </form>
+                        </div>
+                        {{/if}}
+                    </form>
             </div>
             {{!-- <img class="addroomIcon" src="/images/addroom.png" alt="">
             <div class="Form">

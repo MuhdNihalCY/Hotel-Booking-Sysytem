@@ -2,6 +2,7 @@ var db = require('../config/connection')
 var collection = require('../config/collection')
 const { ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
+const { response } = require('express');
 
 module.exports = {
     addroom: (roomDetails) => {
@@ -216,6 +217,46 @@ module.exports = {
             await db.get().collection(collection.VENDOR_DELETED_ROOMS).insertOne(room).then(()=>{
                 resolve()
             })
+        })
+    },
+    getOneRoom:(id)=>{
+        return new Promise(async(resolve,reject)=>{
+            var Room = await db.get().collection(collection.ROOM_COLLECTION).findOne({"_id":ObjectId(id)})
+            resolve(Room)
+        })
+    },
+    SaveEditedRoom:(data, id)=>{
+        return new Promise(async(resolve, reject)=>{
+            await db.get().collection(collection.ROOM_COLLECTION).updateOne({"_id":ObjectId(id)},{$set:
+            {
+                "name":data.name,
+                "contact": data.contact,
+                "State":data.State,
+                "District": data.District,
+                "Address":data.Address,
+                "Place":data.Place,
+                "City": data.City,
+                "ZipCode":data.ZipCode,
+                "Landmark":data.Landmark,
+                "description":data.description,
+                "Verification":data.Verification,
+                "RealPrice":data.RealPrice,
+                "OfferPrice":data.OfferPrice,
+                "roomCount":data.roomCount,
+                "TyprOfRoom": data.TyprOfRoom,
+                "Wifi":data.Wifi,
+                "ServiceTime":data.ServiceTime,
+                "FoodService":data.FoodService,
+                "Pool":data.Pool,
+                "AC":data.AC,
+                "TV":data.TV,
+                "HotelPolices":data.HotelPolices
+            }
+            }).then((response)=>{
+                console.log(response)
+                resolve()
+            })
+
         })
     }
 }
