@@ -682,7 +682,7 @@ router.post('/saveEditedBookingDetails', (req, res) => {
 router.get('/myBookings', verifyLogin, (req, res) => {
   var user = req.session.user;
   userHelpers.getRoomBookingDetails(user.email).then((bookingDetails) => {
-    console.log(bookingDetails);
+    // console.log(bookingDetails);
     res.render('users/MyBookings', { user, bookingDetails })
   })
 })
@@ -715,6 +715,12 @@ router.get('/VerifyDetailsBeforeConfirm/:email/:OTP', (req, res) => {
 
   userHelpers.AddOTPStatus(Email, OTP).then((response) => {
     res.json(response);
+  })
+})
+
+router.get('/cancelBooking/:id',(req,res)=>{
+  userHelpers.CancelBooking(req.params.id).then(()=>{
+    res.redirect('/myBookings')
   })
 })
 

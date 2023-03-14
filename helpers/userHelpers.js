@@ -382,8 +382,12 @@ module.exports = {
     },
     getRoomBookingDetails: (email) => {
         return new Promise(async (resolve, reject) => {
-            let bookingDetails = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).find({ "email": email }).sort({ SearchDate: -1 }).toArray()
+            let bookingDetails = await db.get().collection(collection.USER_CONFIRMED_BOOKING).find({ "email": email }).sort({ SearchDate: -1 }).toArray()
             //console.log(bookingDetails);
+            let CaneledBooking = await db.get().collection(collection.USER_Canceled_ROOMS).find({ "email": email }).sort({ SearchDate: -1 }).toArray()
+
+            bookingDetails = bookingDetails.concat(CaneledBooking)
+            
             resolve(bookingDetails)
         })
     },
@@ -645,14 +649,33 @@ module.exports = {
                     }
                 }
             }
-            console.log("No ROmm: ",RoomsNotAvailableRooms)
+            console.log("No ROmm: ", RoomsNotAvailableRooms)
 
             var response = {
-                Rooms : Rooms,
-                RoomsNotAvailableRooms : RoomsNotAvailableRooms
+                Rooms: Rooms,
+                RoomsNotAvailableRooms: RoomsNotAvailableRooms
             }
 
             resolve(response);
+        })
+    },
+    CancelBooking: (id) => {
+        return new Promise(async (resolve, reject) => {
+            var BookedData
+            await db.get().collection(collection.USER_CONFIRMED_BOOKING).findOne({ "_id": ObjectId(id) }).then((Data) => {
+                BookedData = Data;
+            })
+
+             console.log(BookedData);
+            BookedData.Confirm = false;
+            BookedData.Canceled = true;
+            await db.get().collection(collection.USER_CONFIRMED_BOOKING).deleteOne({ "_id": ObjectId(id) })
+
+            await db.get().collection(collection.USER_Canceled_ROOMS).insertOne(BookedData).then(()=>{
+                resolve()
+            })
+
+
         })
     }
 }

@@ -10,6 +10,7 @@ module.exports={
         USER_ROOM_CLICK:'user_room_click',
         USER_CONFIRMED_BOOKING:'user_confirmed_booking',
         LIVE_ROOM_BOOKED_COLLECTION: 'Live_Room_booked_Collection',
-        VENDOR_DELETED_ROOMS: 'vendor_Deleted_Rooms'
+        VENDOR_DELETED_ROOMS: 'vendor_Deleted_Rooms',
+        USER_Canceled_ROOMS: 'User_Canceled_Rooms'
         
 }

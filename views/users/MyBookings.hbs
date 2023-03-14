@@ -41,7 +41,11 @@
                                         {{/if}}
                                     </div>
                                     <div class="cancel">
-                                        <a href="/cancelBooking/{{_id}}" class="cancelBTN btn btn-danger">Request Cancel Booking</a>
+                                        {{#if Confirm}}
+                                        <a href="/cancelBooking/{{_id}}" onclick="return confirmAction()" class="cancelBTN btn btn-danger">Request Cancel Booking</a>
+                                        {{else}}
+                                        <a href="# " onclick="alert('This Booking is canceled!')" class="cancelBTN btn btn-primary">Booking Canceled</a>
+                                        {{/if}}
                                     </div>
                                 </div>
                             </div>
@@ -112,3 +116,18 @@
         width: 50%;
     }
 </style>
+
+<script>
+function confirmAction() {
+  if (confirm("Are you sure you want Cancel the Booked Room?")) {
+    return true; // Action allowed, link will open
+  } else {
+    return false; // Action canceled, link will not open
+  }
+}
+</script>
+
+
+
+
+
