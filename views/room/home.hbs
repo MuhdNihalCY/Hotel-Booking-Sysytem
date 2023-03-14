@@ -105,7 +105,13 @@
                     </div>
                     <div class="ActionSectionRight col-12 col-md-6 ">
                         <div class="ActionRtTop">
+                            {{#if Canceled}}
+                            <p class="ACtions">Canceled</p>
+                            <p >@ {{CanceledTimeFormatted}}</p>
+                            {{else}}
                             <p class="ACtions">Booked</p>
+                            <p >@ {{ConfirmedTimeFormatted}}</p>
+                            {{/if}}
                             <a href="" class="ViewBTN">View Details </a>
                         </div>
                     </div>
@@ -400,4 +406,6 @@
             width: 100%;
             padding-left: 0;
         }
+    }
 </style>
+

@@ -175,8 +175,36 @@ module.exports = {
             let ConfirmedBooking2 = await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).findOne({ "_id": id });
             console.log("Before Update :", ConfirmedBooking2);
 
+            // create a new Date object
+            let currentDate = new Date();
+
+            // get the date in the format dd-mm-yyyy
+            let day = currentDate.getDate();
+            let month = currentDate.getMonth() + 1; // getMonth() returns 0-11 for the months, so add 1 to get the correct month
+            let year = currentDate.getFullYear();
+
+            let dateFormatted = `${day}-${month}-${year}`;
+
+            // get the time in the format hh:mm pm/am
+            let hours = currentDate.getHours();
+            let minutes = currentDate.getMinutes();
+            let amOrPm = hours >= 12 ? 'pm' : 'am';
+
+            // convert hours from 24-hour format to 12-hour format
+            if (hours > 12) {
+                hours -= 12;
+            }
+
+            let timeFormatted = `${hours}:${minutes} ${amOrPm}`;
+
+            // concatenate the date and time strings
+            let dateTimeFormatted = `${dateFormatted} Time: ${timeFormatted}`;
+
+            // console.log(dateTimeFormatted); // output example: "14-03-2023 Time: 10:23 am"
+
+
             if (ConfirmedBooking2 == null) {
-                await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).updateOne({ "_id": ObjectId(id) }, { $set: { Confirm: "Confirmed" } }).then((response) => {
+                await db.get().collection(collection.USER_BOOKING_TO_CONFIRM).updateOne({ "_id": ObjectId(id) }, { $set: { Confirm: "Confirmed", ConfirmedTime: Date.now(), "ConfirmedTimeFormatted": dateTimeFormatted } }).then((response) => {
                     console.log("Confirmed")
                     console.log(response);
 
@@ -192,6 +220,8 @@ module.exports = {
 
                     } else {
                         console.log(ConfirmedBooking)
+
+                        ConfirmedBooking.ConfirmedTime = Date.now();
                         db.get().collection(collection.USER_CONFIRMED_BOOKING).insertOne(ConfirmedBooking).then((response) => {
                             console.log("fds", response)
                         })
@@ -387,7 +417,7 @@ module.exports = {
             let CaneledBooking = await db.get().collection(collection.USER_Canceled_ROOMS).find({ "email": email }).sort({ SearchDate: -1 }).toArray()
 
             bookingDetails = bookingDetails.concat(CaneledBooking)
-            
+
             resolve(bookingDetails)
         })
     },
@@ -666,16 +696,84 @@ module.exports = {
                 BookedData = Data;
             })
 
-             console.log(BookedData);
+            // create a new Date object
+            let currentDate = new Date();
+
+            // get the date in the format dd-mm-yyyy
+            let day = currentDate.getDate();
+            let month = currentDate.getMonth() + 1; // getMonth() returns 0-11 for the months, so add 1 to get the correct month
+            let year = currentDate.getFullYear();
+
+            let dateFormatted = `${day}-${month}-${year}`;
+
+            // get the time in the format hh:mm pm/am
+            let hours = currentDate.getHours();
+            let minutes = currentDate.getMinutes();
+            let amOrPm = hours >= 12 ? 'pm' : 'am';
+
+            // convert hours from 24-hour format to 12-hour format
+            if (hours > 12) {
+                hours -= 12;
+            }
+
+            let timeFormatted = `${hours}:${minutes} ${amOrPm}`;
+
+            // concatenate the date and time strings
+            let dateTimeFormatted = `${dateFormatted} Time: ${timeFormatted}`;
+
+            console.log(BookedData);
             BookedData.Confirm = false;
             BookedData.Canceled = true;
+            BookedData.CanceledTime = Date.now();
+            BookedData.CanceledTimeFormatted = dateTimeFormatted;
+
             await db.get().collection(collection.USER_CONFIRMED_BOOKING).deleteOne({ "_id": ObjectId(id) })
 
-            await db.get().collection(collection.USER_Canceled_ROOMS).insertOne(BookedData).then(()=>{
-                resolve()
+            await db.get().collection(collection.USER_Canceled_ROOMS).insertOne(BookedData).then(() => {
             })
 
+            const roomId = BookedData.roomId; // the room ID
+            const bookingId = BookedData._id.toString(); // the booking ID provided by user
+            const checkin = BookedData.checkin; // the check-in date provided by user
+            const checkout = BookedData.checkout; // the check-out date provided by user
 
+            // find the room by ID
+            const room = await db.get().collection(collection.LIVE_ROOM_BOOKED_COLLECTION).findOne({ "Room": roomId });
+
+            // loop through the bookings
+            for (let i = 0; i < room.Booked.length; i++) {
+                const booking = room.Booked[i];
+
+                // check if the booking ID matches
+                if (booking.BookedIDs.includes(bookingId)) {
+                    // remove the booking ID
+                    const index = booking.BookedIDs.indexOf(bookingId);
+                    booking.BookedIDs.splice(index, 1);
+
+                    // remove the rooms booked for the given date range
+                    const bookingDate = new Date(booking.date);
+                    const checkinDate = new Date(checkin);
+                    const checkoutDate = new Date(checkout);
+                    if (bookingDate >= checkinDate && bookingDate <= checkoutDate) {
+                        const roomIds = booking.RoomsBooked;
+                        const roomsToRemove = roomIds.filter(roomId => roomIds.indexOf(roomId) === 0);
+                        roomsToRemove.forEach(roomId => {
+                            const roomIndex = booking.RoomsBooked.indexOf(roomId);
+                            booking.RoomsBooked.splice(roomIndex, 1);
+                        });
+                    }
+                }
+            }
+
+
+            // save the updated room
+            await db.get().collection(collection.LIVE_ROOM_BOOKED_COLLECTION).updateOne({ "Room": roomId }, {
+                $set: {
+                    "Booked": room.Booked
+                }
+            })         //room.save();
+
+            resolve()
         })
     }
 }

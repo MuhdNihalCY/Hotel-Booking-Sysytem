@@ -123,10 +123,20 @@ module.exports = {
     GetAllActionsRoom: (id) => {
         id = id.toString();
         return new Promise(async (resolve, reject) => {
-            var BookedRooms = await db.get().collection(collection.USER_CONFIRMED_BOOKING).find({ "roomId": id }).toArray();
+            var BookedRooms = await db.get().collection(collection.USER_CONFIRMED_BOOKING).find({ "roomId": id }).sort({"ConfirmedTime": -1}).toArray();
             //console.log(BookedRooms);
 
             //get all action, but currently only having booked details.
+
+            var CanceledRooms = await db.get().collection(collection.USER_Canceled_ROOMS).find({ "roomId": id }).sort({"CanceledTime": -1}).toArray();
+
+            BookedRooms = BookedRooms.concat(CanceledRooms);
+
+            BookedRooms.sort((a, b) => {
+                const aTime = new Date(a.ConfirmedTime || a.CanceledTime).getTime();
+                const bTime = new Date(b.ConfirmedTime || b.CanceledTime).getTime();
+                return bTime - aTime;
+              });
             resolve(BookedRooms)
         })
     },
