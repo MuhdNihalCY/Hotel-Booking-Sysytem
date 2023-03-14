@@ -205,6 +205,11 @@ router.get('/', function (req, res, next) {
 });
 
 
+router.get('/about',(req,res)=>{
+  res.render('users/about')
+})
+
+
 
 
 router.post('/checkAvailability', verifyLogin, (req, res) => {
