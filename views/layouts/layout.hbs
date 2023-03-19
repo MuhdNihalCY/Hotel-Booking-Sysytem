@@ -41,13 +41,13 @@
 
 
   {{!-- admin dashboard --}}
-  {{#if admin}}
+
+  {{#if vendor}}
   <!-- Fontfaces CSS-->
   <link href="css/font-face.css" rel="stylesheet" media="all">
   <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
   <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
   <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-
 
   <!-- Vendor CSS-->
   <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
@@ -58,14 +58,38 @@
   <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
   <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
+
   <!-- Main CSS-->
   <link href="css/theme.css" rel="stylesheet" media="all">
 
   {{/if}}
+  {{!--
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+
+  --}}
+
+  {{!-- datatables
+
+  <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+
+  <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script> --}}
 
 
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#example').DataTable();
+    });
+  </script>
 
 
+  {{!-- ajax Calling --}}
+   
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
   <title>StayOnn</title>
   <link rel="icon" type="image/x-icon" href="/images/building.png">
 
@@ -99,7 +123,7 @@
     {{/if}}
     {{else}}
     {{#if admin}}
-    {{>adminSidebar}}
+    {{!--{{>adminSidebar}} --}}
     {{else}}
     {{#if noHeader}}
     {{else}}
@@ -132,8 +156,17 @@
     crossorigin="anonymous"></script>
 
 
-  {{!-- ajax Calling --}}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#example').DataTable();
+    });
+  </script>
+
+
+
 
 
 

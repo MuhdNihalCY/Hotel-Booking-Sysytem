@@ -1,0 +1,167 @@
+<section>
+    <div class="headPage">
+        <div class="container">
+            <div class="header">
+                <h1>StayOnn</h1>
+                <h2>Admin Panel</h2>
+                <h3><a class="btn btn-danger" href="/admin/logout">logout</a></h3>
+            </div>
+        </div>
+    </div>
+    <div class="container1">
+        <div class="mainBody">
+            <h2 class="ManageRoomsText">Manage Rooms</h2>
+        </div>
+        <div class="tableBd">
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Contact</th>
+                        <th>E-mail</th>
+                        <th>Place</th>
+                        <th>City</th>
+                        <th>Real Price</th>
+                        <th>Offer Price</th>
+                        <th>Room Count</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each Rooms}}
+                    <tr>
+                        <td><img class="RoomImg" src="/room-images/{{img1}}.jpg"></td>
+                        <td>{{name}}</td>
+                        <td>{{contact}}</td>
+                        <td>{{email}}</td>
+                        <td>{{Place}}</td>
+                        <td>{{City}}</td>
+                        <td>{{RealPrice}}</td>
+                        <td>{{OfferPrice}}</td>
+                        <td>{{roomCount}}</td>
+
+                        {{#if Verification}}
+
+                        <td id="{{_id}}td">
+                            <p class="ActionStatus">Approved</p>
+                            <a class="btn btn-warning" href="/admin/viewRoom/{{_id}}">View Room</a>
+                            <input type="text" id="{{_id}}" value="{{name}}" hidden>
+                            <button onclick="RejectRoom('{{_id}}')" class="btn btn-danger">Block Room</button>
+                        </td>
+
+                        {{else}}
+                        <td id="{{_id}}td">
+                            <p class="ActionStatus">Blocked</p>
+                            <a class="btn btn-warning" href="/admin/viewRoom/{{_id}}">View Room</a>
+                            <input type="text" id="{{_id}}" value="{{name}}" hidden>
+                            <button onclick="AcceptRoom('{{_id}}')" class="btn btn-success">Unblock Room</button>
+                            {{!-- <button onclick="RejectRoom('{{_id}}')" class="btn btn-danger">Reject Room</button>
+                            --}}
+                        </td>
+                        {{/if}}
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    .headPage {
+        margin-bottom: 4rem;
+        background-color: var(--gray-dark);
+        width: 100%;
+        height: 10rem;
+    }
+
+    .header {
+        height: 10rem;
+        color: whitesmoke;
+        font-weight: 800;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .container1 {
+        margin: 5px 20px;
+        margin-bottom: 15rem;
+    }
+
+    .ManageRoomsText {
+        font-weight: 800;
+        color: var(--gray-dark);
+    }
+
+    .RoomImg {
+        height: 100px;
+        border-radius: 15px;
+    }
+
+    tr {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    td button,
+    .btn-warning {
+        margin: 2px 0;
+        width: 130px;
+    }
+
+    .ActionStatus {
+        color: var(--gray-dark);
+        font: 20px;
+        font-weight: 900;
+        margin: 1px 0;
+    }
+</style>
+
+<script>
+    function AcceptRoom(id) {
+
+        var name = document.getElementById(id).value;
+        if (confirm(`Are You sure to Accept The Room : ${name}`)) {
+            $.ajax({
+                url: `/admin/AcceptRoom`,
+                method: 'POST',
+                data: {
+                    "id": id
+                },
+                success: (response) => {
+                    alert("Rooms Accepted");
+                    location.reload()
+                },
+                error: (xhr, status, error) => {
+                    console.log("Error: ", error)
+                }
+            })
+        }
+
+    }
+
+    function RejectRoom(id) {
+        //alert("dsfs")
+        var name = document.getElementById(id).value;
+        if (confirm(`Are You sure to Block The Room : ${name}`)) {
+            $.ajax({
+                url: `/admin/BlockRoom`,
+                method: 'POST',
+                data: {
+                    "id": id
+                },
+                success: (response) => {
+                    alert("Rooms Blocked");
+                    location.reload()
+                },
+                error: (xhr, status, error) => {
+                    console.log("Error: ", error)
+                }
+            })
+        }
+    }
+</script>
