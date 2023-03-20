@@ -63,4 +63,11 @@ router.get('/logout',(req,res)=>{
   res.redirect('/admin')
 })
 
+router.get('/viewRoom/:id',(req,res)=>{
+  var admin = true
+  adminHelpers.getRoom(req.params.id).then((room)=>{
+    res.render("admin/Room",{room,admin})
+  })
+})
+
 module.exports = router;

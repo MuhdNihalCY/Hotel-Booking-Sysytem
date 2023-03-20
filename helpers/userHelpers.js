@@ -10,7 +10,7 @@ module.exports = {
         let destination = data.destination
         let roomCount = data.roomCount
         return new Promise(async (resolve, reject) => {
-            let rooms = await db.get().collection(collection.ROOM_COLLECTION).find({ $and: [{ "Place": destination }, { "roomCount": { $gt: roomCount } }] }).toArray()
+            let rooms = await db.get().collection(collection.ROOM_COLLECTION).find({ $and: [{ "Place": destination }, { "roomCount": { $gt: roomCount } },{"Verification":true}] }).toArray()
             resolve(rooms)
         })
     },

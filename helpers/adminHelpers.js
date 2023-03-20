@@ -34,6 +34,15 @@ module.exports={
                 resolve(response)
             })
         })
+    },
+    getRoom:(id)=>{
+        return new Promise(async(resolve,reject)=>{
+            var room 
+            await db.get().collection(collection.ROOM_COLLECTION).findOne({"_id":ObjectId(id)}).then((response)=>{
+                room = response;
+                resolve(room)
+            })
+        })
     }
 }
 
