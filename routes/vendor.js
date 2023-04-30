@@ -113,6 +113,8 @@ router.get('/viewrooms', verifyLogin, (req, res) => {
       }
     }
 
+    //console.log(rooms)
+
     res.render('room/viewrooms', { vendor, rooms, user })
     //  console.log("called View Rooms")
   })
