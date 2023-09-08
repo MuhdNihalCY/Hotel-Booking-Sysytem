@@ -33,13 +33,26 @@ app.use(fileUpload());
 app.use(session({secret: 'secret',cookie:{maxAge:2592000000}})); // session upto 30 days ,  for 1 minute apply 60000, for 5 minutes 300000 
 
 
-db.connect((err)=>{
-  if(err) {
-    console.log("connection error: "  + err);
-  }else{
-    console.log("Database connection established");
-  } 
-})
+// db.connect((err)=>{
+//   if(err) {
+//     console.log("connection error: "  + err);
+//   }else{
+//     console.log("Database connection established");
+//   } 
+// })
+
+const startApp = async () => {
+  try {
+    await db.connect();
+    console.log("Database connection established on port 3000");
+  } catch (err) {
+    console.error("Connection error: " + err);
+  }
+}
+
+startApp();
+
+
 
 app.use('/',usersRouter);
 app.use('/admin',adminRouter);
