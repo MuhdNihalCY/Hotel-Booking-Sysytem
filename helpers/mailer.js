@@ -16,7 +16,7 @@ module.exports ={
                 service:"gmail",
                 auth:{
                     user: 'mnihal.cy123@gmail.com',            // mnihalcy@gmail.com      'mnihal.cy123@gmail.com',
-                    pass: 'wpbdwpjsasatxvma'               // btpyaxmlighzzaok              'wpbdwpjsasatxvma'
+                    pass: 'junqlhxuxjczqepe'               // btpyaxmlighzzaok              'wpbdwpjsasatxvma' junqlhxuxjczqepe
                 }
             });
             var mailOptions={
